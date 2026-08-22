@@ -31,11 +31,11 @@ import CostBenchmarkWidget from '../components/CostBenchmarkWidget';
 import TimelineProgressWidget from '../components/TimelineProgressWidget';
 
 const DOSSIER_TABS = [
-  { id: 'overview', label: '1. Why Flagged & Overview', icon: AlertOctagon },
-  { id: 'evidence', label: '2. Evidence Center (Documents)', icon: FileText, badge: 'Required' },
-  { id: 'cost', label: '3. Peer Cost Comparison', icon: TrendingUp },
-  { id: 'timeline', label: '4. Timeline & Delay', icon: Clock },
-  { id: 'similar', label: '5. Similar Works', icon: Copy },
+  { id: 'overview', label: '1. Scrutiny Findings & Metadata', icon: AlertOctagon },
+  { id: 'evidence', label: '2. Evidence Compliance Register', icon: FileText },
+  { id: 'cost', label: '3. Peer Cost Benchmarking', icon: TrendingUp },
+  { id: 'timeline', label: '4. Milestone Timeline & Delay', icon: Clock },
+  { id: 'similar', label: '5. Overlapping Proposals', icon: Copy },
 ];
 
 export default function RiskPassport() {
@@ -252,46 +252,46 @@ export default function RiskPassport() {
         </div>
       </div>
 
-      {/* Action Toolbar (Prominent & Clear) */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-xs flex flex-wrap items-center justify-between gap-3">
+      {/* Action Toolbar (Administrative Actions) */}
+      <div className="bg-white rounded-lg border border-slate-200 p-4 shadow-xs flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-bold uppercase tracking-wider text-slate-400 mr-1">
-            Officer Action:
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-500 mr-1">
+            Officer Determination:
           </span>
 
           <button
             onClick={() => handleCreateOrUpdateCase('FIELD_VERIFICATION', 'CRITICAL', 'Mandated physical on-site verification by District Engineer.')}
             disabled={actionLoading}
-            className="px-4 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow-xs transition flex items-center gap-1.5 disabled:opacity-50"
+            className="px-3.5 py-2 rounded-lg bg-red-700 hover:bg-red-800 text-white font-semibold text-xs shadow-xs transition flex items-center gap-1.5 disabled:opacity-50"
           >
             <Send className="w-3.5 h-3.5" />
-            <span>Request Field Verification</span>
+            <span>Direct Field Verification</span>
           </button>
 
           <button
             onClick={() => handleCreateOrUpdateCase('UNDER_REVIEW', 'HIGH', 'Flagged for internal administrative scrutiny.')}
             disabled={actionLoading}
-            className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-semibold text-xs transition disabled:opacity-50"
+            className="px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-900 text-white font-semibold text-xs transition disabled:opacity-50"
           >
             <FileSearch className="w-3.5 h-3.5" />
-            <span>Mark for Review</span>
+            <span>Record Internal Scrutiny</span>
           </button>
 
           <button
             onClick={() => handleCreateOrUpdateCase('DISMISSED', 'LOW', 'Officer verified flag to be normal execution variance.')}
             disabled={actionLoading}
-            className="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs transition disabled:opacity-50"
+            className="px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs transition border border-slate-300 disabled:opacity-50"
           >
-            <span>Dismiss Flag</span>
+            <span>Conclude &amp; Close Inquest</span>
           </button>
         </div>
 
         <Link
           to={`/reports?workId=${work.workId}`}
-          className="px-3.5 py-2 rounded-xl bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 font-semibold text-xs transition flex items-center gap-1.5 shadow-xs"
+          className="px-3.5 py-2 rounded-lg bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 font-semibold text-xs transition flex items-center gap-1.5 shadow-xs"
         >
           <Printer className="w-3.5 h-3.5 text-slate-500" />
-          <span>Export Official Dossier</span>
+          <span>Export Statutory Dossier</span>
         </Link>
       </div>
 

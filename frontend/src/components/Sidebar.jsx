@@ -3,85 +3,73 @@ import { NavLink } from 'react-router-dom';
 import { 
   LayoutDashboard, 
   AlertOctagon, 
-  MapPin, 
-  FolderSearch, 
+  Map, 
   Copy, 
+  FolderSearch, 
   Database, 
-  FileText, 
   History, 
   Sliders, 
-  ExternalLink 
+  FileText,
+  ShieldCheck
 } from 'lucide-react';
 
 const NAV_ITEMS = [
-  { path: '/', label: 'Command Center', icon: LayoutDashboard },
-  { path: '/queue', label: 'Risk Queue', icon: AlertOctagon, badge: 'Priority' },
-  { path: '/map', label: 'Geospatial Map', icon: MapPin },
-  { path: '/investigations', label: 'Investigations', icon: FolderSearch },
-  { path: '/similar', label: 'Similar Works', icon: Copy },
-  { path: '/data', label: 'Data & Import', icon: Database },
-  { path: '/reports', label: 'Reports & Export', icon: FileText },
-  { path: '/audit', label: 'Audit Logs', icon: History },
-  { path: '/settings', label: 'Risk Calibration', icon: Sliders },
+  { to: '/', label: 'Executive Dashboard', icon: LayoutDashboard, exact: true },
+  { to: '/queue', label: 'Prioritised Scrutiny Queue', icon: AlertOctagon },
+  { to: '/map', label: 'Geospatial Distribution', icon: Map },
+  { to: '/similar', label: 'Duplicate Proposals', icon: Copy },
+  { to: '/investigations', label: 'Case Management', icon: FolderSearch },
+  { to: '/data', label: 'Data Ingestion & Audit', icon: Database },
+  { to: '/reports', label: 'Statutory Reports', icon: FileText },
+  { to: '/audit', label: 'Immutable Audit Trail', icon: History },
+  { to: '/settings', label: 'Model Weight Calibration', icon: Sliders },
 ];
 
 export default function Sidebar() {
   return (
-    <aside className="w-64 bg-white border-r border-slate-200 shrink-0 min-h-[calc(100vh-4rem)] flex flex-col justify-between p-4 shadow-xs">
-      <div className="space-y-1">
-        <div className="px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-slate-400">
-          Intelligence Modules
+    <aside className="w-64 bg-slate-900 text-slate-300 border-r border-slate-800 flex flex-col justify-between shrink-0 font-sans">
+      
+      {/* Navigation Links */}
+      <div className="p-3.5 space-y-1">
+        <div className="px-3 py-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+          Operational Modules
         </div>
 
-        <nav className="space-y-1">
-          {NAV_ITEMS.map((item) => {
-            const Icon = item.icon;
-            return (
-              <NavLink
-                key={item.path}
-                to={item.path}
-                end={item.path === '/'}
-                className={({ isActive }) =>
-                  `flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-semibold transition ${
-                    isActive
-                      ? 'bg-gov-navy text-white shadow-xs'
-                      : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
-                  }`
-                }
-              >
-                {({ isActive }) => (
-                  <>
-                    <div className="flex items-center gap-3">
-                      <Icon className={`w-4 h-4 ${isActive ? 'text-sky-400' : 'text-slate-400'}`} />
-                      <span>{item.label}</span>
-                    </div>
-                    {item.badge && (
-                      <span className={`text-[10px] px-1.5 py-0.5 rounded font-mono ${
-                        isActive ? 'bg-red-500/30 text-red-200' : 'bg-red-50 text-red-700 border border-red-200'
-                      }`}>
-                        {item.badge}
-                      </span>
-                    )}
-                  </>
-                )}
-              </NavLink>
-            );
-          })}
-        </nav>
+        {NAV_ITEMS.map((item) => {
+          const Icon = item.icon;
+          return (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              end={item.exact}
+              className={({ isActive }) =>
+                `flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-all ${
+                  isActive
+                    ? 'bg-blue-600 text-white font-semibold shadow-xs'
+                    : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                }`
+              }
+            >
+              <Icon className="w-4 h-4 shrink-0 opacity-90" />
+              <span>{item.label}</span>
+            </NavLink>
+          );
+        })}
       </div>
 
       {/* Official Guidelines Info Card */}
-      <div className="pt-4 border-t border-slate-100">
-        <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 text-[11px] text-slate-600 space-y-1">
-          <div className="font-bold text-slate-800 flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-500" />
-            <span>Governance Guardrail</span>
+      <div className="p-3.5 border-t border-slate-800">
+        <div className="p-3 rounded-lg bg-slate-950 border border-slate-800 text-[11px] text-slate-400 space-y-1">
+          <div className="font-bold text-slate-200 flex items-center gap-1.5">
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+            <span>Statutory Governance</span>
           </div>
-          <p className="text-[10px] text-slate-500 leading-snug">
-            Risk scores prioritize review; final authority remains with human officers.
+          <p className="text-[10px] text-slate-400 leading-snug">
+            All analytical outputs serve as administrative decision-support. Final determinations rest with authorized officers.
           </p>
         </div>
       </div>
+
     </aside>
   );
 }

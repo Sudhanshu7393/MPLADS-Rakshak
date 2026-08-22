@@ -19,11 +19,11 @@ import EmptyState from '../components/EmptyState';
 import Breadcrumbs from '../components/Breadcrumbs';
 
 const QUICK_FILTERS = [
-  { id: 'ALL', label: 'All Flagged Works' },
-  { id: 'COST_OUTLIER', label: '💰 Severe Cost Outliers' },
-  { id: 'CHRONIC_DELAY', label: '⏳ Chronic Execution Delays' },
-  { id: 'MISSING_DOC', label: '📑 Missing Compliance Evidence' },
-  { id: 'DUPLICATE', label: '🔄 Duplicate / Similar Proposals' },
+  { id: 'ALL', label: 'All Scrutiny Items' },
+  { id: 'COST_OUTLIER', label: 'Peer Cost Outliers (&gt;50% Variance)' },
+  { id: 'CHRONIC_DELAY', label: 'Milestone Execution Delays (&gt;180 Days)' },
+  { id: 'MISSING_DOC', label: 'Mandatory Compliance Evidence Gaps' },
+  { id: 'DUPLICATE', label: 'Geospatial & Semantic Overlaps' },
 ];
 
 export default function RiskQueue() {

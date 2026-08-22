@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import GovHeader from './components/GovHeader';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import Login from './pages/Login';
@@ -16,10 +17,10 @@ import ReportsPage from './pages/ReportsPage';
 import DemoTourModal from './components/DemoTourModal';
 import { ToastProvider } from './context/ToastContext';
 import { api } from './services/api';
-import { Sparkles } from 'lucide-react';
+import { Compass } from 'lucide-react';
 
 function MainLayout() {
-  const [activeDataMode, setActiveDataMode] = useState('DEMO / SYNTHETIC DATA');
+  const [activeDataMode, setActiveDataMode] = useState('PUBLIC DATA');
   const [refreshKey, setRefreshKey] = useState(0);
   const [isTourOpen, setIsTourOpen] = useState(false);
 
@@ -40,6 +41,7 @@ function MainLayout() {
 
   return (
     <div className="min-h-screen bg-slate-100 flex flex-col font-sans">
+      <GovHeader />
       <Navbar 
         activeDataMode={activeDataMode} 
         onAnalysisRun={() => setRefreshKey(k => k + 1)}
@@ -61,13 +63,13 @@ function MainLayout() {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
 
-          {/* Floating Interactive Tour Trigger */}
+          {/* Floating Operational Guide Trigger */}
           <button
             onClick={() => setIsTourOpen(true)}
-            className="fixed bottom-6 left-64 z-30 hidden lg:flex items-center gap-2 px-4 py-2.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-xl transition border border-slate-700/60"
+            className="fixed bottom-6 left-68 z-30 hidden lg:flex items-center gap-2 px-3.5 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-200 font-semibold text-xs shadow-md transition border border-slate-700"
           >
-            <Sparkles className="w-4 h-4 text-sky-400" />
-            <span>Platform Tour 🚀</span>
+            <Compass className="w-4 h-4 text-blue-400" />
+            <span>Workflow Walkthrough</span>
           </button>
 
           <DemoTourModal
