@@ -61,13 +61,13 @@ function MainLayout() {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
 
-          {/* Floating SIH 2026 Interactive Tour Trigger */}
+          {/* Floating Interactive Tour Trigger */}
           <button
             onClick={() => setIsTourOpen(true)}
-            className="fixed bottom-6 left-64 z-30 hidden lg:flex items-center gap-2 px-4 py-2.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-xl transition border border-blue-400/30"
+            className="fixed bottom-6 left-64 z-30 hidden lg:flex items-center gap-2 px-4 py-2.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-xl transition border border-slate-700/60"
           >
-            <Sparkles className="w-4 h-4 text-sky-300" />
-            <span>Interactive SIH Tour 🚀</span>
+            <Sparkles className="w-4 h-4 text-sky-400" />
+            <span>Platform Tour 🚀</span>
           </button>
 
           <DemoTourModal

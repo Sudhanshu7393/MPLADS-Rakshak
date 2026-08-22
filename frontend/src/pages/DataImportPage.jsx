@@ -126,7 +126,7 @@ export default function DataImportPage() {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs shadow-md transition disabled:opacity-50"
         >
           <Sparkles className="w-4 h-4 text-slate-950" />
-          <span>{ingesting ? 'Loading & Scoring...' : 'Load SIH Demo Dataset (1,600 Works)'}</span>
+          <span>{ingesting ? 'Loading & Scoring...' : 'Load Standard Benchmark Dataset (1,600 Works)'}</span>
         </button>
       </div>
 
@@ -163,9 +163,9 @@ export default function DataImportPage() {
           <span className="text-[11px] font-bold uppercase tracking-wider text-amber-600">
             Mode 3 • Demo / Synthetic Mode
           </span>
-          <h4 className="text-sm font-bold text-slate-900">Deterministic SIH Test Bench</h4>
+          <h4 className="text-sm font-bold text-slate-900">Deterministic Test Bench</h4>
           <p className="text-xs text-slate-500 leading-relaxed">
-            Fixed random-seed benchmark dataset with known anomaly scenarios (cost outliers, timeline delays, duplicate works).
+            Standard benchmark dataset with verified scenario injections (cost outliers, timeline delays, duplicate works).
           </p>
         </div>
       </div>

@@ -72,13 +72,13 @@ export default function Sidebar() {
 
       {/* Official Guidelines Info Card */}
       <div className="pt-4 border-t border-slate-100">
-        <div className="bg-slate-50 border border-slate-200 rounded-lg p-3 text-[11px] text-slate-600 space-y-1.5">
+        <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 text-[11px] text-slate-600 space-y-1">
           <div className="font-bold text-slate-800 flex items-center gap-1.5">
-            <span>🛡️</span>
-            <span>SIH 2026 Safeguard</span>
+            <span className="w-2 h-2 rounded-full bg-emerald-500" />
+            <span>Governance Guardrail</span>
           </div>
-          <p className="text-[10px] text-slate-500 leading-tight">
-            Flags represent statistical anomalies requiring officer scrutiny. Risk is not fraud; human judgment remains statutory.
+          <p className="text-[10px] text-slate-500 leading-snug">
+            Risk scores prioritize review; final authority remains with human officers.
           </p>
         </div>
       </div>

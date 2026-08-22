@@ -248,11 +248,8 @@ public class RiskEngineService {
             }
 
             double rulePts = (costPts > 0 ? 10.0 : 0.0) + (delayPts > 0 ? 10.0 : 0.0);
-            double rawComposite = (costPts * weights.getCostWeight()) + (delayPts * weights.getDelayWeight()) +
-                    (rulePts * weights.getRuleWeight()) + (evidencePts * weights.getFundEvidenceWeight());
-
-            int finalScore = Math.min(99, (int) Math.round((rawComposite / 25.0) * 100.0));
-            String riskLevel = finalScore >= weights.getMediumThreshold() ? "HIGH" : (finalScore >= weights.getLowThreshold() ? "MEDIUM" : "LOW");
+            int finalScore = Math.min(98, (int) Math.round(costPts + delayPts + rulePts + evidencePts));
+            String riskLevel = finalScore >= 55 ? "HIGH" : (finalScore >= 35 ? "MEDIUM" : "LOW");
 
             RiskScore score = riskScoreRepository.findByWorkId(wId).orElseGet(() -> {
                 RiskScore s = new RiskScore();
@@ -262,7 +259,7 @@ public class RiskEngineService {
 
             score.setOverallScore(finalScore);
             score.setRiskLevel(riskLevel);
-            score.setPriority("HIGH".equals(riskLevel) ? "PRIORITY_1" : "PRIORITY_3");
+            score.setPriority("HIGH".equals(riskLevel) ? "PRIORITY_1" : ("MEDIUM".equals(riskLevel) ? "PRIORITY_2" : "PRIORITY_3"));
             score.setConfidence(work.getSanctionDate() != null ? "HIGH" : "MEDIUM");
             score.setCostScore(costPts);
             score.setDelayScore(delayPts);

@@ -73,8 +73,8 @@ export default function DemoTourModal({ isOpen, onClose }) {
               <Sparkles className="w-4 h-4" />
             </div>
             <div>
-              <h2 className="text-sm font-black text-slate-900 tracking-tight">
-                SIH 2026 GUIDED DEMO TOUR
+              <h2 className="text-sm font-black text-slate-900 tracking-tight uppercase">
+                Platform Intelligence Walkthrough
               </h2>
               <span className="text-[11px] text-slate-400">
                 Step {current.step} of {TOUR_STEPS.length}

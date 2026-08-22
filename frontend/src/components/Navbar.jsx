@@ -38,13 +38,15 @@ export default function Navbar({ activeDataMode = 'DEMO/SYNTHETIC DATA', onAnaly
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-extrabold text-base tracking-wider text-white">MPLADS RAKSHAK</span>
-              <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-400/30">
-                SIH 2026
+              <span className="font-extrabold text-sm tracking-tight text-white group-hover:text-blue-400 transition">
+                MPLADS RAKSHAK
+              </span>
+              <span className="text-[10px] font-bold uppercase tracking-wider bg-blue-900/40 text-blue-200 border border-blue-700/50 px-2 py-0.5 rounded-full">
+                AI Intelligence Layer
               </span>
             </div>
-            <p className="text-[11px] text-slate-400 font-medium">
-              MoSPI • AI-Powered Risk, Anomaly &amp; Transparency Intelligence Layer
+            <p className="text-[10px] text-slate-400 font-medium">
+              Ministry of Statistics &amp; Programme Implementation (MoSPI)
             </p>
           </div>
         </div>

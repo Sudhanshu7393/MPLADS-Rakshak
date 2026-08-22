@@ -72,20 +72,20 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-slate-900 text-slate-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
-        <div className="w-14 h-14 rounded-2xl bg-blue-600/20 border border-blue-400/40 mx-auto flex items-center justify-center text-blue-400 mb-4 shadow-lg shadow-blue-900/40">
-          <Shield className="w-8 h-8 text-sky-400" />
+      <div className="text-center space-y-2">
+          <div className="w-14 h-14 rounded-2xl bg-gov-navy text-white flex items-center justify-center mx-auto shadow-md">
+            <Shield className="w-8 h-8 text-sky-400" />
+          </div>
+          <h1 className="text-2xl font-black text-white tracking-tight">
+            MPLADS RAKSHAK
+          </h1>
+          <p className="text-xs text-slate-400 font-medium">
+            AI-Powered Risk, Anomaly &amp; Transparency Intelligence Platform
+          </p>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-950 text-blue-300 text-[11px] font-semibold border border-blue-800">
+            <span>Ministry of Statistics &amp; Programme Implementation</span>
+          </div>
         </div>
-        <h2 className="text-2xl font-extrabold tracking-tight text-white">
-          MPLADS RAKSHAK
-        </h2>
-        <p className="mt-1 text-xs text-slate-400">
-          AI-Powered Risk, Anomaly &amp; Transparency Intelligence Platform
-        </p>
-        <div className="mt-2 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono bg-blue-950 border border-blue-800 text-blue-300">
-          <span>SIH 2026 • Problem Statement SIH26102</span>
-        </div>
-      </div>
 
       <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-md px-4">
         <div className="bg-slate-950 py-8 px-6 shadow-2xl rounded-2xl border border-slate-800 space-y-6">

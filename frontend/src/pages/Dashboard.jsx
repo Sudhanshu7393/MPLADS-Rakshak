@@ -68,7 +68,7 @@ export default function Dashboard() {
         <EmptyState
           title="No MPLADS dataset loaded yet."
           message="Upload an authorized or public dataset to trigger the AI risk engine and populate the Command Center."
-          actionText="Load 1-Click SIH Demo Data"
+          actionText="Load Benchmark Dataset"
           actionLink="/data"
         />
       </div>

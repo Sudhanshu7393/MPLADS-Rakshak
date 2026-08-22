@@ -13,7 +13,7 @@
 
     <groupId>com.mplads</groupId>
     <artifactId>rakshak-backend</artifactId>
-    <version>1.0.0-SIH2026</version>
+    <version>1.0.0</version>
     <name>MPLADS Rakshak Backend</name>
     <description>AI-Powered Risk, Anomaly &amp; Transparency Intelligence Platform for MPLADS</description>
 

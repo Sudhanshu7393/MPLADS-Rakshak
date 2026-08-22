@@ -64,10 +64,11 @@ class BatchAnalysisRequest(BaseModel):
 @app.get("/")
 def root():
     return {
-        "service": "MPLADS Rakshak ML Engine",
+        "service": "MPLADS Rakshak AI Engine",
         "status": "HEALTHY",
-        "mode": "SIH 2026 Ready",
-        "version": "1.0.0"
+        "mode": "Production Ready",
+        "version": "1.0.0",
+        "supported_engines": ["cost_iqr", "delay_analyzer", "tfidf_duplicate_matcher", "isolation_forest", "agency_profiler", "evidence_audit"]
     }
 
 @app.get("/ml/health")
@@ -208,10 +209,10 @@ def analyze_all_endpoint(req: BatchAnalysisRequest):
                 "detail": f"{ev_item.get('missing_count')} mandatory artifact(s) not uploaded."
             })
             
-        # Composite score calculation (0 to 100)
-        raw_composite = (cost_pts * 0.25) + (delay_pts * 0.20) + (rule_pts * 0.20) + (sim_pts * 0.15) + (agency_pts * 0.10) + (evidence_pts * 0.10)
-        # Rescale gently so multi-signal flags stand out clearly
-        scaled_score = min(99, int(round((raw_composite / 25.0) * 100.0)))
+        # Composite score calculation (Direct 100-point transparent scale)
+        # Cost (25) + Delay (20) + Rules (20) + Similarity (15) + Agency (10) + Evidence (10) = 100 pts
+        direct_sum = cost_pts + delay_pts + rule_pts + sim_pts + agency_pts + min(10.0, evidence_pts)
+        scaled_score = min(98, max(4, int(round(direct_sum))))
         
         # Risk level categorization
         if scaled_score >= 70:

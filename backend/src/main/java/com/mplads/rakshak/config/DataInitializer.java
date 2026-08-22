@@ -36,7 +36,7 @@ public class DataInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
         // Initialize Default Development / Evaluation Roles
         if (userRepository.count() == 0) {
-            log.info("Initializing Development / SIH Demo User Profiles...");
+            log.info("Initializing Enterprise / Evaluation User Profiles...");
 
             User admin = new User(
                     "admin@mplads.gov.in",
