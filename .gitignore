@@ -1,0 +1,32 @@
+# Dependencies & Build Artefacts
+node_modules/
+frontend/node_modules/
+frontend/dist/
+dist/
+
+# Java & Backend
+target/
+backend/target/
+backend_data/
+uploads/
+*.class
+*.jar
+*.war
+tools/
+
+# Python & ML
+venv/
+ml_service/venv/
+__pycache__/
+*/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment & IDE
+.env
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
