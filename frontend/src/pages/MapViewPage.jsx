@@ -5,6 +5,7 @@ import { MapPin, Filter, AlertOctagon, Info, ArrowUpRight } from 'lucide-react';
 import { api } from '../services/api';
 import { formatINR, getRiskColorHex } from '../utils/formatters';
 import RiskScoreBadge from '../components/RiskScoreBadge';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 function ChangeMapView({ center, zoom }) {
   const map = useMap();
@@ -70,8 +71,10 @@ export default function MapViewPage() {
   };
 
   return (
-    <div className="p-6 space-y-4 max-w-7xl mx-auto font-sans">
+    <div className="p-6 md:p-8 space-y-4 max-w-7xl mx-auto font-sans">
       
+      <Breadcrumbs />
+
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>

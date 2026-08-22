@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import Login from './pages/Login';
@@ -13,11 +13,15 @@ import DataImportPage from './pages/DataImportPage';
 import AuditLogsPage from './pages/AuditLogsPage';
 import SettingsPage from './pages/SettingsPage';
 import ReportsPage from './pages/ReportsPage';
-import { getAuthToken, api } from './services/api';
+import DemoTourModal from './components/DemoTourModal';
+import { ToastProvider } from './context/ToastContext';
+import { api } from './services/api';
+import { Sparkles } from 'lucide-react';
 
 function MainLayout() {
-  const [activeDataMode, setActiveDataMode] = useState('DEMO/SYNTHETIC DATA');
+  const [activeDataMode, setActiveDataMode] = useState('DEMO / SYNTHETIC DATA');
   const [refreshKey, setRefreshKey] = useState(0);
+  const [isTourOpen, setIsTourOpen] = useState(false);
 
   const loadDataMode = async () => {
     try {
@@ -42,7 +46,7 @@ function MainLayout() {
       />
       <div className="flex-1 flex overflow-hidden">
         <Sidebar />
-        <main className="flex-1 overflow-y-auto bg-slate-100 min-h-[calc(100vh-4rem)]">
+        <main className="flex-1 overflow-y-auto bg-slate-100 min-h-[calc(100vh-4rem)] relative">
           <Routes>
             <Route path="/" element={<Dashboard key={refreshKey} />} />
             <Route path="/queue" element={<RiskQueue key={refreshKey} />} />
@@ -56,6 +60,20 @@ function MainLayout() {
             <Route path="/reports" element={<ReportsPage key={refreshKey} />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
+
+          {/* Floating SIH 2026 Interactive Tour Trigger */}
+          <button
+            onClick={() => setIsTourOpen(true)}
+            className="fixed bottom-6 left-64 z-30 hidden lg:flex items-center gap-2 px-4 py-2.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-xl transition border border-blue-400/30"
+          >
+            <Sparkles className="w-4 h-4 text-sky-300" />
+            <span>Interactive SIH Tour 🚀</span>
+          </button>
+
+          <DemoTourModal
+            isOpen={isTourOpen}
+            onClose={() => setIsTourOpen(false)}
+          />
         </main>
       </div>
     </div>
@@ -64,11 +82,13 @@ function MainLayout() {
 
 export default function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/*" element={<MainLayout />} />
-      </Routes>
-    </Router>
+    <ToastProvider>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/*" element={<MainLayout />} />
+        </Routes>
+      </Router>
+    </ToastProvider>
   );
 }

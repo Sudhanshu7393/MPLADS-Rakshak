@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
 import { Sliders, Save, RefreshCw, CheckCircle2, ShieldAlert, Info } from 'lucide-react';
 import { api } from '../services/api';
+import Breadcrumbs from '../components/Breadcrumbs';
+import { useToast } from '../context/ToastContext';
 
 export default function SettingsPage() {
+  const { addToast } = useToast();
   const [weights, setWeights] = useState({
     costWeight: 0.25,
     delayWeight: 0.20,
@@ -47,18 +49,19 @@ export default function SettingsPage() {
     setSaving(true);
     try {
       await api.updateRiskWeights(weights);
-      setSuccessMsg('Scoring weights updated and universe recalibrated!');
-      setTimeout(() => setSuccessMsg(''), 3000);
+      addToast('Scoring weights saved! Universe recalculated with updated weights.', 'success');
     } catch (err) {
-      alert('Error updating weights: ' + err.message);
+      addToast('Error updating weights: ' + err.message, 'error');
     } finally {
       setSaving(false);
     }
   };
 
   return (
-    <div className="p-6 space-y-6 max-w-5xl mx-auto font-sans">
+    <div className="p-6 md:p-8 space-y-6 max-w-5xl mx-auto font-sans">
       
+      <Breadcrumbs />
+
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { History, ShieldCheck, Search, Filter, Clock } from 'lucide-react';
 import { api } from '../services/api';
 import { formatDate } from '../utils/formatters';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 export default function AuditLogsPage() {
   const [logs, setLogs] = useState([]);
@@ -27,8 +28,10 @@ export default function AuditLogsPage() {
   }, [page]);
 
   return (
-    <div className="p-6 space-y-6 max-w-7xl mx-auto font-sans">
+    <div className="p-6 md:p-8 space-y-6 max-w-7xl mx-auto font-sans">
       
+      <Breadcrumbs />
+
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>

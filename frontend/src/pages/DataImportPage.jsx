@@ -13,8 +13,11 @@ import {
 } from 'lucide-react';
 import { api } from '../services/api';
 import { formatDate } from '../utils/formatters';
+import Breadcrumbs from '../components/Breadcrumbs';
+import { useToast } from '../context/ToastContext';
 
 export default function DataImportPage() {
+  const { addToast } = useToast();
   const [dataStatus, setDataStatus] = useState(null);
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -55,8 +58,9 @@ export default function DataImportPage() {
       const prev = await api.uploadCSV(file);
       setPreview(prev);
       setColumnMappings(prev.suggestedColumnMappings || {});
+      addToast(`CSV ${file.name} uploaded. Please review column mappings.`, 'info');
     } catch (err) {
-      alert('Upload failed: ' + err.message);
+      addToast('Upload failed: ' + err.message, 'error');
     } finally {
       setUploading(false);
     }
@@ -71,11 +75,11 @@ export default function DataImportPage() {
         sourceType: sourceType,
         columnMappings: columnMappings
       });
-      setSuccessMsg('Dataset successfully validated, mapped, and ingested into PostgreSQL Analytical Store!');
+      addToast('Dataset successfully validated and ingested into Analytical Store!', 'success');
       setPreview(null);
       loadStatus();
     } catch (err) {
-      alert('Ingestion error: ' + err.message);
+      addToast('Ingestion error: ' + err.message, 'error');
     } finally {
       setIngesting(false);
     }
@@ -85,18 +89,20 @@ export default function DataImportPage() {
     setIngesting(true);
     try {
       await api.loadDemoData();
-      setSuccessMsg('Deterministic SIH Demo Dataset (1,600 works) successfully loaded and analyzed!');
+      addToast('Deterministic SIH Demo Dataset (1,600 works) successfully loaded and analyzed!', 'success');
       loadStatus();
     } catch (err) {
-      alert('Error loading demo dataset: ' + err.message);
+      addToast('Error loading demo dataset: ' + err.message, 'error');
     } finally {
       setIngesting(false);
     }
   };
 
   return (
-    <div className="p-6 space-y-6 max-w-7xl mx-auto font-sans">
+    <div className="p-6 md:p-8 space-y-6 max-w-7xl mx-auto font-sans">
       
+      <Breadcrumbs />
+
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>

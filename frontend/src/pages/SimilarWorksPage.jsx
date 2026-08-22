@@ -4,6 +4,7 @@ import { Copy, MapPin, Eye, ArrowRight, ShieldAlert, CheckCircle2 } from 'lucide
 import { api } from '../services/api';
 import { formatINR, formatDate } from '../utils/formatters';
 import EmptyState from '../components/EmptyState';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 export default function SimilarWorksPage() {
   const [similarities, setSimilarities] = useState([]);
@@ -26,8 +27,10 @@ export default function SimilarWorksPage() {
   }, []);
 
   return (
-    <div className="p-6 space-y-6 max-w-7xl mx-auto font-sans">
+    <div className="p-6 md:p-8 space-y-6 max-w-7xl mx-auto font-sans">
       
+      <Breadcrumbs />
+
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>

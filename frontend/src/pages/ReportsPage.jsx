@@ -4,6 +4,7 @@ import { Printer, Download, Search, Shield, FileText, CheckCircle, AlertTriangle
 import { api } from '../services/api';
 import { formatINR, formatDate } from '../utils/formatters';
 import RiskScoreBadge from '../components/RiskScoreBadge';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 export default function ReportsPage() {
   const [searchParams] = useSearchParams();
@@ -40,8 +41,12 @@ export default function ReportsPage() {
   };
 
   return (
-    <div className="p-6 space-y-6 max-w-5xl mx-auto font-sans">
+    <div className="p-6 md:p-8 space-y-6 max-w-5xl mx-auto font-sans">
       
+      <div className="print:hidden">
+        <Breadcrumbs />
+      </div>
+
       {/* Search and Print Bar (Hidden during print) */}
       <div className="print:hidden flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
         <form onSubmit={handleSearch} className="flex items-center gap-2 flex-1 max-w-md">
