@@ -35,28 +35,43 @@ const NAV_ITEMS = [
 ];
 
 export default function Sidebar({ isCollapsed, onToggle }) {
-  const [internalCollapsed, setInternalCollapsed] = useState(false);
+  const [internalCollapsed, setInternalCollapsed] = useState(() => {
+    const saved = localStorage.getItem('sidebar_collapsed');
+    return saved !== null ? saved === 'true' : true; // Default: Compact Icon Mode
+  });
+
   const collapsed = isCollapsed !== undefined ? isCollapsed : internalCollapsed;
-  const toggle = onToggle || (() => setInternalCollapsed(prev => !prev));
+
+  const handleToggle = () => {
+    if (onToggle) {
+      onToggle();
+    } else {
+      setInternalCollapsed(prev => {
+        const next = !prev;
+        localStorage.setItem('sidebar_collapsed', String(next));
+        return next;
+      });
+    }
+  };
 
   return (
     <>
       <aside 
         className={`${
-          collapsed ? 'w-0 -ml-64 lg:w-16 lg:ml-0' : 'w-64'
+          collapsed ? 'w-16' : 'w-64'
         } bg-white text-slate-700 border-r border-slate-200 flex flex-col justify-between shrink-0 font-sans transition-all duration-300 ease-in-out no-print sidebar relative overflow-hidden z-20`}
       >
         
         {/* Header with Title & Collapse Button */}
-        <div className="p-3.5 space-y-1 overflow-y-auto overflow-x-hidden">
-          <div className="flex items-center justify-between px-2 py-1.5 mb-1 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+        <div className="p-3 space-y-1 overflow-y-auto overflow-x-hidden">
+          <div className={`flex items-center ${collapsed ? 'justify-center' : 'justify-between'} px-1 py-1.5 mb-1 text-[10px] font-bold uppercase tracking-wider text-slate-400`}>
             {!collapsed && <span>Operational Modules</span>}
             <button
-              onClick={toggle}
-              className="p-1 rounded-md hover:bg-slate-100 text-slate-500 hover:text-slate-900 transition ml-auto"
-              title={collapsed ? "Expand Sidebar" : "Hide Sidebar"}
+              onClick={handleToggle}
+              className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-slate-900 transition"
+              title={collapsed ? "Expand Sidebar" : "Collapse Sidebar"}
             >
-              {collapsed ? <PanelLeftOpen className="w-4 h-4" /> : <PanelLeftClose className="w-4 h-4" />}
+              {collapsed ? <PanelLeftOpen className="w-4 h-4 text-slate-600" /> : <PanelLeftClose className="w-4 h-4 text-slate-600" />}
             </button>
           </div>
 
