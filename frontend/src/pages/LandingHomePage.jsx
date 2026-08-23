@@ -175,8 +175,8 @@ export default function LandingHomePage() {
 
         </div>
 
-        {/* Official Government of India Pure Typography (Bottom-Right Corner on Image) */}
-        <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-8 z-20 text-right select-none pointer-events-none space-y-0.5">
+        {/* Official Government of India Pure Typography (Bottom-Right on Image) */}
+        <div className="absolute bottom-12 right-6 sm:bottom-14 sm:right-10 z-20 text-right select-none pointer-events-none space-y-0.5">
           <div className="text-xs sm:text-sm font-black text-white uppercase tracking-widest drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] font-sans">
             Government of India
           </div>
