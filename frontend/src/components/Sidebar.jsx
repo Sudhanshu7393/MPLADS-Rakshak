@@ -116,7 +116,7 @@ export default function Sidebar({ isCollapsed, onToggle }) {
       {/* Floating Toggle Pill when completely collapsed on small screens */}
       {collapsed && (
         <button
-          onClick={toggle}
+          onClick={handleToggle}
           className="fixed top-18 left-3 z-30 p-2 rounded-lg bg-slate-900 text-white shadow-lg hover:bg-slate-800 transition lg:hidden"
           title="Open Operational Modules"
         >
