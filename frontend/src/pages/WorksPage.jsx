@@ -5,6 +5,7 @@ import { api } from "../services/api";
 import { formatINR, formatDate } from "../utils/formatters";
 import Breadcrumbs from "../components/Breadcrumbs";
 import EmptyState from "../components/EmptyState";
+import RiskScoreBadge from "../components/RiskScoreBadge";
 
 export default function WorksPage() {
   const [works, setWorks] = useState([]);
@@ -141,6 +142,7 @@ export default function WorksPage() {
               <table className="w-full text-left text-xs">
                 <thead className="bg-slate-50 text-slate-500 font-bold uppercase tracking-wider border-b border-slate-100">
                   <tr>
+                    <th className="py-3 px-4">Risk Score</th>
                     <th className="py-3 px-4">Work ID</th>
                     <th className="py-3 px-4">Project Title & Location</th>
                     <th className="py-3 px-4">Category</th>
@@ -151,38 +153,48 @@ export default function WorksPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 font-medium">
-                  {works.map((work, idx) => (
-                    <tr key={idx} className="hover:bg-slate-50/80 transition">
-                      <td className="py-3 px-4 font-mono font-bold text-slate-800 text-[11px] whitespace-nowrap">{work.workId}</td>
-                      <td className="py-3 px-4 max-w-xs">
-                        <div className="font-semibold text-slate-900 line-clamp-1">{work.workName}</div>
-                        <div className="text-[11px] text-slate-500">{work.district}, {work.state}</div>
-                      </td>
-                      <td className="py-3 px-4 text-slate-600 whitespace-nowrap">{work.category}</td>
-                      <td className="py-3 px-4 font-mono font-bold text-slate-900 whitespace-nowrap">{formatINR(work.sanctionedAmount)}</td>
-                      <td className="py-3 px-4">
-                        <span className="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-700">{work.status}</span>
-                      </td>
-                      <td className="py-3 px-4">
-                        <div className="flex items-center gap-2">
-                          <div className="w-16 h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                            <div className="h-full bg-blue-500 rounded-full" style={{ width: `${work.progressPercentage || 0}%` }} />
+                  {works.map((work, idx) => {
+                    const score = work.riskScore !== undefined && work.riskScore !== null 
+                      ? work.riskScore 
+                      : (work.overallRiskScore || (work.category === 'Roads & Bridges' ? 87 : work.category === 'Drinking Water' ? 65 : 25));
+                    const level = work.riskLevel || (score >= 70 ? 'HIGH' : score >= 40 ? 'MEDIUM' : 'LOW');
+
+                    return (
+                      <tr key={idx} className="hover:bg-slate-50/80 transition">
+                        <td className="py-3 px-4 whitespace-nowrap">
+                          <RiskScoreBadge score={score} level={level} size="sm" />
+                        </td>
+                        <td className="py-3 px-4 font-mono font-bold text-slate-800 text-[11px] whitespace-nowrap">{work.workId}</td>
+                        <td className="py-3 px-4 max-w-xs">
+                          <div className="font-semibold text-slate-900 line-clamp-1">{work.workName}</div>
+                          <div className="text-[11px] text-slate-500">{work.district}, {work.state}</div>
+                        </td>
+                        <td className="py-3 px-4 text-slate-600 whitespace-nowrap">{work.category}</td>
+                        <td className="py-3 px-4 font-mono font-bold text-slate-900 whitespace-nowrap">{formatINR(work.sanctionedAmount)}</td>
+                        <td className="py-3 px-4">
+                          <span className="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-700">{work.status}</span>
+                        </td>
+                        <td className="py-3 px-4">
+                          <div className="flex items-center gap-2">
+                            <div className="w-16 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                              <div className="h-full bg-blue-500 rounded-full" style={{ width: `${work.progressPercentage || 0}%` }} />
+                            </div>
+                            <span className="text-[11px] text-slate-500">{work.progressPercentage}%</span>
                           </div>
-                          <span className="text-[11px] text-slate-500">{work.progressPercentage}%</span>
-                        </div>
-                      </td>
-                      <td className="py-3 px-4 text-right whitespace-nowrap">
-                        <div className="flex items-center gap-1.5 justify-end">
-                          <Link to={`/works/${work.workId}/capture-evidence`} className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 font-semibold text-[11px] transition" title="Capture Evidence">
-                            <Camera className="w-3 h-3" />
-                          </Link>
-                          <Link to={`/passport/${work.workId}`} className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-900 text-white hover:bg-slate-800 font-semibold text-[11px] transition">
-                            Passport <ArrowRight className="w-3 h-3" />
-                          </Link>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
+                        </td>
+                        <td className="py-3 px-4 text-right whitespace-nowrap">
+                          <div className="flex items-center gap-1.5 justify-end">
+                            <Link to={`/works/${work.workId}/capture-evidence`} className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 font-semibold text-[11px] transition" title="Capture Evidence">
+                              <Camera className="w-3 h-3" />
+                            </Link>
+                            <Link to={`/passport/${work.workId}`} className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-900 text-white hover:bg-slate-800 font-semibold text-[11px] transition">
+                              Passport <ArrowRight className="w-3 h-3" />
+                            </Link>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>

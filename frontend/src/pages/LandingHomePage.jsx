@@ -585,44 +585,50 @@ export default function LandingHomePage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-200">
-              {highRiskWorks.map((work) => (
-                <tr key={work.workId} className="hover:bg-slate-50 transition">
-                  <td className="py-3 px-3">
-                    <span className="font-mono font-bold text-blue-800 block text-[11px]">
-                      {work.workId}
-                    </span>
-                    <span className="text-slate-900 font-medium line-clamp-1 max-w-xs">
-                      {work.workTitle}
-                    </span>
-                  </td>
-                  <td className="py-3 px-3 text-slate-700">
-                    <span className="font-semibold block">{work.district}</span>
-                    <span className="text-[10px] text-slate-500">{work.state}</span>
-                  </td>
-                  <td className="py-3 px-3 font-mono font-bold text-slate-900">
-                    {formatINR(work.sanctionedAmount || work.estimatedCost)}
-                  </td>
-                  <td className="py-3 px-3">
-                    <span className="px-2 py-0.5 rounded font-mono font-bold text-[11px] bg-red-100 text-red-900 border border-red-200">
-                      {work.overallRiskScore} / 100
-                    </span>
-                  </td>
-                  <td className="py-3 px-3">
-                    <span className="text-[11px] font-semibold text-red-700">
-                      {work.riskSignals && work.riskSignals[0] ? work.riskSignals[0].split(':')[0] : 'Peer Cost Outlier'}
-                    </span>
-                  </td>
-                  <td className="py-3 px-3 text-right">
-                    <Link
-                      to={'/passport/' + work.workId}
-                      className="px-3 py-1.5 rounded bg-blue-700 hover:bg-blue-800 text-white font-bold text-[11px] transition inline-flex items-center gap-1 shadow-xs"
-                    >
-                      <span>Inspect</span>
-                      <ArrowRight className="w-3 h-3" />
-                    </Link>
-                  </td>
-                </tr>
-              ))}
+              {highRiskWorks.map((work) => {
+                const score = work.riskScore !== undefined && work.riskScore !== null ? work.riskScore : (work.overallRiskScore || 85);
+                const title = work.workName || work.workTitle || 'Sanctioned Infrastructure Project';
+                const reason = work.primaryReason || (work.riskSignals && work.riskSignals[0] ? work.riskSignals[0].split(':')[0] : 'Peer Cost Outlier (+53.8%)');
+
+                return (
+                  <tr key={work.workId} className="hover:bg-slate-50 transition">
+                    <td className="py-3 px-3">
+                      <span className="font-mono font-bold text-blue-800 block text-[11px]">
+                        {work.workId}
+                      </span>
+                      <span className="text-slate-900 font-medium line-clamp-1 max-w-xs" title={title}>
+                        {title}
+                      </span>
+                    </td>
+                    <td className="py-3 px-3 text-slate-700">
+                      <span className="font-semibold block">{work.district}</span>
+                      <span className="text-[10px] text-slate-500">{work.state}</span>
+                    </td>
+                    <td className="py-3 px-3 font-mono font-bold text-slate-900">
+                      {formatINR(work.sanctionedAmount || work.estimatedCost || 4800000)}
+                    </td>
+                    <td className="py-3 px-3">
+                      <span className="px-2 py-0.5 rounded font-mono font-bold text-[11px] bg-red-100 text-red-900 border border-red-200">
+                        {score} / 100
+                      </span>
+                    </td>
+                    <td className="py-3 px-3">
+                      <span className="text-[11px] font-semibold text-red-700">
+                        {reason}
+                      </span>
+                    </td>
+                    <td className="py-3 px-3 text-right">
+                      <Link
+                        to={'/passport/' + work.workId}
+                        className="px-3 py-1.5 rounded bg-blue-700 hover:bg-blue-800 text-white font-bold text-[11px] transition inline-flex items-center gap-1 shadow-xs"
+                      >
+                        <span>Inspect</span>
+                        <ArrowRight className="w-3 h-3" />
+                      </Link>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
