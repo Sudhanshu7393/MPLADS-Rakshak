@@ -226,15 +226,15 @@ export default function LandingHomePage() {
       </section>
 
 
-      {/* 2. LOWER PORTAL CONTENT WITH APPLE-STYLE SCROLL REVEAL & GOLDEN ASHOKA EMBLEM */}
+      {/* 2. LOWER PORTAL CONTENT WITH APPLE-STYLE SCROLL REVEAL & SUBTLE ASHOKA WATERMARK */}
       <div 
         id="command-center"
         className="relative bg-cover bg-fixed bg-center scroll-mt-6"
         style={{ backgroundImage: "url('/gov_watermark.jpg')" }}
       >
         
-        {/* Semi-transparent tint to ensure high contrast and clear emblem visibility */}
-        <div className="absolute inset-0 bg-[#F8FAFC]/82 dark:bg-[#0B0F19]/88 pointer-events-none transition-colors duration-300" />
+        {/* Soft subtle tint for elegant official texture without clutter */}
+        <div className="absolute inset-0 bg-[#F8FAFC]/93 dark:bg-[#0B0F19]/95 pointer-events-none transition-colors duration-300" />
 
         <div className="relative z-10">
 
