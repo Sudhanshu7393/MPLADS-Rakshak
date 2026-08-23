@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import Login from './pages/Login';
@@ -26,6 +26,8 @@ function MainLayout() {
   const [activeDataMode, setActiveDataMode] = useState('PUBLIC DATA');
   const [refreshKey, setRefreshKey] = useState(0);
   const [isTourOpen, setIsTourOpen] = useState(false);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const location = useLocation();
 
   const loadDataMode = async () => {
     try {
@@ -42,15 +44,25 @@ function MainLayout() {
     loadDataMode();
   }, [refreshKey]);
 
+  // Close mobile drawer on page navigation
+  useEffect(() => {
+    setMobileNavOpen(false);
+  }, [location.pathname]);
+
   return (
     <div className="h-screen bg-[#F1F5F9] dark:bg-[#0B0F19] text-slate-900 dark:text-slate-100 flex flex-col font-sans overflow-hidden transition-colors duration-200">
       <Navbar 
         activeDataMode={activeDataMode} 
         onAnalysisRun={() => setRefreshKey(k => k + 1)}
+        mobileNavOpen={mobileNavOpen}
+        onToggleMobileNav={() => setMobileNavOpen(prev => !prev)}
       />
-      <div className="flex-1 flex overflow-hidden">
-        <Sidebar />
-        <main className="flex-1 overflow-y-auto bg-[#F1F5F9] dark:bg-[#0B0F19] p-4 md:p-6 lg:p-8 relative transition-colors duration-200">
+      <div className="flex-1 flex overflow-hidden relative">
+        <Sidebar 
+          mobileOpen={mobileNavOpen}
+          onCloseMobile={() => setMobileNavOpen(false)}
+        />
+        <main className="flex-1 overflow-y-auto bg-[#F1F5F9] dark:bg-[#0B0F19] p-3 sm:p-5 md:p-6 lg:p-8 relative transition-colors duration-200">
           <Routes>
             <Route path="/" element={<LandingHomePage key={refreshKey} />} />
             <Route path="/dashboard" element={<Dashboard key={refreshKey} />} />
