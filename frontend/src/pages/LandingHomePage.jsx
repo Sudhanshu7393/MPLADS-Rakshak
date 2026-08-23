@@ -191,52 +191,55 @@ export default function LandingHomePage() {
 
           {/* A. EXECUTIVE SEARCH & COMMAND BAR (DIRECTLY BELOW IMAGE) */}
           <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
-            <div className="bg-white/95 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-slate-200/80 space-y-5">
+            <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-xl border border-slate-200/90 space-y-4">
               
-              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3.5">
                 
                 {/* Search Form */}
                 <form onSubmit={handleSearch} className="flex-1 max-w-2xl">
                   <div className="relative flex items-center">
-                    <Search className="w-4 h-4 text-slate-400 absolute left-4" />
+                    <Search className="w-4 h-4 text-slate-400 absolute left-4 pointer-events-none" />
                     <input
                       type="text"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       placeholder="Search Constituency, District, or Work Title (e.g. Varanasi, CC Road)..."
-                      className="w-full bg-slate-50 text-slate-900 rounded-xl pl-11 pr-28 py-3 text-xs sm:text-sm placeholder-slate-400 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white shadow-xs"
+                      className="w-full bg-slate-50/70 hover:bg-white focus:bg-white text-slate-900 rounded-xl pl-11 pr-24 py-2.5 text-xs sm:text-sm placeholder-slate-400 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-[#0B2545] shadow-xs transition"
                     />
                     <button
                       type="submit"
-                      className="absolute right-1.5 px-4.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition shadow-xs"
+                      className="absolute right-1.5 px-3.5 py-1.5 bg-[#0B2545] hover:bg-[#071B30] text-white text-xs font-bold rounded-lg transition shadow-xs flex items-center gap-1"
                     >
-                      Search
+                      <span>Search</span>
                     </button>
                   </div>
                 </form>
 
-                {/* Quick Action Navigation Pills */}
-                <div className="flex flex-wrap items-center gap-2.5">
+                {/* Quick Action Navigation Buttons */}
+                <div className="flex flex-wrap items-center gap-2">
                   <Link
                     to="/queue"
-                    className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-sm transition flex items-center gap-1.5"
+                    className="px-4 py-2.5 rounded-xl bg-[#0B2545] hover:bg-[#071B30] text-white font-bold text-xs shadow-xs transition flex items-center gap-2 border border-[#0B2545] group"
                   >
-                    <AlertOctagon className="w-4 h-4" />
-                    <span>Scrutiny Queue ({highRisk} Flags)</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <AlertOctagon className="w-4 h-4 text-red-400" />
+                    <span>Scrutiny Queue</span>
+                    <span className="bg-red-600 text-white font-mono text-[10px] px-1.5 py-0.5 rounded-full font-black">
+                      {highRisk}
+                    </span>
+                    <ArrowRight className="w-3.5 h-3.5 text-slate-300 group-hover:translate-x-0.5 transition-transform" />
                   </Link>
 
                   <Link
                     to="/dashboard"
-                    className="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs border border-slate-300 transition flex items-center gap-1.5"
+                    className="px-3.5 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs border border-slate-300 hover:border-slate-400 shadow-xs transition flex items-center gap-1.5"
                   >
-                    <TrendingUp className="w-3.5 h-3.5 text-blue-600" />
-                    <span>Analytics</span>
+                    <TrendingUp className="w-3.5 h-3.5 text-blue-700" />
+                    <span>Executive Analytics</span>
                   </Link>
 
                   <Link
                     to="/works/MPL-2024-UP-004821/capture-evidence"
-                    className="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs border border-slate-300 transition flex items-center gap-1.5"
+                    className="px-3.5 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs border border-slate-300 hover:border-slate-400 shadow-xs transition flex items-center gap-1.5"
                   >
                     <Camera className="w-3.5 h-3.5 text-emerald-600" />
                     <span>Geo-Camera</span>
@@ -244,7 +247,7 @@ export default function LandingHomePage() {
 
                   <Link
                     to="/works"
-                    className="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs border border-slate-300 transition flex items-center gap-1.5"
+                    className="px-3.5 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs border border-slate-300 hover:border-slate-400 shadow-xs transition flex items-center gap-1.5"
                   >
                     <Layers className="w-3.5 h-3.5 text-slate-600" />
                     <span>Browse All Works</span>
@@ -257,7 +260,7 @@ export default function LandingHomePage() {
               <div className="pt-2 border-t border-slate-100 flex flex-wrap items-center justify-between text-xs text-slate-500 font-medium">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>Continuous Surveillance Active: <strong>{totalWorks.toLocaleString('en-IN')} Sanctioned Works</strong></span>
+                  <span>Continuous Surveillance Active: <strong className="text-slate-800">{totalWorks.toLocaleString('en-IN')} Sanctioned Works</strong></span>
                 </div>
                 <div className="flex items-center gap-4 font-mono text-[11px]">
                   <span>Total Value: <strong className="text-slate-900">{formatINR(totalCost)}</strong></span>
