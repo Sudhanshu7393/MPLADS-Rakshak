@@ -233,8 +233,8 @@ export default function LandingHomePage() {
         style={{ backgroundImage: "url('/gov_watermark.jpg')" }}
       >
         
-        {/* Soft subtle tint for elegant official texture without clutter */}
-        <div className="absolute inset-0 bg-[#F8FAFC]/93 dark:bg-[#0B0F19]/95 pointer-events-none transition-colors duration-300" />
+        {/* Soft subtle tint for elegant official texture with clearly defined darker emblem */}
+        <div className="absolute inset-0 bg-[#F8FAFC]/88 dark:bg-[#0B0F19]/92 pointer-events-none transition-colors duration-300" />
 
         <div className="relative z-10">
 
