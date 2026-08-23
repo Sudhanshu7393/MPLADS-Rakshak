@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { 
+  Compass,
   LayoutDashboard, 
   AlertOctagon, 
   Map, 
@@ -15,7 +16,8 @@ import {
 } from 'lucide-react';
 
 const NAV_ITEMS = [
-  { to: '/', label: 'Executive Dashboard', icon: LayoutDashboard, exact: true },
+  { to: '/', label: 'Overview & Workflow Hub', icon: Compass, exact: true },
+  { to: '/dashboard', label: 'Executive Analytics', icon: LayoutDashboard },
   { to: '/queue', label: 'Prioritised Scrutiny Queue', icon: AlertOctagon },
   { to: '/works', label: 'All Works (Browse)', icon: Layers },
   { to: '/map', label: 'Geospatial Distribution', icon: Map },
@@ -24,7 +26,7 @@ const NAV_ITEMS = [
   { to: '/data', label: 'Data Ingestion & Audit', icon: Database },
   { to: '/reports', label: 'Statutory Reports', icon: FileText },
   { to: '/audit', label: 'Officer Audit Trail', icon: History },
-  { to: '/settings', label: 'Model Weight Calibration', icon: Sliders },
+  { to: '/settings', label: 'Model Calibration', icon: Sliders },
 ];
 
 export default function Sidebar() {

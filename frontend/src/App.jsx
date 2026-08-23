@@ -4,6 +4,7 @@ import GovHeader from './components/GovHeader';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import Login from './pages/Login';
+import LandingHomePage from './pages/LandingHomePage';
 import Dashboard from './pages/Dashboard';
 import RiskQueue from './pages/RiskQueue';
 import RiskPassport from './pages/RiskPassport';
@@ -50,9 +51,10 @@ function MainLayout() {
       />
       <div className="flex-1 flex overflow-hidden">
         <Sidebar />
-        <main className="flex-1 overflow-y-auto bg-slate-100 relative">
+        <main className="flex-1 overflow-y-auto bg-slate-100 p-4 md:p-6 relative">
           <Routes>
-            <Route path="/" element={<Dashboard key={refreshKey} />} />
+            <Route path="/" element={<LandingHomePage key={refreshKey} />} />
+            <Route path="/dashboard" element={<Dashboard key={refreshKey} />} />
             <Route path="/queue" element={<RiskQueue key={refreshKey} />} />
             <Route path="/passport/:workId" element={<RiskPassport key={refreshKey} />} />
             <Route path="/works/:workId/capture-evidence" element={<CameraCapturePage />} />
