@@ -145,37 +145,38 @@ export default function LandingHomePage() {
   return (
     <div className="min-h-screen bg-[#F8FAFC] font-sans text-slate-900 -m-4 md:-m-6 lg:-m-8">
       
-      {/* 1. ENTERPRISE HERO SECTION WITH CLEAR NATURAL PARLIAMENT BACKGROUND */}
-      <section className="relative bg-slate-900 text-white pt-14 pb-28 px-4 sm:px-6 lg:px-8 border-b border-slate-800 overflow-hidden">
+      {/* 1. SEAMLESS CINEMATIC HERO SECTION WITH ILLUMINATED PARLIAMENT ARCHITECTURE */}
+      <section className="relative bg-slate-950 text-white pt-12 pb-32 px-4 sm:px-6 lg:px-8 border-b border-slate-800 overflow-hidden">
         
-        {/* Official Parliament Background Image in Clear Natural Colors */}
+        {/* Full Parliament Architectural Background */}
         <div 
-          className="absolute inset-0 bg-cover bg-center opacity-85 scale-100 pointer-events-none"
+          className="absolute inset-0 bg-cover bg-center opacity-90 scale-100 pointer-events-none transition-transform duration-700"
           style={{ backgroundImage: "url('/parliament_bg.jpg')" }}
         />
 
-        {/* Natural subtle dark gradient to protect text contrast on the left */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-black/20 pointer-events-none" />
+        {/* Sophisticated Dark Gradient Vignette for Razor-Sharp Text Contrast */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/92 via-slate-950/70 to-slate-950/45 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/60 pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
           
-          {/* Left Column: Headline & Search */}
-          <div className="lg:col-span-7 space-y-6">
+          {/* Left Column: Headline & Controls */}
+          <div className="lg:col-span-7 space-y-5">
             
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-slate-800/90 border border-slate-700 text-slate-200 text-xs font-semibold">
-              <ShieldCheck className="w-4 h-4 text-blue-400" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/15 border border-blue-400/30 text-blue-300 text-xs font-semibold backdrop-blur-md">
+              <ShieldCheck className="w-3.5 h-3.5 text-blue-400" />
               <span>Ministry of Statistics &amp; Programme Implementation (MoSPI) • e-SAKSHI</span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-[1.15] text-white">
-              AI-Powered Risk &amp; Anomaly Intelligence for <span className="text-blue-400">MPLADS Governance</span>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.18] text-white">
+              AI-Powered Risk &amp; Anomaly Intelligence for <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-300">MPLADS Governance</span>
             </h1>
 
-            <p className="text-sm sm:text-base text-slate-300 max-w-xl leading-relaxed">
-              Automated decision-support system enabling District Planning Officers to detect peer cost outliers, execution delays, duplicate proposals, and capture tamper-evident geo-verified completion evidence.
+            <p className="text-xs sm:text-sm text-slate-300 max-w-xl leading-relaxed">
+              Automated decision-support platform enabling District Planning Officers to proactively detect peer cost outliers, execution delays, duplicate proposals, and capture tamper-evident geo-verified completion evidence.
             </p>
 
-            {/* Clean Professional Search Bar */}
+            {/* Search Input */}
             <form onSubmit={handleSearch} className="max-w-lg pt-1">
               <div className="relative flex items-center">
                 <Search className="w-4 h-4 text-slate-400 absolute left-4" />
@@ -184,39 +185,39 @@ export default function LandingHomePage() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search Constituency, District, or Work (e.g. Varanasi, CC Road)..."
-                  className="w-full bg-slate-900/90 text-white rounded-lg pl-11 pr-28 py-3 text-xs sm:text-sm placeholder-slate-400 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm"
+                  className="w-full bg-slate-900/90 text-white rounded-xl pl-11 pr-28 py-3 text-xs sm:text-sm placeholder-slate-400 border border-slate-700/80 focus:outline-none focus:ring-2 focus:ring-blue-500 backdrop-blur-md shadow-lg"
                 />
                 <button
                   type="submit"
-                  className="absolute right-1.5 px-4 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-md transition"
+                  className="absolute right-1.5 px-4 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold rounded-lg transition shadow-sm"
                 >
                   Search
                 </button>
               </div>
             </form>
 
-            {/* Primary Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3 pt-2">
+            {/* Action Buttons */}
+            <div className="flex flex-wrap items-center gap-3 pt-1">
               <Link
                 to="/queue"
-                className="px-5 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs sm:text-sm shadow-sm transition flex items-center gap-2"
+                className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs sm:text-sm shadow-md transition flex items-center gap-2 transform active:scale-95"
               >
-                <AlertOctagon className="w-4 h-4 text-white" />
+                <AlertOctagon className="w-4 h-4" />
                 <span>Scrutiny Queue ({highRisk} Flags)</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
 
               <Link
                 to="/dashboard"
-                className="px-5 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs sm:text-sm border border-slate-700 transition flex items-center gap-2"
+                className="px-4 py-2.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 font-semibold text-xs sm:text-sm border border-slate-700/80 backdrop-blur-md transition flex items-center gap-2"
               >
                 <TrendingUp className="w-4 h-4 text-blue-400" />
-                <span>Executive Analytics</span>
+                <span>Analytics</span>
               </Link>
 
               <Link
                 to="/works/MPL-2024-UP-004821/capture-evidence"
-                className="px-5 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs sm:text-sm border border-slate-700 transition flex items-center gap-2"
+                className="px-4 py-2.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 font-semibold text-xs sm:text-sm border border-slate-700/80 backdrop-blur-md transition flex items-center gap-2"
               >
                 <Camera className="w-4 h-4 text-emerald-400" />
                 <span>Geo-Camera</span>
@@ -225,55 +226,55 @@ export default function LandingHomePage() {
 
           </div>
 
-          {/* Right Column: Case Inquest Spotlight Card */}
-          <div className="lg:col-span-5 relative flex justify-center">
+          {/* Right Column: Frosted Glassmorphic Case Inquest Card */}
+          <div className="lg:col-span-5 flex justify-center">
             
-            <div className="w-full max-w-md bg-white rounded-2xl p-6 text-slate-900 shadow-xl border border-slate-200 space-y-4">
+            <div className="w-full max-w-md bg-slate-900/80 backdrop-blur-xl rounded-2xl p-5 text-white shadow-2xl border border-white/10 space-y-4">
               
-              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <div className="flex items-center justify-between border-b border-white/10 pb-3">
                 <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-md bg-blue-600 flex items-center justify-center text-white font-bold text-xs">
+                  <div className="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-xs">
                     <ShieldCheck className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="text-xs font-bold block text-slate-900 leading-none">CASE INQUEST SPOTLIGHT</span>
-                    <span className="text-[10px] text-slate-500 font-mono">#MPL-2024-UP-004821</span>
+                    <span className="text-xs font-bold block text-slate-200 leading-none">CASE INQUEST SPOTLIGHT</span>
+                    <span className="text-[10px] text-slate-400 font-mono">#MPL-2024-UP-004821</span>
                   </div>
                 </div>
-                <span className="px-2.5 py-0.5 rounded text-[11px] font-bold bg-red-50 text-red-700 border border-red-200">
+                <span className="px-2.5 py-0.5 rounded text-[10px] font-black bg-red-500/20 text-red-300 border border-red-400/30">
                   87 / 100 HIGH RISK
                 </span>
               </div>
 
-              <div className="space-y-1.5">
-                <h4 className="text-sm font-bold text-slate-900 leading-snug">
+              <div className="space-y-1">
+                <h4 className="text-xs sm:text-sm font-bold text-white leading-snug">
                   Construction of CC Road &amp; Paver Works, Rampur, Varanasi
                 </h4>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Sanctioned cost is <strong>+53.8% above peer median</strong> with near-identical proposal detected 420m away.
+                <p className="text-[11px] text-slate-300 leading-relaxed">
+                  Sanctioned cost is <strong className="text-red-400">+53.8% above peer median</strong> with a near-identical proposal detected 420m away.
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 gap-2.5 text-xs pt-1">
-                <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
-                  <span className="text-[10px] text-slate-500 block font-semibold uppercase">Cost Variance</span>
-                  <span className="font-mono font-bold text-slate-900 text-sm">₹48.00 Lakh</span>
-                  <span className="text-[10px] text-red-600 block font-semibold">+53.8% Outlier</span>
+              <div className="grid grid-cols-2 gap-2 text-xs">
+                <div className="p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/80 space-y-0.5">
+                  <span className="text-[9px] text-slate-400 block font-bold uppercase">Cost Variance</span>
+                  <span className="font-mono font-bold text-white text-sm">₹48.00 Lakh</span>
+                  <span className="text-[10px] text-red-400 block font-bold">+53.8% Outlier</span>
                 </div>
 
-                <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
-                  <span className="text-[10px] text-slate-500 block font-semibold uppercase">Proximity</span>
-                  <span className="font-mono font-bold text-slate-900 text-sm">420 Meters</span>
-                  <span className="text-[10px] text-amber-600 block font-semibold">Duplicate Cluster</span>
+                <div className="p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/80 space-y-0.5">
+                  <span className="text-[9px] text-slate-400 block font-bold uppercase">Duplicate Range</span>
+                  <span className="font-mono font-bold text-white text-sm">420 Meters</span>
+                  <span className="text-[10px] text-amber-400 block font-bold">Similar Proposal</span>
                 </div>
               </div>
 
               <Link
                 to="/passport/MPL-2024-UP-004821"
-                className="w-full py-2.5 rounded-lg bg-slate-900 hover:bg-blue-900 text-white font-semibold text-xs flex items-center justify-center gap-2 transition"
+                className="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center justify-center gap-2 transition shadow-md"
               >
                 <span>Inspect Forensic Risk Passport</span>
-                <ArrowRight className="w-3.5 h-3.5 text-blue-400" />
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
 
             </div>
@@ -285,12 +286,12 @@ export default function LandingHomePage() {
       </section>
 
 
-      {/* 2. THREE CORE PILLAR HIGHLIGHTS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
+      {/* 2. THREE CORE PILLAR HIGHLIGHTS (CLEAN WHITE CARDS) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           
-          <div className="bg-white rounded-xl p-5 shadow-sm border border-slate-200 flex items-start gap-4">
-            <div className="w-10 h-10 rounded-lg bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-700 shrink-0">
+          <div className="bg-white rounded-xl p-5 shadow-lg border border-slate-200 flex items-start gap-4">
+            <div className="w-10 h-10 rounded-lg bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-700 shrink-0 shadow-xs">
               <Cpu className="w-5 h-5" />
             </div>
             <div className="space-y-0.5">
@@ -301,8 +302,8 @@ export default function LandingHomePage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl p-5 shadow-sm border border-slate-200 flex items-start gap-4">
-            <div className="w-10 h-10 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 shrink-0">
+          <div className="bg-white rounded-xl p-5 shadow-lg border border-slate-200 flex items-start gap-4">
+            <div className="w-10 h-10 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 shrink-0 shadow-xs">
               <Camera className="w-5 h-5" />
             </div>
             <div className="space-y-0.5">
@@ -313,8 +314,8 @@ export default function LandingHomePage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl p-5 shadow-sm border border-slate-200 flex items-start gap-4">
-            <div className="w-10 h-10 rounded-lg bg-slate-100 border border-slate-300 flex items-center justify-center text-slate-800 shrink-0">
+          <div className="bg-white rounded-xl p-5 shadow-lg border border-slate-200 flex items-start gap-4">
+            <div className="w-10 h-10 rounded-lg bg-slate-100 border border-slate-300 flex items-center justify-center text-slate-800 shrink-0 shadow-xs">
               <FileCheck2 className="w-5 h-5" />
             </div>
             <div className="space-y-0.5">
