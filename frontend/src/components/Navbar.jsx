@@ -77,18 +77,7 @@ export default function Navbar({ activeDataMode = 'PUBLIC DATA', onAnalysisRun }
                   : 'text-slate-300 hover:text-white hover:bg-slate-800/80'
               }`}
             >
-              Gateway
-            </Link>
-
-            <Link
-              to="/workflow"
-              className={`px-3 py-1.5 rounded-lg transition ${
-                location.pathname === '/workflow' 
-                  ? 'bg-blue-600 text-white shadow-xs' 
-                  : 'text-slate-300 hover:text-white hover:bg-slate-800/80'
-              }`}
-            >
-              Workflow Hub
+              Overview &amp; Workflow
             </Link>
 
             <Link
@@ -99,7 +88,7 @@ export default function Navbar({ activeDataMode = 'PUBLIC DATA', onAnalysisRun }
                   : 'text-slate-300 hover:text-white hover:bg-slate-800/80'
               }`}
             >
-              Dashboard
+              Executive Analytics
             </Link>
 
             <Link
@@ -114,8 +103,19 @@ export default function Navbar({ activeDataMode = 'PUBLIC DATA', onAnalysisRun }
             </Link>
 
             <Link
-              to="/works/MPL-2024-UP-004821/capture-evidence"
+              to="/map"
               className={`px-3 py-1.5 rounded-lg transition hidden md:inline-block ${
+                location.pathname === '/map' 
+                  ? 'bg-blue-600 text-white shadow-xs' 
+                  : 'text-slate-300 hover:text-white hover:bg-slate-800/80'
+              }`}
+            >
+              Geospatial Map
+            </Link>
+
+            <Link
+              to="/works/MPL-2024-UP-004821/capture-evidence"
+              className={`px-3 py-1.5 rounded-lg transition hidden lg:inline-block ${
                 location.pathname.includes('/capture-evidence') 
                   ? 'bg-blue-600 text-white shadow-xs' 
                   : 'text-slate-300 hover:text-white hover:bg-slate-800/80'
