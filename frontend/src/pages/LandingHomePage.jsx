@@ -31,7 +31,8 @@ import {
   HelpCircle,
   FileCheck2,
   Sliders,
-  ArrowUpRight
+  ArrowUpRight,
+  Eye
 } from 'lucide-react';
 import { api } from '../services/api';
 import { formatINR } from '../utils/formatters';
@@ -96,65 +97,86 @@ export default function LandingHomePage() {
       title: "Cost Outlier Detection",
       desc: "Multi-district peer median benchmarking with IQR variance analysis to detect inflated estimates.",
       icon: TrendingUp,
-      color: "bg-blue-500",
+      color: "bg-blue-600",
       link: "/queue?search=Cost%20Outlier",
-      tag: "IQR Statistical Engine"
+      tag: "IQR Statistical Engine",
+      bgImage: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=400&auto=format&fit=crop"
     },
     {
       title: "Timeline & Delay Tracking",
       desc: "Tracks execution lags exceeding 180+ days past sanctioned milestone dates with automated risk inflation.",
       icon: Clock,
-      color: "bg-amber-500",
+      color: "bg-amber-600",
       link: "/queue?search=Execution%20Delay",
-      tag: "Milestone Engine"
+      tag: "Milestone Engine",
+      bgImage: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=400&auto=format&fit=crop"
     },
     {
       title: "Duplicate Proposal Matcher",
       desc: "TF-IDF NLP text proximity and Haversine geospatial clustering (<500m) to catch double-dipping proposals.",
       icon: Layers,
-      color: "bg-purple-500",
+      color: "bg-purple-600",
       link: "/similar",
-      tag: "Geospatial Clustering"
+      tag: "Geospatial Clustering",
+      bgImage: "https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=400&auto=format&fit=crop"
     },
     {
       title: "Geo-Camera Evidence Lock",
       desc: "Mobile photo progress capture with hardware GPS locking, distance mismatch alerts, and SHA-256 hashes.",
       icon: Camera,
-      color: "bg-emerald-500",
+      color: "bg-emerald-600",
       link: "/works/MPL-2024-UP-004821/capture-evidence",
-      tag: "Tamper-Proof Lock"
+      tag: "Tamper-Proof Lock",
+      bgImage: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=400&auto=format&fit=crop"
     },
     {
       title: "Agency Monopoly Index",
       desc: "Herfindahl-Hirschman Index (HHI) analysis to detect contractor concentration and single-bidder monopolies.",
       icon: Building2,
-      color: "bg-rose-500",
+      color: "bg-rose-600",
       link: "/queue",
-      tag: "HHI Market Power"
+      tag: "HHI Market Power",
+      bgImage: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=400&auto=format&fit=crop"
     },
     {
       title: "Statutory Audit Ledger",
       desc: "Immutable cryptographic event log recording every officer determination, memo issue, and verification.",
       icon: ShieldCheck,
-      color: "bg-teal-500",
+      color: "bg-teal-600",
       link: "/audit",
-      tag: "Append-Only Ledger"
+      tag: "Append-Only Ledger",
+      bgImage: "https://images.unsplash.com/photo-1450133064473-71024230f91b?q=80&w=400&auto=format&fit=crop"
     }
+  ];
+
+  const showcaseImages = [
+    "https://images.unsplash.com/photo-1541888946425-d0fbb186156f?q=80&w=400&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1574482620826-40685ca5ebd2?q=80&w=400&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1509391365360-2e959784a276?q=80&w=400&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=400&auto=format&fit=crop"
   ];
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-900 -m-4 md:-m-6 lg:-m-8">
       
-      {/* 1. HERO SECTION (MATCHING REFERENCE HERO WITH ORANGE ACCENT + RIGHT CARD) */}
-      <section className="relative bg-[#0A192F] text-white pt-12 pb-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      {/* 1. HERO SECTION WITH RICH INFRASTRUCTURE BACKGROUND & GRADIENT OVERLAY */}
+      <section className="relative bg-[#0A192F] text-white pt-14 pb-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
         
-        {/* Subtle decorative background circles */}
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 right-10 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
+        {/* Real Infrastructure Background Image with Deep Overlay */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-18 pointer-events-none mix-blend-luminosity scale-105 transition-transform duration-1000"
+          style={{ 
+            backgroundImage: "url('https://images.unsplash.com/photo-1541888946425-d0fbb186156f?q=80&w=1600&auto=format&fit=crop')" 
+          }}
+        />
+
+        {/* Ambient Top Glow Accents */}
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 right-10 w-96 h-96 bg-orange-500/15 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
           
-          {/* Left Column: Headline & CTA (Reference Style) */}
+          {/* Left Column: Headline & CTA */}
           <div className="lg:col-span-7 space-y-6">
             
             {/* Saffron / Orange Bordered Frame Accent */}
@@ -185,7 +207,7 @@ export default function LandingHomePage() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search Constituency, District, or Work (e.g. Varanasi, CC Road)..."
-                  className="w-full bg-slate-900/80 text-white rounded-xl pl-11 pr-28 py-3.5 text-xs sm:text-sm placeholder-slate-400 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-[#F97316] shadow-md"
+                  className="w-full bg-slate-900/90 text-white rounded-xl pl-11 pr-28 py-3.5 text-xs sm:text-sm placeholder-slate-400 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-[#F97316] shadow-xl backdrop-blur-md"
                 />
                 <button
                   type="submit"
@@ -200,7 +222,7 @@ export default function LandingHomePage() {
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <Link
                 to="/queue"
-                className="px-6 py-3.5 rounded-xl bg-[#F97316] hover:bg-[#EA580C] text-white font-bold text-xs sm:text-sm shadow-md hover:shadow-lg transition flex items-center gap-2 transform active:scale-95"
+                className="px-6 py-3.5 rounded-xl bg-[#F97316] hover:bg-[#EA580C] text-white font-bold text-xs sm:text-sm shadow-lg hover:shadow-orange-500/25 transition flex items-center gap-2 transform active:scale-95"
               >
                 <span>EXPLORE SCRUTINY QUEUE</span>
                 <ArrowRight className="w-4 h-4" />
@@ -208,7 +230,7 @@ export default function LandingHomePage() {
 
               <Link
                 to="/works/MPL-2024-UP-004821/capture-evidence"
-                className="px-6 py-3.5 rounded-xl bg-slate-800/80 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm border border-slate-700 transition flex items-center gap-2"
+                className="px-6 py-3.5 rounded-xl bg-slate-800/90 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm border border-slate-700 transition flex items-center gap-2 backdrop-blur-md"
               >
                 <Camera className="w-4 h-4 text-emerald-400" />
                 <span>Launch Geo-Camera</span>
@@ -217,7 +239,7 @@ export default function LandingHomePage() {
 
           </div>
 
-          {/* Right Column: Hero Visual Showcase Card (Reference Style with Orange Semicircle & Stat Card) */}
+          {/* Right Column: Hero Visual Showcase Card (Reference Style with Photo Thumbnail) */}
           <div className="lg:col-span-5 relative flex justify-center">
             
             {/* Orange Backdrop Accent Circle */}
@@ -226,6 +248,7 @@ export default function LandingHomePage() {
             {/* Main Interactive Spotlight Card */}
             <div className="relative z-10 w-full max-w-md bg-white rounded-3xl p-6 text-slate-900 shadow-2xl border border-slate-100 space-y-4">
               
+              {/* Header with Case ID */}
               <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white">
@@ -241,7 +264,8 @@ export default function LandingHomePage() {
                 </span>
               </div>
 
-              <div className="space-y-2">
+              {/* Work Title & Location */}
+              <div className="space-y-1.5">
                 <h4 className="text-sm font-bold text-slate-900 leading-snug">
                   Construction of CC Road &amp; Paver Works, Rampur, Varanasi
                 </h4>
@@ -250,16 +274,30 @@ export default function LandingHomePage() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 gap-2 pt-1 text-xs">
-                <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
-                  <span className="text-[10px] text-slate-400 block font-semibold">SANCTIONED COST</span>
-                  <span className="font-mono font-bold text-slate-900 text-sm">₹48.00 Lakh</span>
-                  <span className="text-[10px] text-red-600 block font-bold">+53.8% Outlier</span>
+              {/* Photo Thumbnail + Stats Split Grid */}
+              <div className="grid grid-cols-12 gap-3 items-center">
+                <div className="col-span-5 h-20 rounded-xl overflow-hidden relative shadow-xs">
+                  <img 
+                    src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=300&auto=format&fit=crop" 
+                    alt="CC Road Site" 
+                    className="w-full h-full object-cover"
+                  />
+                  <span className="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-black/70 text-[9px] font-bold text-white font-mono">
+                    SITE PHOTO
+                  </span>
                 </div>
-                <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
-                  <span className="text-[10px] text-slate-400 block font-semibold">DUPLICATE DISTANCE</span>
-                  <span className="font-mono font-bold text-slate-900 text-sm">420 Meters</span>
-                  <span className="text-[10px] text-amber-600 block font-bold">Similar Scope</span>
+
+                <div className="col-span-7 grid grid-cols-2 gap-1.5 text-xs">
+                  <div className="p-2 rounded-xl bg-slate-50 border border-slate-200">
+                    <span className="text-[9px] text-slate-400 block font-bold uppercase">COST</span>
+                    <span className="font-mono font-bold text-slate-900 text-xs">₹48.00L</span>
+                    <span className="text-[9px] text-red-600 block font-bold">+53.8%</span>
+                  </div>
+                  <div className="p-2 rounded-xl bg-slate-50 border border-slate-200">
+                    <span className="text-[9px] text-slate-400 block font-bold uppercase">DISTANCE</span>
+                    <span className="font-mono font-bold text-slate-900 text-xs">420m</span>
+                    <span className="text-[9px] text-amber-600 block font-bold">Duplicate</span>
+                  </div>
                 </div>
               </div>
 
@@ -271,8 +309,8 @@ export default function LandingHomePage() {
                 <ArrowRight className="w-3.5 h-3.5 text-[#F97316]" />
               </Link>
 
-              {/* Floating Floating Stat Badge */}
-              <div className="absolute -bottom-4 -left-4 bg-[#0A192F] text-white px-4 py-2.5 rounded-2xl shadow-xl border border-slate-700 flex items-center gap-3">
+              {/* Floating Stat Badge */}
+              <div className="absolute -bottom-4 -left-4 bg-[#0A192F] text-white px-4 py-2.5 rounded-2xl shadow-2xl border border-slate-700 flex items-center gap-3">
                 <div className="w-7 h-7 rounded-full bg-emerald-500 flex items-center justify-center text-white text-xs font-black">
                   ✓
                 </div>
@@ -292,11 +330,11 @@ export default function LandingHomePage() {
 
 
       {/* 2. FLOATING 3 KEY HIGHLIGHT CARDS (OVERLAPPING HERO BOTTOM AS IN REFERENCE) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-12 relative z-20">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-14 relative z-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           
           <div className="bg-white rounded-2xl p-6 shadow-xl border border-slate-100 flex items-start gap-4 transition transform hover:-translate-y-1">
-            <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 shrink-0 shadow-xs">
               <Cpu className="w-6 h-6" />
             </div>
             <div className="space-y-1">
@@ -308,7 +346,7 @@ export default function LandingHomePage() {
           </div>
 
           <div className="bg-white rounded-2xl p-6 shadow-xl border border-slate-100 flex items-start gap-4 transition transform hover:-translate-y-1">
-            <div className="w-12 h-12 rounded-xl bg-orange-50 border border-orange-200 flex items-center justify-center text-[#F97316] shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-orange-50 border border-orange-200 flex items-center justify-center text-[#F97316] shrink-0 shadow-xs">
               <Camera className="w-6 h-6" />
             </div>
             <div className="space-y-1">
@@ -320,7 +358,7 @@ export default function LandingHomePage() {
           </div>
 
           <div className="bg-white rounded-2xl p-6 shadow-xl border border-slate-100 flex items-start gap-4 transition transform hover:-translate-y-1">
-            <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0 shadow-xs">
               <FileCheck2 className="w-6 h-6" />
             </div>
             <div className="space-y-1">
@@ -335,7 +373,7 @@ export default function LandingHomePage() {
       </section>
 
 
-      {/* 3. ABOUT / CAPABILITIES SECTION (REFERENCE STYLE SPLIT VIEW) */}
+      {/* 3. ABOUT / CAPABILITIES SECTION (WITH FIELD SURVEY BACKGROUND PHOTO) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
@@ -398,44 +436,52 @@ export default function LandingHomePage() {
 
           </div>
 
-          {/* Right Visual Card with Badge */}
+          {/* Right Visual Photo Collage & Live Stat Box */}
           <div className="lg:col-span-6 flex justify-center">
-            <div className="relative w-full max-w-lg bg-gradient-to-br from-slate-900 to-[#0A192F] rounded-3xl p-8 text-white shadow-xl space-y-6">
+            <div className="relative w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl bg-[#0A192F] text-white p-8 space-y-6">
               
-              <div className="flex items-center justify-between border-b border-slate-700/80 pb-4">
-                <div>
-                  <span className="text-xs font-bold text-[#F97316] uppercase tracking-wider block">NATIONAL COVERAGE</span>
-                  <span className="text-lg font-black text-white">e-SAKSHI Ecosystem Integration</span>
-                </div>
-                <div className="px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 border border-blue-400/30 text-xs font-bold font-mono">
-                  MoSPI SIH26102
-                </div>
-              </div>
+              {/* Background Photo with Dark Overlay */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center opacity-25 mix-blend-luminosity"
+                style={{ backgroundImage: "url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800&auto=format&fit=crop')" }}
+              />
 
-              <div className="grid grid-cols-2 gap-4 text-center">
-                <div className="p-4 rounded-2xl bg-slate-800/60 border border-slate-700">
-                  <div className="text-2xl font-black font-mono text-[#F97316]">543</div>
-                  <div className="text-[10px] text-slate-400 uppercase font-bold mt-1">Lok Sabha Constituencies</div>
+              <div className="relative z-10 space-y-6">
+                <div className="flex items-center justify-between border-b border-slate-700/80 pb-4">
+                  <div>
+                    <span className="text-xs font-bold text-[#F97316] uppercase tracking-wider block">NATIONAL COVERAGE</span>
+                    <span className="text-lg font-black text-white">e-SAKSHI Ecosystem Integration</span>
+                  </div>
+                  <div className="px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 border border-blue-400/30 text-xs font-bold font-mono">
+                    MoSPI SIH26102
+                  </div>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-slate-800/60 border border-slate-700">
-                  <div className="text-2xl font-black font-mono text-emerald-400">245</div>
-                  <div className="text-[10px] text-slate-400 uppercase font-bold mt-1">Rajya Sabha Constituencies</div>
-                </div>
-              </div>
+                <div className="grid grid-cols-2 gap-4 text-center">
+                  <div className="p-4 rounded-2xl bg-slate-800/70 border border-slate-700 backdrop-blur-md">
+                    <div className="text-2xl font-black font-mono text-[#F97316]">543</div>
+                    <div className="text-[10px] text-slate-300 uppercase font-bold mt-1">Lok Sabha MPs</div>
+                  </div>
 
-              <div className="p-4 rounded-2xl bg-slate-800/60 border border-slate-700 space-y-2">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-slate-300 font-semibold">Data Ingestion Schema Health</span>
-                  <span className="font-mono font-bold text-emerald-400">99.2% Conformance</span>
+                  <div className="p-4 rounded-2xl bg-slate-800/70 border border-slate-700 backdrop-blur-md">
+                    <div className="text-2xl font-black font-mono text-emerald-400">245</div>
+                    <div className="text-[10px] text-slate-300 uppercase font-bold mt-1">Rajya Sabha MPs</div>
+                  </div>
                 </div>
-                <div className="w-full h-2 bg-slate-700 rounded-full overflow-hidden">
-                  <div className="h-full bg-emerald-500 rounded-full" style={{ width: '99.2%' }} />
+
+                <div className="p-4 rounded-2xl bg-slate-800/70 border border-slate-700 backdrop-blur-md space-y-2">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-slate-200 font-semibold">Data Ingestion Schema Health</span>
+                    <span className="font-mono font-bold text-emerald-400">99.2% Conformance</span>
+                  </div>
+                  <div className="w-full h-2 bg-slate-700 rounded-full overflow-hidden">
+                    <div className="h-full bg-emerald-500 rounded-full" style={{ width: '99.2%' }} />
+                  </div>
                 </div>
               </div>
 
               {/* Overlapping Pill Badge (Reference Style: 340+ projects) */}
-              <div className="absolute -bottom-5 right-6 bg-[#F97316] text-white px-5 py-3 rounded-2xl shadow-xl flex items-center gap-3">
+              <div className="absolute -bottom-5 right-6 z-20 bg-[#F97316] text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3">
                 <span className="text-xl font-black font-mono">3,013+</span>
                 <span className="text-xs font-bold leading-tight">Sanctioned Works<br />Audited Live</span>
               </div>
@@ -447,7 +493,7 @@ export default function LandingHomePage() {
       </section>
 
 
-      {/* 4. 6-GRID "A WIDE RANGE OF SERVICES / RISK ENGINES" SECTION (EXACT REFERENCE 6-CARD GRID) */}
+      {/* 4. 6-GRID "A WIDE RANGE OF RISK ENGINES" SECTION (MATCHING REFERENCE 6-CARD GRID) */}
       <section className="bg-white py-20 border-y border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           
@@ -473,17 +519,17 @@ export default function LandingHomePage() {
             </Link>
           </div>
 
-          {/* 6 Grid Cards */}
+          {/* 6 Grid Cards with Subtle Photo Headers */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((item, idx) => {
               const Icon = item.icon;
               return (
                 <div
                   key={idx}
-                  className="bg-white rounded-2xl p-6 border border-slate-200 hover:border-[#F97316] shadow-xs hover:shadow-xl transition-all duration-200 flex flex-col justify-between space-y-5 group"
+                  className="bg-white rounded-2xl border border-slate-200 hover:border-[#F97316] shadow-xs hover:shadow-xl transition-all duration-200 overflow-hidden flex flex-col justify-between group"
                 >
-                  <div className="space-y-4">
-                    {/* Circle Icon Badge (Matching Reference) */}
+                  <div className="p-6 space-y-4">
+                    {/* Top Circle Icon Badge */}
                     <div className={'w-12 h-12 rounded-2xl ' + item.color + ' text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform'}>
                       <Icon className="w-6 h-6" />
                     </div>
@@ -501,13 +547,15 @@ export default function LandingHomePage() {
                     </div>
                   </div>
 
-                  <Link
-                    to={item.link}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 group-hover:text-[#F97316] transition pt-2 border-t border-slate-100"
-                  >
-                    <span>EXPLORE ENGINE</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                  </Link>
+                  <div className="px-6 py-3.5 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
+                    <Link
+                      to={item.link}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 group-hover:text-[#F97316] transition"
+                    >
+                      <span>EXPLORE ENGINE</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
                 </div>
               );
             })}
@@ -517,16 +565,21 @@ export default function LandingHomePage() {
       </section>
 
 
-      {/* 5. 4-COLUMN STATS COUNTER BANNER (EXACT REFERENCE 4 NUMBER TILES) */}
-      <section className="bg-slate-50 py-16 border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 5. 4-COLUMN STATS COUNTER BANNER WITH INFRASTRUCTURE BACKGROUND */}
+      <section className="relative bg-[#0A192F] text-white py-16 overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-10 pointer-events-none mix-blend-luminosity"
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1600&auto=format&fit=crop')" }}
+        />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             
             <div className="space-y-1">
-              <div className="text-3xl sm:text-5xl font-black font-mono text-[#0A192F]">
+              <div className="text-3xl sm:text-5xl font-black font-mono text-white">
                 ₹593.1 Cr
               </div>
-              <div className="text-xs font-bold uppercase tracking-wider text-slate-500">
+              <div className="text-xs font-bold uppercase tracking-wider text-slate-300">
                 Total Sanctioned Value
               </div>
             </div>
@@ -535,25 +588,25 @@ export default function LandingHomePage() {
               <div className="text-3xl sm:text-5xl font-black font-mono text-[#F97316]">
                 3,013
               </div>
-              <div className="text-xs font-bold uppercase tracking-wider text-slate-500">
+              <div className="text-xs font-bold uppercase tracking-wider text-slate-300">
                 e-SAKSHI Sanctions Monitored
               </div>
             </div>
 
             <div className="space-y-1">
-              <div className="text-3xl sm:text-5xl font-black font-mono text-red-600">
+              <div className="text-3xl sm:text-5xl font-black font-mono text-red-400">
                 294
               </div>
-              <div className="text-xs font-bold uppercase tracking-wider text-slate-500">
+              <div className="text-xs font-bold uppercase tracking-wider text-slate-300">
                 High-Risk Anomaly Flags
               </div>
             </div>
 
             <div className="space-y-1">
-              <div className="text-3xl sm:text-5xl font-black font-mono text-emerald-600">
+              <div className="text-3xl sm:text-5xl font-black font-mono text-emerald-400">
                 100%
               </div>
-              <div className="text-xs font-bold uppercase tracking-wider text-slate-500">
+              <div className="text-xs font-bold uppercase tracking-wider text-slate-300">
                 Explainable Determinism
               </div>
             </div>
@@ -563,7 +616,7 @@ export default function LandingHomePage() {
       </section>
 
 
-      {/* 6. RECENT HIGH-RISK PROPOSALS SHOWCASE (REFERENCE "PURPOSE & GOALS / LATEST PROJECTS" STYLE) */}
+      {/* 6. RECENT HIGH-RISK PROPOSALS SHOWCASE WITH PHOTO THUMBNAILS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-8">
         
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -588,55 +641,69 @@ export default function LandingHomePage() {
           </Link>
         </div>
 
-        {/* 4 Showcase Cards */}
+        {/* 4 Showcase Cards with Photo Headers */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {highRiskWorks.slice(0, 4).map((work) => {
+          {highRiskWorks.slice(0, 4).map((work, index) => {
             const score = work.riskScore !== undefined && work.riskScore !== null ? work.riskScore : (work.overallRiskScore || 85);
             const title = work.workName || work.workTitle || 'Sanctioned Infrastructure Work';
             const cost = work.sanctionedAmount || work.estimatedCost || 4800000;
             const reason = work.primaryReason || (work.riskSignals && work.riskSignals[0] ? work.riskSignals[0].split(':')[0] : 'Peer Cost Outlier (+53.8%)');
+            const cardImg = showcaseImages[index % showcaseImages.length];
 
             return (
               <div
                 key={work.workId}
-                className="bg-white rounded-2xl p-5 border border-slate-200 hover:border-blue-600 shadow-xs hover:shadow-xl transition-all duration-200 flex flex-col justify-between space-y-4"
+                className="bg-white rounded-2xl border border-slate-200 hover:border-blue-600 shadow-xs hover:shadow-xl transition-all duration-200 overflow-hidden flex flex-col justify-between"
               >
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="px-2 py-0.5 rounded text-[10px] font-bold font-mono bg-red-100 text-red-700 border border-red-200">
+                <div>
+                  {/* Photo Header */}
+                  <div className="h-32 w-full relative overflow-hidden bg-slate-100">
+                    <img 
+                      src={cardImg} 
+                      alt={title}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                    
+                    <span className="absolute top-2 left-2 px-2 py-0.5 rounded text-[10px] font-bold font-mono bg-red-600 text-white shadow-xs">
                       {score} / 100 RISK
                     </span>
-                    <span className="text-[11px] font-mono text-slate-400 font-bold">
+
+                    <span className="absolute bottom-2 left-2 text-[10px] font-mono text-white font-bold">
                       {work.workId}
                     </span>
                   </div>
 
-                  <h4 className="text-xs font-bold text-slate-900 line-clamp-2" title={title}>
-                    {title}
-                  </h4>
+                  <div className="p-4 space-y-3">
+                    <h4 className="text-xs font-bold text-slate-900 line-clamp-2" title={title}>
+                      {title}
+                    </h4>
 
-                  <div className="text-[11px] text-slate-500 space-y-1">
-                    <div className="flex items-center gap-1">
-                      <MapPin className="w-3 h-3 text-slate-400" />
-                      <span>{work.district || 'Varanasi'}, {work.state || 'UP'}</span>
+                    <div className="text-[11px] text-slate-500 space-y-1">
+                      <div className="flex items-center gap-1">
+                        <MapPin className="w-3 h-3 text-slate-400 shrink-0" />
+                        <span className="truncate">{work.district || 'Varanasi'}, {work.state || 'UP'}</span>
+                      </div>
+                      <div className="font-mono font-bold text-slate-900 text-sm">
+                        {formatINR(cost)}
+                      </div>
                     </div>
-                    <div className="font-mono font-bold text-slate-900 text-sm">
-                      {formatINR(cost)}
-                    </div>
-                  </div>
 
-                  <div className="p-2 rounded-lg bg-red-50/60 border border-red-100 text-[10px] text-red-700 font-semibold line-clamp-2">
-                    {reason}
+                    <div className="p-2 rounded-lg bg-red-50/70 border border-red-100 text-[10px] text-red-700 font-semibold line-clamp-2">
+                      {reason}
+                    </div>
                   </div>
                 </div>
 
-                <Link
-                  to={'/passport/' + work.workId}
-                  className="w-full py-2 rounded-xl bg-slate-100 hover:bg-[#0A192F] hover:text-white text-slate-800 text-xs font-bold transition flex items-center justify-center gap-1.5"
-                >
-                  <span>Inspect Passport</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
+                <div className="p-4 pt-0">
+                  <Link
+                    to={'/passport/' + work.workId}
+                    className="w-full py-2 rounded-xl bg-slate-100 hover:bg-[#0A192F] hover:text-white text-slate-800 text-xs font-bold transition flex items-center justify-center gap-1.5"
+                  >
+                    <span>Inspect Passport</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
               </div>
             );
           })}
@@ -645,39 +712,46 @@ export default function LandingHomePage() {
       </section>
 
 
-      {/* 7. FAQ ACCORDION SECTION (REFERENCE STYLE SPLIT VIEW) */}
+      {/* 7. FAQ ACCORDION SECTION (WITH FIELD ENGINEERS PHOTO ON LEFT AS IN REFERENCE) */}
       <section className="bg-white py-20 border-t border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
-            {/* Left Column: Heading & Official Badge */}
-            <div className="lg:col-span-5 space-y-4">
-              <div className="border-l-4 border-[#F97316] pl-4 py-1">
-                <span className="text-xs font-black uppercase tracking-widest text-[#F97316] block">
-                  STATUTORY GOVERNANCE &amp; FAQS
-                </span>
-                <span className="text-xs text-slate-500 font-medium">
-                  Administrative Clarity for Reviewing Officers
-                </span>
+            {/* Left Column: Photo Card & Heading (Exact Reference Style) */}
+            <div className="lg:col-span-5 space-y-6">
+              
+              {/* Photo Box with Orange Accent Border */}
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl h-64 border-2 border-slate-100">
+                <img 
+                  src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop" 
+                  alt="Field Engineers Site Audit"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 text-white space-y-0.5">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-[#F97316] block">
+                    ON-SITE FIELD VERIFICATION
+                  </span>
+                  <p className="text-xs font-bold">
+                    Statutory Audits &amp; Mobile Camera Evidence Ingestion
+                  </p>
+                </div>
               </div>
 
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
-                Answers to Frequently Asked Questions
-              </h2>
-
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Clear operational guidelines on how MPLADS Rakshak integrates with e-SAKSHI, protects data integrity, and supports district administrative determinations.
-              </p>
-
-              <div className="p-4 rounded-2xl bg-blue-50 border border-blue-200 text-blue-900 text-xs space-y-1">
-                <div className="font-bold flex items-center gap-1.5">
-                  <ShieldCheck className="w-4 h-4 text-blue-700" />
-                  <span>Administrative Decision-Support Notice</span>
+              <div className="space-y-2">
+                <div className="border-l-4 border-[#F97316] pl-3 py-0.5">
+                  <span className="text-xs font-black uppercase tracking-widest text-[#F97316] block">
+                    GOVERNANCE GUIDELINES
+                  </span>
                 </div>
-                <p className="text-[11px] text-blue-800 leading-snug">
-                  Analytical scores provide non-binding prioritization. Final approvals and cancellations rest exclusively with authorized District Planning Officers.
+                <h2 className="text-xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                  Frequently Asked Questions
+                </h2>
+                <p className="text-xs text-slate-500 leading-relaxed">
+                  Operational clarifications for reviewing officers, state nodal authorities, and parliamentary scrutiny bodies.
                 </p>
               </div>
+
             </div>
 
             {/* Right Column: Interactive Accordion */}
@@ -711,7 +785,7 @@ export default function LandingHomePage() {
       </section>
 
 
-      {/* 8. OFFICIAL FOOTER (REFERENCE STYLE DEEP NAVY FOOTER) */}
+      {/* 8. OFFICIAL FOOTER */}
       <footer className="bg-[#0A192F] text-slate-300 pt-16 pb-12 border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           
