@@ -79,6 +79,7 @@ export const api = {
   },
   getRiskPassport: (workId) => request(`/risks/passport/${workId}`),
   runAnalysis: () => request('/risks/run-analysis', { method: 'POST' }),
+  runFullAnalysis: () => request('/risks/run-analysis', { method: 'POST' }),
   submitEvidenceAction: (workId, data) => request(`/risks/evidence-action/${workId}`, {
     method: 'POST',
     body: JSON.stringify(data)
