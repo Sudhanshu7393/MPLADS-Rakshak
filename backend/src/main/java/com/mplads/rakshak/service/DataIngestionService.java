@@ -105,15 +105,9 @@ public class DataIngestionService {
 
     @Transactional
     public DataImport ingestWithMapping(String tempFileId, String fileName, String sourceType, Map<String, String> columnMappings, String userEmail) throws IOException {
-        Path filePath = Paths.get(uploadDir, tempFileId);
-        if (!Files.exists(filePath)) {
-            // Check if it's the demo file directly
-            Path demoPath = Paths.get("data/demo/mplads_demo_dataset.csv");
-            if (Files.exists(demoPath)) {
-                filePath = demoPath;
-            } else {
-                throw new FileNotFoundException("Upload file expired or not found: " + tempFileId);
-            }
+        Path filePath = resolveFilePath(tempFileId);
+        if (filePath == null || !Files.exists(filePath)) {
+            throw new FileNotFoundException("Upload file or demo dataset not found: " + tempFileId);
         }
 
         DataImport dataImport = new DataImport();
@@ -235,9 +229,9 @@ public class DataIngestionService {
 
     @Transactional
     public DataImport loadDemoDataset(String userEmail) throws IOException {
-        Path demoCsv = Paths.get("data/demo/mplads_demo_dataset.csv");
-        if (!Files.exists(demoCsv)) {
-            throw new FileNotFoundException("Demo dataset not found at: " + demoCsv.toAbsolutePath());
+        Path demoCsv = resolveFilePath("mplads_demo_dataset.csv");
+        if (demoCsv == null || !Files.exists(demoCsv)) {
+            throw new FileNotFoundException("Demo dataset not found in data/demo/mplads_demo_dataset.csv or classpath.");
         }
 
         return ingestWithMapping(
@@ -247,6 +241,48 @@ public class DataIngestionService {
                 Collections.emptyMap(),
                 userEmail != null ? userEmail : "demo.officer@mplads.gov.in"
         );
+    }
+
+    private Path resolveFilePath(String tempFileIdOrName) {
+        if (tempFileIdOrName == null) return null;
+
+        // 1. Direct upload path check
+        Path uploadPath = Paths.get(uploadDir, tempFileIdOrName);
+        if (Files.exists(uploadPath)) {
+            return uploadPath;
+        }
+
+        // 2. Multi-path candidates for demo dataset
+        List<Path> candidates = Arrays.asList(
+                Paths.get("data/demo/mplads_demo_dataset.csv"),
+                Paths.get("../data/demo/mplads_demo_dataset.csv"),
+                Paths.get("backend/data/demo/mplads_demo_dataset.csv"),
+                Paths.get("backend/src/main/resources/data/demo/mplads_demo_dataset.csv"),
+                Paths.get("src/main/resources/data/demo/mplads_demo_dataset.csv")
+        );
+
+        for (Path p : candidates) {
+            if (Files.exists(p)) {
+                return p;
+            }
+        }
+
+        // 3. Fallback: extract from Classpath Resource
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("data/demo/mplads_demo_dataset.csv")) {
+            if (is != null) {
+                Path extractDir = Paths.get(uploadDir);
+                if (!Files.exists(extractDir)) {
+                    Files.createDirectories(extractDir);
+                }
+                Path extracted = extractDir.resolve("mplads_demo_dataset_extracted.csv");
+                Files.copy(is, extracted, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                return extracted;
+            }
+        } catch (Exception e) {
+            log.warn("Could not extract classpath demo dataset: {}", e.getMessage());
+        }
+
+        return null;
     }
 
     private String getMappedValue(CSVRecord record, Map<String, String> mapping, String systemField) {
