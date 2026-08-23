@@ -32,13 +32,12 @@ export default function AuditLogsPage() {
       
       <Breadcrumbs />
 
-      {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-xl font-black tracking-tight text-slate-900">IMMUTABLE AUDIT TRAIL</h1>
+            <h1 className="text-xl font-black tracking-tight text-slate-900">OFFICER AUDIT TRAIL</h1>
             <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
-              Tamper-Evident Ledger
+              Append-Only Log
             </span>
           </div>
           <p className="text-xs text-slate-500 mt-1">
@@ -52,7 +51,7 @@ export default function AuditLogsPage() {
         {loading ? (
           <div className="p-12 text-center text-xs text-slate-500">
             <div className="w-8 h-8 border-3 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
-            Loading cryptographic audit logs...
+            Loading audit logs...
           </div>
         ) : (
           <>

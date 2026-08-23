@@ -10,18 +10,20 @@ import {
   History, 
   Sliders, 
   FileText,
-  ShieldCheck
+  ShieldCheck,
+  Layers
 } from 'lucide-react';
 
 const NAV_ITEMS = [
   { to: '/', label: 'Executive Dashboard', icon: LayoutDashboard, exact: true },
   { to: '/queue', label: 'Prioritised Scrutiny Queue', icon: AlertOctagon },
+  { to: '/works', label: 'All Works (Browse)', icon: Layers },
   { to: '/map', label: 'Geospatial Distribution', icon: Map },
   { to: '/similar', label: 'Duplicate Proposals', icon: Copy },
   { to: '/investigations', label: 'Case Management', icon: FolderSearch },
   { to: '/data', label: 'Data Ingestion & Audit', icon: Database },
   { to: '/reports', label: 'Statutory Reports', icon: FileText },
-  { to: '/audit', label: 'Immutable Audit Trail', icon: History },
+  { to: '/audit', label: 'Officer Audit Trail', icon: History },
   { to: '/settings', label: 'Model Weight Calibration', icon: Sliders },
 ];
 

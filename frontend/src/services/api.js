@@ -147,5 +147,32 @@ export const api = {
   }),
 
   // Reports
-  getDossier: (workId) => request(`/reports/dossier/${workId}`)
+  getDossier: (workId) => request(`/reports/dossier/${workId}`),
+
+  // Works (browse all)
+  getWorks: (params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return request(`/works${query ? '?' + query : ''}`);
+  },
+
+  // Completion Evidence
+  captureEvidence: async (workId, formData) => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE}/works/${workId}/evidence/capture`, {
+      method: 'POST',
+      headers: { ...(token ? { 'Authorization': `Bearer ${token}` } : {}) },
+      body: formData
+    });
+    if (!response.ok) throw new Error(await response.text() || 'Upload failed');
+    return await response.json();
+  },
+  getEvidenceForWork: (workId) => request(`/works/${workId}/evidence`),
+  getEvidenceById: (evidenceId) => request(`/evidence/${evidenceId}`),
+  verifyEvidence: (evidenceId, data) => request(`/evidence/${evidenceId}/verify`, {
+    method: 'PATCH',
+    body: JSON.stringify(data)
+  }),
+
+  // Data Quality
+  getDataQuality: () => request('/data/quality'),
 };

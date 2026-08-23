@@ -94,4 +94,43 @@ public class DataImportController {
 
         return ResponseEntity.ok(status);
     }
+
+    @GetMapping("/quality")
+    public ResponseEntity<Map<String, Object>> getDataQuality() {
+        Map<String, Object> quality = new HashMap<>();
+        long total = workRepository.countTotalWorks();
+        quality.put("totalRecords", total);
+
+        if (total == 0) {
+            quality.put("message", "No dataset loaded");
+            return ResponseEntity.ok(quality);
+        }
+
+        long withCoords = workRepository.countWithCoordinates();
+        long withSanctionDate = workRepository.countWithSanctionDate();
+        long withExpectedCompletion = workRepository.countWithExpectedCompletionDate();
+        long withAgency = workRepository.countWithAgency();
+        long withCategory = workRepository.countWithCategory();
+        long withStatus = workRepository.countWithStatus();
+
+        quality.put("coordinateCompleteness", pct(withCoords, total));
+        quality.put("sanctionDateCompleteness", pct(withSanctionDate, total));
+        quality.put("completionDateCompleteness", pct(withExpectedCompletion, total));
+        quality.put("agencyCompleteness", pct(withAgency, total));
+        quality.put("categoryCompleteness", pct(withCategory, total));
+        quality.put("statusCompleteness", pct(withStatus, total));
+        quality.put("withCoordinates", withCoords);
+        quality.put("missingCoordinates", total - withCoords);
+        double overallScore = (pct(withCoords, total) + pct(withSanctionDate, total)
+                + pct(withExpectedCompletion, total) + pct(withAgency, total)
+                + pct(withCategory, total) + pct(withStatus, total)) / 6.0;
+        quality.put("overallCompleteness", Math.round(overallScore * 10.0) / 10.0);
+
+        return ResponseEntity.ok(quality);
+    }
+
+    private double pct(long count, long total) {
+        if (total == 0) return 0.0;
+        return Math.round((count * 1000.0 / total)) / 10.0;
+    }
 }

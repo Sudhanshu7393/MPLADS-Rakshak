@@ -56,8 +56,8 @@ public class Work {
     private String implementingAgencyId;
     private String implementingAgencyName;
 
-    private Integer documentCount = 3;
-    private Integer photoCount = 2;
+    private Integer documentCount = 0;
+    private Integer photoCount = 0;
     private Boolean hasCompletionCertificate = false;
 
     private String sourceType = "DEMO/SYNTHETIC DATA"; // PUBLIC DATA, AUTHORIZED DATA, DEMO/SYNTHETIC DATA

@@ -14,6 +14,8 @@ import DataImportPage from './pages/DataImportPage';
 import AuditLogsPage from './pages/AuditLogsPage';
 import SettingsPage from './pages/SettingsPage';
 import ReportsPage from './pages/ReportsPage';
+import WorksPage from './pages/WorksPage';
+import CameraCapturePage from './pages/CameraCapturePage';
 import DemoTourModal from './components/DemoTourModal';
 import { ToastProvider } from './context/ToastContext';
 import { api } from './services/api';
@@ -53,7 +55,9 @@ function MainLayout() {
             <Route path="/" element={<Dashboard key={refreshKey} />} />
             <Route path="/queue" element={<RiskQueue key={refreshKey} />} />
             <Route path="/passport/:workId" element={<RiskPassport key={refreshKey} />} />
+            <Route path="/works/:workId/capture-evidence" element={<CameraCapturePage />} />
             <Route path="/similar" element={<SimilarWorksPage key={refreshKey} />} />
+            <Route path="/works" element={<WorksPage key={refreshKey} />} />
             <Route path="/map" element={<MapViewPage key={refreshKey} />} />
             <Route path="/investigations" element={<InvestigationsPage key={refreshKey} />} />
             <Route path="/data" element={<DataImportPage key={refreshKey} />} />

@@ -21,7 +21,9 @@ import {
   History,
   TrendingUp,
   Info,
-  Layers
+  Layers,
+  Camera,
+  ImageOff
 } from 'lucide-react';
 import { api } from '../services/api';
 import { formatINR, formatDate, getRiskBadgeClass } from '../utils/formatters';
@@ -36,6 +38,7 @@ const DOSSIER_TABS = [
   { id: 'cost', label: '3. Peer Cost Benchmarking', icon: TrendingUp },
   { id: 'timeline', label: '4. Milestone Timeline & Delay', icon: Clock },
   { id: 'similar', label: '5. Overlapping Proposals', icon: Copy },
+  { id: 'photos', label: '6. Completion Evidence', icon: Camera },
 ];
 
 export default function RiskPassport() {
@@ -46,6 +49,9 @@ export default function RiskPassport() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('overview');
+
+  // Photo Evidence State
+  const [photoEvidence, setPhotoEvidence] = useState([]);
 
   // Investigation Action State
   const [actionLoading, setActionLoading] = useState(false);
@@ -64,8 +70,18 @@ export default function RiskPassport() {
     }
   };
 
+  const loadPhotoEvidence = async () => {
+    try {
+      const ev = await api.getEvidenceForWork(workId);
+      setPhotoEvidence(ev || []);
+    } catch (err) {
+      console.error('Evidence load error:', err);
+    }
+  };
+
   useEffect(() => {
     loadPassport();
+    loadPhotoEvidence();
   }, [workId]);
 
   const handleCreateOrUpdateCase = async (status, priority = 'HIGH', reason) => {
@@ -286,13 +302,26 @@ export default function RiskPassport() {
           </button>
         </div>
 
-        <Link
-          to={`/reports?workId=${work.workId}`}
-          className="px-3.5 py-2 rounded-lg bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 font-semibold text-xs transition flex items-center gap-1.5 shadow-xs"
-        >
-          <Printer className="w-3.5 h-3.5 text-slate-500" />
-          <span>Export Statutory Dossier</span>
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link
+            to={`/works/${work.workId}/capture-evidence`}
+            className="px-3.5 py-2 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-semibold text-xs transition flex items-center gap-1.5 shadow-xs"
+          >
+            <Camera className="w-3.5 h-3.5" />
+            <span>Capture Evidence</span>
+            {photoEvidence.length > 0 && (
+              <span className="bg-emerald-500 text-white px-1.5 py-0.5 rounded-full text-[10px] font-bold">{photoEvidence.length}</span>
+            )}
+          </Link>
+
+          <Link
+            to={`/reports?workId=${work.workId}`}
+            className="px-3.5 py-2 rounded-lg bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 font-semibold text-xs transition flex items-center gap-1.5 shadow-xs"
+          >
+            <Printer className="w-3.5 h-3.5 text-slate-500" />
+            <span>Export Dossier</span>
+          </Link>
+        </div>
       </div>
 
       {actionSuccessMsg && (
@@ -337,42 +366,41 @@ export default function RiskPassport() {
               <span className="text-xs text-slate-400 font-mono">Multi-Signal Decomposition</span>
             </div>
 
-            {/* Subscore decomposition chips */}
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
-              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-center">
+              <div className="p-3 rounded-lg bg-slate-50 border border-slate-200 text-center">
                 <span className="text-[11px] font-semibold text-slate-500 block">Cost Anomaly</span>
-                <span className={`text-base font-bold ${subscores.cost_anomaly > 15 ? 'text-red-700' : 'text-slate-800'}`}>
-                  {subscores.cost_anomaly || 25} pts
+                <span className={`text-base font-bold ${(subscores.cost_anomaly || 0) > 15 ? 'text-red-700' : 'text-slate-800'}`}>
+                  {subscores.cost_anomaly ?? 0} pts
                 </span>
               </div>
-              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-center">
+              <div className="p-3 rounded-lg bg-slate-50 border border-slate-200 text-center">
                 <span className="text-[11px] font-semibold text-slate-500 block">Delay Anomaly</span>
-                <span className={`text-base font-bold ${subscores.delay_anomaly > 10 ? 'text-amber-700' : 'text-slate-800'}`}>
-                  {subscores.delay_anomaly || 20} pts
+                <span className={`text-base font-bold ${(subscores.delay_anomaly || 0) > 10 ? 'text-amber-700' : 'text-slate-800'}`}>
+                  {subscores.delay_anomaly ?? 0} pts
                 </span>
               </div>
-              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-center">
+              <div className="p-3 rounded-lg bg-slate-50 border border-slate-200 text-center">
                 <span className="text-[11px] font-semibold text-slate-500 block">Rule Violations</span>
                 <span className="text-base font-bold text-slate-800">
-                  {subscores.rule_violation || 20} pts
+                  {subscores.rule_violation ?? 0} pts
                 </span>
               </div>
-              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-center">
+              <div className="p-3 rounded-lg bg-slate-50 border border-slate-200 text-center">
                 <span className="text-[11px] font-semibold text-slate-500 block">Duplicate Match</span>
-                <span className={`text-base font-bold ${subscores.similarity_duplicate > 5 ? 'text-red-700' : 'text-slate-800'}`}>
-                  {subscores.similarity_duplicate || 15} pts
+                <span className={`text-base font-bold ${(subscores.similarity_duplicate || 0) > 5 ? 'text-red-700' : 'text-slate-800'}`}>
+                  {subscores.similarity_duplicate ?? 0} pts
                 </span>
               </div>
-              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-center">
+              <div className="p-3 rounded-lg bg-slate-50 border border-slate-200 text-center">
                 <span className="text-[11px] font-semibold text-slate-500 block">Agency Pattern</span>
                 <span className="text-base font-bold text-slate-800">
-                  {subscores.agency_concentration || 6} pts
+                  {subscores.agency_concentration ?? 0} pts
                 </span>
               </div>
-              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-center">
+              <div className="p-3 rounded-lg bg-slate-50 border border-slate-200 text-center">
                 <span className="text-[11px] font-semibold text-slate-500 block">Missing Evidence</span>
-                <span className={`text-base font-bold ${subscores.missing_evidence > 0 ? 'text-red-700' : 'text-slate-800'}`}>
-                  {subscores.missing_evidence || 8} pts
+                <span className={`text-base font-bold ${(subscores.missing_evidence || 0) > 0 ? 'text-red-700' : 'text-slate-800'}`}>
+                  {subscores.missing_evidence ?? 0} pts
                 </span>
               </div>
             </div>
@@ -487,6 +515,148 @@ export default function RiskPassport() {
               No overlapping or duplicate works detected within this geographic cluster.
             </div>
           )}
+        </div>
+      )}
+
+      {/* Tab 6: Completion Evidence (Geo-verified Photos) */}
+      {activeTab === 'photos' && (
+        <div className="space-y-4 animate-in fade-in duration-150">
+          <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div className="flex items-center gap-2">
+                <Camera className="w-4 h-4 text-emerald-600" />
+                <h4 className="text-sm font-bold text-slate-900">Geo-Verified Completion Evidence</h4>
+              </div>
+              <Link
+                to={`/works/${work.workId}/capture-evidence`}
+                className="px-3.5 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-semibold text-xs transition flex items-center gap-1.5"
+              >
+                <Camera className="w-3.5 h-3.5" />
+                Capture New Evidence
+              </Link>
+            </div>
+
+            {photoEvidence.length === 0 ? (
+              <div className="text-center py-12 space-y-3">
+                <ImageOff className="w-10 h-10 text-slate-300 mx-auto" />
+                <p className="text-xs text-slate-500 font-semibold">No completion evidence submitted yet</p>
+                <p className="text-xs text-slate-400">Use the "Capture Evidence" button to submit a geo-verified photo from the work site.</p>
+                <Link
+                  to={`/works/${work.workId}/capture-evidence`}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-700 text-white text-xs font-semibold rounded-xl hover:bg-emerald-800 transition"
+                >
+                  <Camera className="w-3.5 h-3.5" /> Submit First Evidence
+                </Link>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {photoEvidence.map((ev, idx) => {
+                  const statusColor = {
+                    SUBMITTED: 'bg-blue-50 text-blue-800 border-blue-200',
+                    LOCATION_VERIFIED: 'bg-emerald-50 text-emerald-800 border-emerald-200',
+                    LOCATION_MISMATCH: 'bg-red-50 text-red-800 border-red-200',
+                    UNDER_REVIEW: 'bg-amber-50 text-amber-800 border-amber-200',
+                    VERIFIED: 'bg-emerald-50 text-emerald-800 border-emerald-200',
+                    REJECTED: 'bg-red-50 text-red-800 border-red-200',
+                  }[ev.verificationStatus] || 'bg-slate-50 text-slate-800 border-slate-200';
+
+                  return (
+                    <div key={idx} className="border border-slate-200 rounded-xl overflow-hidden">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+                        {/* Photo */}
+                        <div className="bg-slate-900 flex items-center justify-center min-h-[200px]">
+                          {ev.photoUrl ? (
+                            <img
+                              src={ev.photoUrl}
+                              alt={`Evidence ${idx + 1}`}
+                              className="w-full h-full object-cover max-h-[250px]"
+                              onError={(e) => { e.target.style.display = 'none'; }}
+                            />
+                          ) : (
+                            <div className="text-slate-500 text-xs flex flex-col items-center gap-2 p-8">
+                              <ImageOff className="w-8 h-8 text-slate-600" />
+                              Photo not accessible (local storage)
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Metadata */}
+                        <div className="p-4 space-y-3 text-xs">
+                          <div className="flex items-center justify-between">
+                            <span className="font-mono font-bold text-slate-500 text-[11px]">#{idx + 1}</span>
+                            <span className={`px-2 py-0.5 rounded border text-[11px] font-bold ${statusColor}`}>
+                              {ev.verificationStatus}
+                            </span>
+                          </div>
+
+                          <div className="space-y-1.5">
+                            <div className="flex items-start gap-2">
+                              <MapPin className="w-3.5 h-3.5 text-slate-400 mt-0.5 shrink-0" />
+                              <div>
+                                <span className="text-slate-400 block text-[10px]">Captured GPS</span>
+                                <span className="font-mono text-slate-800">
+                                  {ev.capturedLatitude?.toFixed(5)}, {ev.capturedLongitude?.toFixed(5)}
+                                </span>
+                                <span className="text-slate-400 text-[10px] block">±{Math.round(ev.gpsAccuracyMeters || 0)}m accuracy</span>
+                              </div>
+                            </div>
+
+                            {ev.locationDistanceMeters !== null && ev.locationDistanceMeters !== undefined && (
+                              <div className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-[11px] font-semibold ${
+                                ev.locationMismatch ? 'bg-red-50 text-red-700 border-red-200' : 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                              }`}>
+                                {ev.locationMismatch ? '⚠ Location mismatch: ' : '✓ Distance from site: '}
+                                <span className="font-mono">{Math.round(ev.locationDistanceMeters)}m</span>
+                              </div>
+                            )}
+
+                            <div>
+                              <span className="text-slate-400 text-[10px]">Captured By</span>
+                              <p className="font-semibold text-slate-800">{ev.uploadedByUserName}</p>
+                              <p className="text-slate-400">{formatDate(ev.capturedAt)}</p>
+                            </div>
+
+                            <div>
+                              <span className="text-slate-400 text-[10px]">File Hash (SHA-256)</span>
+                              <p className="font-mono text-[10px] text-slate-500 break-all leading-tight">{ev.fileHash?.slice(0, 40)}...</p>
+                            </div>
+                          </div>
+
+                          {/* Officer Verify Action */}
+                          {(ev.verificationStatus === 'SUBMITTED' || ev.verificationStatus === 'LOCATION_MISMATCH') && (
+                            <div className="flex gap-2 pt-1">
+                              <button
+                                onClick={async () => {
+                                  try {
+                                    await api.verifyEvidence(ev.evidenceId, { status: 'VERIFIED', note: 'Officer verified.', verifierName: 'Officer', verifierRole: 'ROLE_DISTRICT_OFFICER' });
+                                    loadPhotoEvidence();
+                                  } catch (e) { console.error(e); }
+                                }}
+                                className="flex-1 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-[11px] font-semibold transition"
+                              >
+                                Mark Verified
+                              </button>
+                              <button
+                                onClick={async () => {
+                                  try {
+                                    await api.verifyEvidence(ev.evidenceId, { status: 'REJECTED', note: 'Evidence rejected.', verifierName: 'Officer', verifierRole: 'ROLE_DISTRICT_OFFICER' });
+                                    loadPhotoEvidence();
+                                  } catch (e) { console.error(e); }
+                                }}
+                                className="flex-1 py-1.5 bg-red-100 hover:bg-red-200 text-red-800 rounded-lg text-[11px] font-semibold transition border border-red-200"
+                              >
+                                Reject
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
         </div>
       )}
 

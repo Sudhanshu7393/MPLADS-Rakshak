@@ -21,6 +21,7 @@ export default function DataImportPage() {
   const [dataStatus, setDataStatus] = useState(null);
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [dataQuality, setDataQuality] = useState(null);
 
   // Upload & Mapping State
   const [uploading, setUploading] = useState(false);
@@ -33,12 +34,14 @@ export default function DataImportPage() {
   const loadStatus = async () => {
     setLoading(true);
     try {
-      const [status, hist] = await Promise.all([
+      const [status, hist, quality] = await Promise.all([
         api.getDataStatus(),
-        api.getImportHistory()
+        api.getImportHistory(),
+        api.getDataQuality().catch(() => null)
       ]);
       setDataStatus(status);
       setHistory(hist || []);
+      setDataQuality(quality);
     } catch (e) {
       console.error(e);
     } finally {
@@ -171,8 +174,16 @@ export default function DataImportPage() {
       </div>
 
       {/* Live Data Quality Metrics */}
-      <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs">
-        <h3 className="text-sm font-bold text-slate-900 mb-3">Active Data Quality &amp; Completeness Scorecard</h3>
+      <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs space-y-4">
+        <div className="flex items-center justify-between">
+          <h3 className="text-sm font-bold text-slate-900">Active Data Quality &amp; Completeness Scorecard</h3>
+          {dataQuality?.overallCompleteness !== undefined && (
+            <span className="px-2.5 py-1 rounded-lg text-xs font-mono font-bold bg-blue-50 text-blue-800 border border-blue-200">
+              Overall Completeness: {dataQuality.overallCompleteness}%
+            </span>
+          )}
+        </div>
+
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 text-xs">
           <div className="p-3 rounded-lg bg-slate-50 border border-slate-100">
             <span className="text-slate-500 block text-[11px]">Total Records</span>
@@ -192,9 +203,30 @@ export default function DataImportPage() {
           </div>
           <div className="p-3 rounded-lg bg-slate-50 border border-slate-100">
             <span className="text-slate-500 block text-[11px]">Missing Coordinates</span>
-            <span className="text-base font-extrabold text-slate-800">{dataStatus?.missingCoordinates || 0}</span>
+            <span className="text-base font-extrabold text-slate-800">{dataQuality?.missingCoordinates ?? (dataStatus?.missingCoordinates || 0)}</span>
           </div>
         </div>
+
+        {dataQuality && (
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-slate-100 text-xs">
+            <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-100">
+              <span className="text-slate-400 block text-[10px]">Geospatial Tagging</span>
+              <span className="font-bold text-slate-800">{dataQuality.coordinateCompleteness}%</span>
+            </div>
+            <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-100">
+              <span className="text-slate-400 block text-[10px]">Sanction Date Field</span>
+              <span className="font-bold text-slate-800">{dataQuality.sanctionDateCompleteness}%</span>
+            </div>
+            <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-100">
+              <span className="text-slate-400 block text-[10px]">Implementing Agency</span>
+              <span className="font-bold text-slate-800">{dataQuality.agencyCompleteness}%</span>
+            </div>
+            <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-100">
+              <span className="text-slate-400 block text-[10px]">Category &amp; Sector</span>
+              <span className="font-bold text-slate-800">{dataQuality.categoryCompleteness}%</span>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* CSV Ingestion & Mapping Area */}

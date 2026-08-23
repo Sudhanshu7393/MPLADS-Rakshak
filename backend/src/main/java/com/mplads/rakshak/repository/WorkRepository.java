@@ -48,4 +48,22 @@ public interface WorkRepository extends JpaRepository<Work, Long> {
 
     @Query("SELECT SUM(w.expenditureAmount) FROM Work w")
     Double sumTotalExpenditureAmount();
+
+    @Query("SELECT COUNT(w) FROM Work w WHERE w.latitude IS NOT NULL AND w.longitude IS NOT NULL")
+    long countWithCoordinates();
+
+    @Query("SELECT COUNT(w) FROM Work w WHERE w.sanctionDate IS NOT NULL")
+    long countWithSanctionDate();
+
+    @Query("SELECT COUNT(w) FROM Work w WHERE w.expectedCompletionDate IS NOT NULL")
+    long countWithExpectedCompletionDate();
+
+    @Query("SELECT COUNT(w) FROM Work w WHERE w.implementingAgencyName IS NOT NULL AND w.implementingAgencyName <> ''")
+    long countWithAgency();
+
+    @Query("SELECT COUNT(w) FROM Work w WHERE w.category IS NOT NULL AND w.category <> ''")
+    long countWithCategory();
+
+    @Query("SELECT COUNT(w) FROM Work w WHERE w.status IS NOT NULL AND w.status <> ''")
+    long countWithStatus();
 }
