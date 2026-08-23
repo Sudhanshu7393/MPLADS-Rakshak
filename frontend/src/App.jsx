@@ -47,7 +47,6 @@ function MainLayout() {
 
   return (
     <div className="h-screen bg-slate-100 flex flex-col font-sans overflow-hidden">
-      <GovHeader />
       <Navbar 
         activeDataMode={activeDataMode} 
         onAnalysisRun={() => setRefreshKey(k => k + 1)}
