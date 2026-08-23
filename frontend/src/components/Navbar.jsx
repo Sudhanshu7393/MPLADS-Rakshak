@@ -36,52 +36,55 @@ export default function Navbar({ activeDataMode = 'PUBLIC DATA', onAnalysisRun }
           
           {/* Logo & Ministry Branding */}
           <Link to="/" className="flex items-center gap-3 group shrink-0">
-            <div className="w-9 h-9 rounded-lg bg-blue-700 flex items-center justify-center shadow-xs">
+            <div className="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center shadow-xs">
               <ShieldCheck className="w-5 h-5 text-white" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-black text-base tracking-wide text-white">
+                <span className="font-extrabold text-sm tracking-wide text-white">
                   MPLADS RAKSHAK
                 </span>
+                <span className="text-[10px] font-bold uppercase tracking-wider bg-blue-900/80 text-blue-200 border border-blue-700/60 px-1.5 py-0.5 rounded">
+                  ANALYTICAL ENGINE
+                </span>
               </div>
-              <p className="text-[10px] text-slate-300 font-medium">
-                सांसद स्थानीय क्षेत्र विकास योजना • MoSPI
+              <p className="text-[10px] text-slate-400 font-medium">
+                National Risk &amp; Anomaly Prioritisation Platform • MoSPI
               </p>
             </div>
           </Link>
 
-          {/* Center Navigation Links (Clean Indian Gov Style) */}
-          <nav className="hidden md:flex items-center gap-1">
+          {/* Center Navigation Links (English Modern Style) */}
+          <nav className="hidden lg:flex items-center gap-1 bg-slate-900/60 p-1 rounded-xl border border-slate-800">
             <Link
               to="/"
-              className="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-200 hover:text-white hover:bg-slate-800 transition"
+              className="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-200 hover:text-white hover:bg-slate-800 transition"
             >
-              मुख्य पृष्ठ (Home)
+              Home &amp; Workflow
             </Link>
             <Link
               to="/dashboard"
-              className="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-300 hover:text-white hover:bg-slate-800 transition"
+              className="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition"
             >
-              डैशबोर्ड (Dashboard)
+              Executive Analytics
             </Link>
             <Link
               to="/queue"
-              className="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-300 hover:text-white hover:bg-slate-800 transition"
+              className="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition"
             >
-              स्क्रूटनी (Risk Queue)
+              Scrutiny Queue
             </Link>
             <Link
               to="/map"
-              className="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-300 hover:text-white hover:bg-slate-800 transition"
+              className="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition"
             >
-              मानचित्र (Map)
+              Geospatial Map
             </Link>
             <Link
               to="/works/MPL-2024-UP-004821/capture-evidence"
-              className="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-300 hover:text-white hover:bg-slate-800 transition"
+              className="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition"
             >
-              फील्ड कैमरा (Camera)
+              Field Camera
             </Link>
           </nav>
 
@@ -95,19 +98,19 @@ export default function Navbar({ activeDataMode = 'PUBLIC DATA', onAnalysisRun }
             <button
               onClick={handleTriggerAnalysis}
               disabled={runningAnalysis}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-blue-700 hover:bg-blue-600 text-white text-xs font-bold transition disabled:opacity-50 shadow-xs"
-              title="Run unsupervised anomaly engine"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold transition disabled:opacity-50"
+              title="Run unsupervised anomaly engine across all records"
             >
-              <RefreshCw className={`w-3 h-3 ${runningAnalysis ? 'animate-spin' : ''}`} />
-              <span className="hidden xl:inline">
-                {runningAnalysis ? 'विश्लेषण जारी...' : 'Run Analysis'}
+              <RefreshCw className={`w-3.5 h-3.5 text-blue-400 ${runningAnalysis ? 'animate-spin' : ''}`} />
+              <span className="hidden sm:inline">
+                {runningAnalysis ? 'Running...' : 'Run Analytical Cycle'}
               </span>
             </button>
 
             {/* User Profile / Logout */}
             <div className="flex items-center gap-2 pl-2 border-l border-slate-700">
               <div className="text-right hidden sm:block">
-                <div className="text-xs font-bold text-slate-200 leading-tight">
+                <div className="text-xs font-semibold text-slate-200 leading-tight">
                   {user?.fullName || 'District Planning Officer'}
                 </div>
                 <div className="text-[10px] text-slate-400 font-mono">

@@ -52,8 +52,8 @@ function MainLayout() {
         onAnalysisRun={() => setRefreshKey(k => k + 1)}
       />
       <div className="flex-1 flex overflow-hidden">
-        {!isHomePage && <Sidebar />}
-        <main className={`flex-1 overflow-y-auto bg-slate-100 ${isHomePage ? 'p-0' : 'p-4 md:p-6'} relative`}>
+        <Sidebar />
+        <main className="flex-1 overflow-y-auto bg-slate-100 p-4 md:p-6 relative">
           <Routes>
             <Route path="/" element={<LandingHomePage key={refreshKey} />} />
             <Route path="/dashboard" element={<Dashboard key={refreshKey} />} />
