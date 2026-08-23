@@ -31,7 +31,9 @@ import {
   HelpCircle,
   FileCheck2,
   Sliders,
-  ArrowUpRight
+  ArrowUpRight,
+  Filter,
+  Zap
 } from 'lucide-react';
 import { api } from '../services/api';
 import { formatINR } from '../utils/formatters';
@@ -47,7 +49,7 @@ export default function LandingHomePage() {
   useEffect(() => {
     Promise.all([
       api.getDashboardSummary(),
-      api.getRiskQueue({ page: 0, size: 4, sort: 'overallRiskScore,desc' })
+      api.getRiskQueue({ page: 0, size: 5, sort: 'overallRiskScore,desc' })
     ]).then(([sumData, queueData]) => {
       setSummary(sumData);
       setHighRiskWorks(queueData?.content || []);
@@ -59,7 +61,7 @@ export default function LandingHomePage() {
   const totalCost = summary?.totalSanctionedAmount || 5931310000;
 
   const handleSearch = (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     if (searchQuery.trim()) {
       navigate('/queue?search=' + encodeURIComponent(searchQuery.trim()));
     } else {
@@ -67,9 +69,9 @@ export default function LandingHomePage() {
     }
   };
 
-  const setFilterAndSearch = (query) => {
-    setSearchQuery(query);
-    navigate('/queue?search=' + encodeURIComponent(query));
+  const handleQuickTagSearch = (tag) => {
+    setSearchQuery(tag);
+    navigate('/queue?search=' + encodeURIComponent(tag));
   };
 
   const faqs = [
@@ -91,84 +93,99 @@ export default function LandingHomePage() {
     }
   ];
 
+  const quickFilters = [
+    { label: "🚨 High Risk Flags", query: "High Risk" },
+    { label: "💰 Cost Inflation (>+50%)", query: "Cost Outlier" },
+    { label: "⏳ Delay (>180 Days)", query: "Execution Delay" },
+    { label: "📍 Varanasi (UP)", query: "Varanasi" },
+    { label: "🛣️ Rural Roads", query: "Rural Roads" },
+    { label: "👥 Single Agency Monopoly", query: "Agency Monopoly" }
+  ];
+
   const services = [
     {
       title: "Cost Outlier Detection",
       desc: "Multi-district peer median benchmarking with IQR variance analysis to detect inflated estimates.",
       icon: TrendingUp,
-      color: "bg-blue-600 text-white",
+      accent: "from-blue-600 to-indigo-600",
       link: "/queue?search=Cost%20Outlier",
-      tag: "IQR Statistical Engine"
+      tag: "IQR Statistical Engine",
+      stat: "+53.8% Avg Outlier"
     },
     {
       title: "Timeline & Delay Tracking",
       desc: "Tracks execution lags exceeding 180+ days past sanctioned milestone dates with automated risk inflation.",
       icon: Clock,
-      color: "bg-slate-700 text-white",
+      accent: "from-amber-600 to-orange-600",
       link: "/queue?search=Execution%20Delay",
-      tag: "Milestone Engine"
+      tag: "Milestone Engine",
+      stat: "180+ Days Threshold"
     },
     {
       title: "Duplicate Proposal Matcher",
       desc: "TF-IDF NLP text proximity and Haversine geospatial clustering (<500m) to catch double-dipping proposals.",
       icon: Layers,
-      color: "bg-indigo-600 text-white",
+      accent: "from-indigo-600 to-purple-600",
       link: "/similar",
-      tag: "Geospatial Clustering"
+      tag: "Geospatial Clustering",
+      stat: "<500m Proximity Lock"
     },
     {
       title: "Geo-Camera Evidence Lock",
       desc: "Mobile photo progress capture with hardware GPS locking, distance mismatch alerts, and SHA-256 hashes.",
       icon: Camera,
-      color: "bg-emerald-600 text-white",
+      accent: "from-emerald-600 to-teal-600",
       link: "/works/MPL-2024-UP-004821/capture-evidence",
-      tag: "Tamper-Proof Lock"
+      tag: "Tamper-Proof Lock",
+      stat: "SHA-256 Verified"
     },
     {
       title: "Agency Monopoly Index",
       desc: "Herfindahl-Hirschman Index (HHI) analysis to detect contractor concentration and single-bidder monopolies.",
       icon: Building2,
-      color: "bg-slate-800 text-white",
+      accent: "from-slate-700 to-slate-900",
       link: "/queue",
-      tag: "HHI Market Power"
+      tag: "HHI Market Power",
+      stat: "HHI > 2500 Monitored"
     },
     {
       title: "Statutory Audit Ledger",
       desc: "Immutable cryptographic event log recording every officer determination, memo issue, and verification.",
       icon: ShieldCheck,
-      color: "bg-blue-800 text-white",
+      accent: "from-blue-800 to-slate-900",
       link: "/audit",
-      tag: "Append-Only Ledger"
+      tag: "Append-Only Ledger",
+      stat: "100% Audit Trail"
     }
   ];
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] font-sans text-slate-900 -m-4 md:-m-6 lg:-m-8 relative">
+    <div className="min-h-screen bg-[#F8FAFC] font-sans text-slate-900 -m-4 md:-m-6 lg:-m-8 relative scroll-smooth selection:bg-blue-600 selection:text-white">
       
-      {/* 1. CINEMATIC 100% FULL-SCREEN PARLIAMENT HERO (PURE TITLE & EMBLEM ON THE IMAGE) */}
+      {/* 1. CINEMATIC 100% FULL-SCREEN PARLIAMENT HERO VIEWPORT */}
       <section className="relative bg-slate-950 text-white min-h-[calc(100vh-3.75rem)] flex flex-col justify-between items-center text-center px-4 sm:px-6 lg:px-8 border-b border-slate-800 overflow-hidden">
         
         {/* Unobstructed Parliament Architectural Background */}
         <div 
-          className="absolute inset-0 bg-cover bg-center opacity-95 scale-100 pointer-events-none transition-transform duration-700"
+          className="absolute inset-0 bg-cover bg-center opacity-95 scale-100 pointer-events-none transition-transform duration-1000 ease-out"
           style={{ backgroundImage: "url('/parliament_bg.jpg')" }}
         />
 
-        {/* Subtle Dark Vignette Mask so Title stands out with complete clarity */}
+        {/* Subtle Dark Vignette Mask for ultra-crisp title readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-slate-950/60 pointer-events-none" />
 
-        {/* Top Spacer for perfect vertical centering */}
+        {/* Top Spacer for vertical balance */}
         <div className="h-6 sm:h-10 shrink-0" />
 
         {/* ONLY THE PROJECT TITLE ON THE IMAGE (VERTICALLY CENTERED) */}
         <div className="relative z-10 max-w-4xl mx-auto space-y-5 my-auto py-6">
           
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/80 border border-slate-700/80 text-blue-300 text-xs font-semibold backdrop-blur-md shadow-lg">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/85 border border-slate-700/80 text-blue-300 text-xs font-semibold backdrop-blur-md shadow-2xl hover:border-blue-400/50 transition">
             <ShieldCheck className="w-4 h-4 text-blue-400" />
             <span>Ministry of Statistics &amp; Programme Implementation • e-SAKSHI (MoSPI)</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white drop-shadow-xl">
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white drop-shadow-2xl">
             MPLADS <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-200">RAKSHAK</span>
           </h1>
 
@@ -178,17 +195,17 @@ export default function LandingHomePage() {
 
         </div>
 
-        {/* Full-Screen Viewport Bottom Bar (Telemetry + Scroll Down Hint + Government Badge) */}
-        <div className="w-full relative z-20 pb-6 px-4 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-300 border-t border-white/10 pt-4 bg-slate-950/40 backdrop-blur-xs">
+        {/* Full-Screen Viewport Bottom Bar (Telemetry + Smooth Scroll Trigger + Government Badge) */}
+        <div className="w-full relative z-20 pb-6 px-4 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-300 border-t border-white/10 pt-4 bg-slate-950/50 backdrop-blur-sm">
           
           <div className="flex items-center gap-2 text-xs font-medium">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span>Live Surveillance: <strong className="text-white">{totalWorks.toLocaleString('en-IN')} Works</strong> • <strong className="text-white">{formatINR(totalCost)}</strong> • <strong className="text-red-400">{highRisk} Flags</strong></span>
+            <span>Live Surveillance: <strong className="text-white font-mono">{totalWorks.toLocaleString('en-IN')} Works</strong> • <strong className="text-white font-mono">{formatINR(totalCost)}</strong> • <strong className="text-red-400 font-mono">{highRisk} Flags</strong></span>
           </div>
 
           <a 
             href="#command-center"
-            className="flex items-center gap-1.5 text-xs text-blue-300 hover:text-white transition font-bold animate-bounce"
+            className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-blue-600/20 border border-blue-400/30 text-xs text-blue-300 hover:text-white hover:bg-blue-600/40 transition-all font-bold animate-bounce shadow-lg"
           >
             <span>Explore Scrutiny Queue &amp; Analytics</span>
             <ChevronDown className="w-4 h-4" />
@@ -208,7 +225,7 @@ export default function LandingHomePage() {
       </section>
 
 
-      {/* 2. EVERYTHING ELSE STARTS CLEANLY BELOW THE PARLIAMENT IMAGE WITH OFFICIAL EMBLEM WATERMARK */}
+      {/* 2. LOWER PORTAL CONTENT WITH ASHOKA EMBLEM WATERMARK & LIFT TRANSITIONS */}
       <div 
         id="command-center"
         className="relative bg-cover bg-fixed bg-center scroll-mt-6"
@@ -216,15 +233,15 @@ export default function LandingHomePage() {
       >
         
         {/* Semi-transparent tint to ensure high contrast */}
-        <div className="absolute inset-0 bg-[#F8FAFC]/92 pointer-events-none" />
+        <div className="absolute inset-0 bg-[#F8FAFC]/94 pointer-events-none" />
 
         <div className="relative z-10">
 
-          {/* A. EXECUTIVE SEARCH & COMMAND BAR (DIRECTLY BELOW IMAGE) */}
+          {/* A. EXECUTIVE COMMAND & SEARCH CENTER */}
           <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4 relative z-20">
-            <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-xl border border-slate-200/90 space-y-4">
+            <div className="bg-white/95 backdrop-blur-md rounded-2xl p-6 sm:p-7 shadow-xl border border-slate-200/90 space-y-5 transition-all hover:shadow-2xl">
               
-              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3.5">
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                 
                 {/* Search Form */}
                 <form onSubmit={handleSearch} className="flex-1 max-w-2xl">
@@ -239,7 +256,7 @@ export default function LandingHomePage() {
                     />
                     <button
                       type="submit"
-                      className="absolute right-1.5 px-3.5 py-1.5 bg-[#0B2545] hover:bg-[#071B30] text-white text-xs font-bold rounded-lg transition shadow-xs flex items-center gap-1"
+                      className="absolute right-1.5 px-4 py-1.5 bg-[#0B2545] hover:bg-[#071B30] text-white text-xs font-bold rounded-lg transition shadow-xs flex items-center gap-1"
                     >
                       <span>Search</span>
                     </button>
@@ -250,19 +267,19 @@ export default function LandingHomePage() {
                 <div className="flex flex-wrap items-center gap-2">
                   <Link
                     to="/queue"
-                    className="px-4 py-2.5 rounded-xl bg-[#0B2545] hover:bg-[#071B30] text-white font-bold text-xs shadow-xs transition flex items-center gap-2 border border-[#0B2545] group"
+                    className="px-4 py-2.5 rounded-xl bg-[#0B2545] hover:bg-[#071B30] text-white font-bold text-xs shadow-sm transition flex items-center gap-2 border border-[#0B2545] group hover:-translate-y-0.5"
                   >
                     <AlertOctagon className="w-4 h-4 text-red-400" />
                     <span>Scrutiny Queue</span>
                     <span className="bg-red-600 text-white font-mono text-[10px] px-1.5 py-0.5 rounded-full font-black">
                       {highRisk}
                     </span>
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-300 group-hover:translate-x-0.5 transition-transform" />
+                    <ArrowRight className="w-3.5 h-3.5 text-slate-300 group-hover:translate-x-1 transition-transform" />
                   </Link>
 
                   <Link
                     to="/dashboard"
-                    className="px-3.5 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs border border-slate-300 hover:border-slate-400 shadow-xs transition flex items-center gap-1.5"
+                    className="px-3.5 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs border border-slate-300 hover:border-slate-400 shadow-xs transition flex items-center gap-1.5 hover:-translate-y-0.5"
                   >
                     <TrendingUp className="w-3.5 h-3.5 text-blue-700" />
                     <span>Executive Analytics</span>
@@ -270,7 +287,7 @@ export default function LandingHomePage() {
 
                   <Link
                     to="/works/MPL-2024-UP-004821/capture-evidence"
-                    className="px-3.5 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs border border-slate-300 hover:border-slate-400 shadow-xs transition flex items-center gap-1.5"
+                    className="px-3.5 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs border border-slate-300 hover:border-slate-400 shadow-xs transition flex items-center gap-1.5 hover:-translate-y-0.5"
                   >
                     <Camera className="w-3.5 h-3.5 text-emerald-600" />
                     <span>Geo-Camera</span>
@@ -278,7 +295,7 @@ export default function LandingHomePage() {
 
                   <Link
                     to="/works"
-                    className="px-3.5 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs border border-slate-300 hover:border-slate-400 shadow-xs transition flex items-center gap-1.5"
+                    className="px-3.5 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs border border-slate-300 hover:border-slate-400 shadow-xs transition flex items-center gap-1.5 hover:-translate-y-0.5"
                   >
                     <Layers className="w-3.5 h-3.5 text-slate-600" />
                     <span>Browse All Works</span>
@@ -287,8 +304,25 @@ export default function LandingHomePage() {
 
               </div>
 
+              {/* Instant Filter Chips */}
+              <div className="pt-2 flex flex-wrap items-center gap-2">
+                <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1">
+                  <Filter className="w-3 h-3 text-slate-500" />
+                  Quick Filters:
+                </span>
+                {quickFilters.map((qf, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => handleQuickTagSearch(qf.query)}
+                    className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-700 border border-slate-200 hover:border-blue-300 text-[11px] font-medium transition cursor-pointer"
+                  >
+                    {qf.label}
+                  </button>
+                ))}
+              </div>
+
               {/* Live Telemetry Bar */}
-              <div className="pt-2 border-t border-slate-100 flex flex-wrap items-center justify-between text-xs text-slate-500 font-medium">
+              <div className="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between text-xs text-slate-500 font-medium">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                   <span>Continuous Surveillance Active: <strong className="text-slate-800">{totalWorks.toLocaleString('en-IN')} Sanctioned Works</strong></span>
@@ -306,40 +340,40 @@ export default function LandingHomePage() {
           </section>
 
 
-          {/* B. THREE CORE PILLAR HIGHLIGHTS */}
-          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {/* B. THREE CORE PILLAR HIGHLIGHT CARDS WITH HOVER LIFT */}
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               
-              <div className="bg-white/95 backdrop-blur-sm rounded-xl p-5 shadow-sm border border-slate-200/80 flex items-start gap-4 hover:shadow-md transition">
-                <div className="w-10 h-10 rounded-lg bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-700 shrink-0 shadow-xs">
+              <div className="bg-white/95 backdrop-blur-sm rounded-xl p-5 shadow-sm border border-slate-200/80 border-l-4 border-l-blue-600 flex items-start gap-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+                <div className="w-10 h-10 rounded-lg bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-700 shrink-0 shadow-xs group-hover:scale-110 transition-transform">
                   <Cpu className="w-5 h-5" />
                 </div>
-                <div className="space-y-0.5">
-                  <h3 className="text-sm font-bold text-slate-900">Explainable AI Scoring</h3>
+                <div className="space-y-1">
+                  <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-700 transition">Explainable AI Scoring</h3>
                   <p className="text-xs text-slate-600 leading-relaxed">
                     Deterministic scoring based on peer group IQR cost deviation and timeline lags.
                   </p>
                 </div>
               </div>
 
-              <div className="bg-white/95 backdrop-blur-sm rounded-xl p-5 shadow-sm border border-slate-200/80 flex items-start gap-4 hover:shadow-md transition">
-                <div className="w-10 h-10 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 shrink-0 shadow-xs">
+              <div className="bg-white/95 backdrop-blur-sm rounded-xl p-5 shadow-sm border border-slate-200/80 border-l-4 border-l-emerald-600 flex items-start gap-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+                <div className="w-10 h-10 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 shrink-0 shadow-xs group-hover:scale-110 transition-transform">
                   <Camera className="w-5 h-5" />
                 </div>
-                <div className="space-y-0.5">
-                  <h3 className="text-sm font-bold text-slate-900">Geo-Camera Verification</h3>
+                <div className="space-y-1">
+                  <h3 className="text-sm font-bold text-slate-900 group-hover:text-emerald-700 transition">Geo-Camera Verification</h3>
                   <p className="text-xs text-slate-600 leading-relaxed">
                     On-site photo evidence locked with GPS coordinates and SHA-256 digital hashes.
                   </p>
                 </div>
               </div>
 
-              <div className="bg-white/95 backdrop-blur-sm rounded-xl p-5 shadow-sm border border-slate-200/80 flex items-start gap-4 hover:shadow-md transition">
-                <div className="w-10 h-10 rounded-lg bg-slate-100 border border-slate-300 flex items-center justify-center text-slate-800 shrink-0 shadow-xs">
+              <div className="bg-white/95 backdrop-blur-sm rounded-xl p-5 shadow-sm border border-slate-200/80 border-l-4 border-l-slate-800 flex items-start gap-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+                <div className="w-10 h-10 rounded-lg bg-slate-100 border border-slate-300 flex items-center justify-center text-slate-800 shrink-0 shadow-xs group-hover:scale-110 transition-transform">
                   <FileCheck2 className="w-5 h-5" />
                 </div>
-                <div className="space-y-0.5">
-                  <h3 className="text-sm font-bold text-slate-900">Statutory PDF Dossier</h3>
+                <div className="space-y-1">
+                  <h3 className="text-sm font-bold text-slate-900 group-hover:text-slate-900 transition">Statutory PDF Dossier</h3>
                   <p className="text-xs text-slate-600 leading-relaxed">
                     1-click court-ready audit reports with full officer audit trails and comparative graphs.
                   </p>
@@ -350,9 +384,9 @@ export default function LandingHomePage() {
           </section>
 
 
-          {/* C. FOUR BOLD METRIC STATS */}
+          {/* C. FOUR BOLD METRIC STATS BANNER */}
           <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div className="bg-white/95 backdrop-blur-sm rounded-xl p-6 sm:p-8 border border-slate-200/80 shadow-sm grid grid-cols-2 lg:grid-cols-4 gap-6 text-center divide-y lg:divide-y-0 lg:divide-x divide-slate-100">
+            <div className="bg-white/95 backdrop-blur-sm rounded-xl p-6 sm:p-8 border border-slate-200/80 shadow-sm grid grid-cols-2 lg:grid-cols-4 gap-6 text-center divide-y lg:divide-y-0 lg:divide-x divide-slate-100 hover:shadow-md transition">
               
               <div className="space-y-1">
                 <div className="text-2xl sm:text-3xl font-extrabold font-mono text-slate-900">
@@ -394,7 +428,7 @@ export default function LandingHomePage() {
           </section>
 
 
-          {/* D. SIX ANALYTICAL ENGINES GRID */}
+          {/* D. SIX ANALYTICAL ENGINES GRID (INTERACTIVE DEPTH & FLIP/LIFT CARDS) */}
           <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-6">
             
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200/80 pb-3">
@@ -422,18 +456,24 @@ export default function LandingHomePage() {
                 return (
                   <div
                     key={idx}
-                    className="bg-white/95 backdrop-blur-sm rounded-xl p-5 border border-slate-200/80 hover:border-slate-300 shadow-xs flex flex-col justify-between space-y-4 transition"
+                    className="bg-white/95 backdrop-blur-sm rounded-xl p-5 border border-slate-200/80 hover:border-blue-400 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between space-y-4 group relative overflow-hidden"
                   >
                     <div className="space-y-2.5">
-                      <div className={'w-9 h-9 rounded-lg ' + item.color + ' flex items-center justify-center'}>
-                        <Icon className="w-4.5 h-4.5" />
+                      
+                      <div className="flex items-center justify-between">
+                        <div className={'w-10 h-10 rounded-lg bg-gradient-to-br ' + item.accent + ' flex items-center justify-center text-white shadow-xs group-hover:scale-110 transition-transform'}>
+                          <Icon className="w-5 h-5" />
+                        </div>
+                        <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">
+                          {item.stat}
+                        </span>
                       </div>
 
                       <div>
                         <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider">
                           {item.tag}
                         </span>
-                        <h3 className="text-sm font-bold text-slate-900 mt-0.5">
+                        <h3 className="text-sm font-bold text-slate-900 mt-0.5 group-hover:text-blue-700 transition">
                           {item.title}
                         </h3>
                       </div>
@@ -445,9 +485,9 @@ export default function LandingHomePage() {
 
                     <Link
                       to={item.link}
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-blue-700 hover:text-blue-900 pt-2.5 border-t border-slate-100"
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-blue-700 hover:text-blue-900 pt-2.5 border-t border-slate-100 group-hover:translate-x-1 transition-transform"
                     >
-                      <span>Explore Module</span>
+                      <span>Explore Engine</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                   </div>
@@ -483,7 +523,7 @@ export default function LandingHomePage() {
               </Link>
             </div>
 
-            <div className="bg-white/95 backdrop-blur-sm rounded-xl border border-slate-200/80 overflow-hidden shadow-xs">
+            <div className="bg-white/95 backdrop-blur-sm rounded-xl border border-slate-200/80 overflow-hidden shadow-xs hover:shadow-md transition">
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs">
                   <thead className="bg-slate-50 text-slate-600 font-semibold uppercase tracking-wider text-[11px] border-b border-slate-200/80">
@@ -504,9 +544,9 @@ export default function LandingHomePage() {
                       const reason = work.primaryReason || (work.riskSignals && work.riskSignals[0] ? work.riskSignals[0].split(':')[0] : 'Peer Cost Outlier (+53.8%)');
 
                       return (
-                        <tr key={work.workId} className="hover:bg-slate-50/80 transition">
+                        <tr key={work.workId} className="hover:bg-slate-50/90 transition group">
                           <td className="py-3 px-4 whitespace-nowrap">
-                            <span className="px-2.5 py-0.5 rounded font-mono font-bold text-xs bg-red-50 text-red-700 border border-red-200">
+                            <span className="px-2.5 py-0.5 rounded font-mono font-bold text-xs bg-red-50 text-red-700 border border-red-200 group-hover:bg-red-600 group-hover:text-white transition">
                               {score} / 100
                             </span>
                           </td>
@@ -530,7 +570,7 @@ export default function LandingHomePage() {
                           <td className="py-3 px-4 text-right whitespace-nowrap">
                             <Link
                               to={'/passport/' + work.workId}
-                              className="inline-flex items-center gap-1 px-3 py-1.5 rounded bg-slate-100 hover:bg-slate-900 hover:text-white text-slate-800 font-semibold text-xs transition border border-slate-300"
+                              className="inline-flex items-center gap-1 px-3 py-1.5 rounded bg-slate-100 hover:bg-slate-900 hover:text-white text-slate-800 font-semibold text-xs transition border border-slate-300 shadow-xs"
                             >
                               <span>Inspect</span>
                               <ArrowRight className="w-3 h-3" />
@@ -565,7 +605,7 @@ export default function LandingHomePage() {
                 return (
                   <div
                     key={idx}
-                    className="rounded-lg border border-slate-200/80 bg-white/95 backdrop-blur-sm overflow-hidden shadow-xs"
+                    className="rounded-lg border border-slate-200/80 bg-white/95 backdrop-blur-sm overflow-hidden shadow-xs hover:border-slate-300 transition"
                   >
                     <button
                       onClick={() => setOpenFaq(isOpen ? -1 : idx)}
