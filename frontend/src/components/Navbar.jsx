@@ -35,55 +35,58 @@ export default function Navbar({ activeDataMode = 'PUBLIC DATA', onAnalysisRun }
         <div className="flex items-center justify-between h-16">
           
           {/* Logo & Ministry Branding */}
-          <Link to="/" className="flex items-center gap-3.5 group">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-700 to-indigo-900 border border-blue-500/30 flex items-center justify-center shadow-xs">
+          <Link to="/" className="flex items-center gap-3 group shrink-0">
+            <div className="w-9 h-9 rounded-lg bg-blue-700 flex items-center justify-center shadow-xs">
               <ShieldCheck className="w-5 h-5 text-white" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-extrabold text-sm tracking-wide text-white">
+                <span className="font-black text-base tracking-wide text-white">
                   MPLADS RAKSHAK
                 </span>
-                <span className="text-[10px] font-bold uppercase tracking-wider bg-blue-900/60 text-blue-200 border border-blue-700/60 px-2 py-0.5 rounded">
-                  ANALYTICAL ENGINE
-                </span>
               </div>
-              <p className="text-[10px] text-slate-400 font-medium">
-                National Risk &amp; Anomaly Prioritisation Platform • MoSPI
+              <p className="text-[10px] text-slate-300 font-medium">
+                सांसद स्थानीय क्षेत्र विकास योजना • MoSPI
               </p>
             </div>
           </Link>
 
-          {/* Center Navigation Links (Official Gov Portal Style) */}
-          <nav className="hidden lg:flex items-center gap-1.5 bg-slate-950/40 p-1 rounded-xl border border-slate-800/80">
+          {/* Center Navigation Links (Clean Indian Gov Style) */}
+          <nav className="hidden md:flex items-center gap-1">
             <Link
               to="/"
-              className="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition"
+              className="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-200 hover:text-white hover:bg-slate-800 transition"
             >
-              Home
+              मुख्य पृष्ठ (Home)
             </Link>
             <Link
               to="/dashboard"
-              className="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition"
+              className="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-300 hover:text-white hover:bg-slate-800 transition"
             >
-              Dashboard
+              डैशबोर्ड (Dashboard)
             </Link>
             <Link
               to="/queue"
-              className="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition"
+              className="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-300 hover:text-white hover:bg-slate-800 transition"
             >
-              Scrutiny Queue
+              स्क्रूटनी (Risk Queue)
             </Link>
             <Link
-              to="/works"
-              className="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition"
+              to="/map"
+              className="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-300 hover:text-white hover:bg-slate-800 transition"
             >
-              All Works
+              मानचित्र (Map)
+            </Link>
+            <Link
+              to="/works/MPL-2024-UP-004821/capture-evidence"
+              className="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-300 hover:text-white hover:bg-slate-800 transition"
+            >
+              फील्ड कैमरा (Camera)
             </Link>
           </nav>
 
           {/* Right Action Items */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
             
             {/* Active Data Mode Badge */}
             <DataModeBadge mode={activeDataMode} />
@@ -92,30 +95,30 @@ export default function Navbar({ activeDataMode = 'PUBLIC DATA', onAnalysisRun }
             <button
               onClick={handleTriggerAnalysis}
               disabled={runningAnalysis}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-medium transition disabled:opacity-50"
-              title="Re-execute unsupervised anomaly engine across all ingested records"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-blue-700 hover:bg-blue-600 text-white text-xs font-bold transition disabled:opacity-50 shadow-xs"
+              title="Run unsupervised anomaly engine"
             >
-              <RefreshCw className={`w-3.5 h-3.5 text-blue-400 ${runningAnalysis ? 'animate-spin' : ''}`} />
-              <span className="hidden sm:inline">
-                {runningAnalysis ? 'Executing Cycle...' : 'Run Analytical Cycle'}
+              <RefreshCw className={`w-3 h-3 ${runningAnalysis ? 'animate-spin' : ''}`} />
+              <span className="hidden xl:inline">
+                {runningAnalysis ? 'विश्लेषण जारी...' : 'Run Analysis'}
               </span>
             </button>
 
             {/* User Profile / Logout */}
             <div className="flex items-center gap-2 pl-2 border-l border-slate-700">
-              <div className="text-right hidden md:block">
-                <div className="text-xs font-semibold text-slate-200 leading-tight">
+              <div className="text-right hidden sm:block">
+                <div className="text-xs font-bold text-slate-200 leading-tight">
                   {user?.fullName || 'District Planning Officer'}
                 </div>
                 <div className="text-[10px] text-slate-400 font-mono">
-                  {user?.role ? user.role.replace('ROLE_', '') : 'DISTRICT_OFFICER'}
+                  {user?.role ? user.role.replace('ROLE_', '') : 'Varanasi, UP'}
                 </div>
               </div>
 
               <button
                 onClick={handleLogout}
                 className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition"
-                title="Sign out of administrative session"
+                title="Sign out"
               >
                 <LogOut className="w-4 h-4" />
               </button>
