@@ -18,6 +18,7 @@ import WorksPage from './pages/WorksPage';
 import CameraCapturePage from './pages/CameraCapturePage';
 import DemoTourModal from './components/DemoTourModal';
 import { ToastProvider } from './context/ToastContext';
+import { ThemeProvider } from './context/ThemeContext';
 import { api } from './services/api';
 import { Compass } from 'lucide-react';
 
@@ -42,14 +43,14 @@ function MainLayout() {
   }, [refreshKey]);
 
   return (
-    <div className="h-screen bg-slate-100 flex flex-col font-sans overflow-hidden">
+    <div className="h-screen bg-slate-100 dark:bg-obsidian-900 text-slate-900 dark:text-slate-100 flex flex-col font-sans overflow-hidden transition-colors duration-200">
       <Navbar 
         activeDataMode={activeDataMode} 
         onAnalysisRun={() => setRefreshKey(k => k + 1)}
       />
       <div className="flex-1 flex overflow-hidden">
         <Sidebar />
-        <main className="flex-1 overflow-y-auto bg-slate-100 p-4 md:p-6 lg:p-8 relative">
+        <main className="flex-1 overflow-y-auto bg-slate-100 dark:bg-obsidian-900 p-4 md:p-6 lg:p-8 relative transition-colors duration-200">
           <Routes>
             <Route path="/" element={<LandingHomePage key={refreshKey} />} />
             <Route path="/dashboard" element={<Dashboard key={refreshKey} />} />
@@ -70,7 +71,7 @@ function MainLayout() {
           {/* Floating Operational Guide Trigger */}
           <button
             onClick={() => setIsTourOpen(true)}
-            className="fixed bottom-6 left-68 z-30 hidden lg:flex items-center gap-2 px-3.5 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-200 font-semibold text-xs shadow-md transition border border-slate-700"
+            className="fixed bottom-6 left-68 z-30 hidden lg:flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 text-slate-200 font-semibold text-xs shadow-md transition border border-slate-700 no-print"
           >
             <Compass className="w-4 h-4 text-blue-400" />
             <span>Workflow Walkthrough</span>
@@ -88,13 +89,15 @@ function MainLayout() {
 
 export default function App() {
   return (
-    <ToastProvider>
-      <Router>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/*" element={<MainLayout />} />
-        </Routes>
-      </Router>
-    </ToastProvider>
+    <ThemeProvider>
+      <ToastProvider>
+        <Router>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/*" element={<MainLayout />} />
+          </Routes>
+        </Router>
+      </ToastProvider>
+    </ThemeProvider>
   );
 }
