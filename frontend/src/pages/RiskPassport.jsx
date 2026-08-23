@@ -183,6 +183,15 @@ export default function RiskPassport() {
         </Link>
 
         <div className="flex items-center gap-2 text-xs">
+          <button
+            onClick={() => window.print()}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs shadow-xs transition no-print"
+            title="Export clean court-ready statutory PDF dossier"
+          >
+            <Printer className="w-3.5 h-3.5" />
+            <span>Export Statutory PDF Dossier</span>
+          </button>
+
           <span className="text-slate-400">Work ID:</span>
           <span className="font-mono font-bold text-slate-900 bg-white px-2.5 py-1 rounded-lg border border-slate-200 shadow-xs">
             {work.workId}

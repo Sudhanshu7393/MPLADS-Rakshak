@@ -15,7 +15,12 @@ import {
   Compass, 
   Search, 
   Check, 
-  ChevronRight
+  ChevronRight,
+  ExternalLink,
+  Lock,
+  FileCheck2,
+  Sliders,
+  Printer
 } from 'lucide-react';
 import { api } from '../services/api';
 import { formatINR } from '../utils/formatters';
@@ -62,40 +67,40 @@ export default function LandingHomePage() {
       tag: 'STEP 01',
       title: 'Data Ingestion & Quality Audit',
       subtitle: 'Dynamic Schema Mapping & Validation',
-      desc: 'Connects to e-SAKSHI public portal and CSV streams. Automatically normalizes columns, flags incomplete records, and scores data health (99.2% schema readiness).',
+      desc: 'Connects directly to e-SAKSHI data feeds and CSV extracts. Automatically normalizes administrative fields, flags incomplete records, and verifies data health with 99.2% schema conformance.',
       icon: Database,
       link: '/data',
       btnText: 'Open Ingestion Gateway',
-      badge: 'e-SAKSHI Stream'
+      badge: 'e-SAKSHI Feed'
     },
     {
       num: 2,
       tag: 'STEP 02',
-      title: 'AI Multi-Signal Scoring Engine',
-      subtitle: 'Unsupervised Anomaly Calibration',
-      desc: 'Executes 6 calibrated analytical models: Peer Group Cost IQR Outliers, Timeline Delay Lag, TF-IDF Duplicate Scope Matcher, Haversine Distance Clustering (<500m), and Agency Monopoly.',
+      title: 'Multi-Signal Analytical Risk Engine',
+      subtitle: 'Calibrated Anomaly Detection',
+      desc: 'Executes 6 calibrated statistical models: Peer Group Cost Interquartile Outliers, Milestone Timeline Delays, TF-IDF Text Proximity, Haversine Distance Clustering (<500m), and Agency Monopoly indices.',
       icon: Cpu,
       link: '/settings',
-      btnText: 'Calibrate AI Weights',
+      btnText: 'Review Model Parameters',
       badge: '6 Risk Engines'
     },
     {
       num: 3,
       tag: 'STEP 03',
       title: 'Prioritised Scrutiny Queue',
-      subtitle: 'Risk-Ranked Triage for Officers',
-      desc: 'Sorts thousands of proposals into high, medium, and low risk bands. Officers can filter by Lok Sabha / Rajya Sabha constituency, district, risk signals, and cost brackets.',
+      subtitle: 'Risk-Ranked Administrative Triage',
+      desc: 'Ranks thousands of sanctioned works into High, Medium, and Low risk bands. District Officers can filter by parliamentary constituency, block, village, cost brackets, and anomaly signals.',
       icon: AlertOctagon,
       link: '/queue',
-      btnText: 'Explore Scrutiny Queue',
-      badge: highRisk + ' Flags (Score >= 70)'
+      btnText: 'Open Scrutiny Queue',
+      badge: '294 High-Risk Flags'
     },
     {
       num: 4,
       tag: 'STEP 04',
       title: '360° Forensic Risk Passport',
-      subtitle: '6-Tab Comprehensive Case Dossier',
-      desc: 'Deep-dives into flagged proposals (e.g. Varanasi CC Road #004821): Peer cost medians (+53.8%), milestone delay tracking, nearby duplicate work maps, and missing completion certificates.',
+      subtitle: 'Comprehensive Case Dossier',
+      desc: 'Deep-dives into individual works (e.g. Varanasi CC Road #MPL-2024-UP-004821): Peer cost medians (+53.8%), milestone timeline delay tracking, duplicate work maps, and missing completion certificates.',
       icon: FileText,
       link: '/passport/MPL-2024-UP-004821',
       btnText: 'Inspect Varanasi Dossier',
@@ -110,18 +115,18 @@ export default function LandingHomePage() {
       icon: Camera,
       link: '/works/MPL-2024-UP-004821/capture-evidence',
       btnText: 'Launch Field Geo-Camera',
-      badge: 'Tamper-Evident SHA-256'
+      badge: 'SHA-256 Hash'
     },
     {
       num: 6,
       tag: 'STEP 06',
-      title: 'Officer Action & Audit Ledger',
-      subtitle: 'Immutable Trail & PDF Export',
-      desc: 'District Planning Officers review forensic evidence, issue inspection notices, approve genuine proposals, and export court-ready statutory PDF reports with immutable cryptographic audit logging.',
+      title: 'Officer Determination & Audit Ledger',
+      subtitle: 'Cryptographic Immutable Trail',
+      desc: 'District Planning Officers record determinations, order field inspections, approve genuine proposals, and export court-ready statutory PDF reports with immutable cryptographic audit logging.',
       icon: ShieldCheck,
       link: '/audit',
-      btnText: 'View Officer Audit Trail',
-      badge: 'Append-Only Audit'
+      btnText: 'View Statutory Audit Trail',
+      badge: 'Append-Only Ledger'
     }
   ];
 
@@ -130,114 +135,110 @@ export default function LandingHomePage() {
   const roles = [
     {
       role: 'District Planning Officer (DPO)',
-      jurisdiction: 'Varanasi District HQ',
+      jurisdiction: 'Varanasi District Administration',
       desc: 'Authorized to triage high-risk flags, review peer cost benchmarks, order on-site inspections, and sanction genuine works.',
       link: '/queue',
       badge: 'DPO Triage Portal',
-      badgeColor: 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300'
+      badgeColor: 'bg-blue-100 text-blue-900 border-blue-200'
     },
     {
       role: 'Field Verification Surveyor',
-      jurisdiction: 'Rural Roads & Infrastructure',
+      jurisdiction: 'Rural Infrastructure Wings',
       desc: 'Equipped with mobile camera to capture GPS-locked physical progress evidence and milestone completion proof.',
       link: '/works/MPL-2024-UP-004821/capture-evidence',
       badge: 'Mobile Field App',
-      badgeColor: 'bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300'
+      badgeColor: 'bg-indigo-100 text-indigo-900 border-indigo-200'
     },
     {
       role: 'State Nodal Officer',
-      jurisdiction: 'Uttar Pradesh State Level',
+      jurisdiction: 'State Planning Department',
       desc: 'Monitors cross-district fund distribution, agency monopoly concentrations, and parliamentary constituency utilization.',
       link: '/dashboard',
       badge: 'State Oversight',
-      badgeColor: 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300'
+      badgeColor: 'bg-amber-100 text-amber-900 border-amber-200'
     },
     {
       role: 'Statutory Auditor (CAG / MoSPI)',
-      jurisdiction: 'National Level Audit',
+      jurisdiction: 'National Audit & Oversight',
       desc: 'Reviews cryptographic officer audit logs, system risk calibration parameters, and exports court-ready forensic reports.',
       link: '/reports',
       badge: 'Auditor Console',
-      badgeColor: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300'
+      badgeColor: 'bg-emerald-100 text-emerald-900 border-emerald-200'
     }
   ];
 
   return (
-    <div className="max-w-7xl mx-auto space-y-10 font-sans">
+    <div className="max-w-7xl mx-auto space-y-8 font-sans pb-12">
       
-      {/* 1. HERO SECTION & QUICK DISCOVERY */}
-      <section className="relative overflow-hidden rounded-3xl bg-white dark:bg-obsidian-850 p-6 sm:p-10 border border-slate-200 dark:border-slate-800/80 shadow-xs space-y-6">
+      {/* 1. OFFICIAL GOVERNMENT HERO SECTION */}
+      <section className="bg-white rounded-2xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6">
         
-        {/* Ambient Top Glow */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 dark:bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-emerald-500/10 dark:bg-emerald-600/10 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="relative z-10 space-y-4">
+        <div className="space-y-4">
           
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-500/15 border border-blue-200 dark:border-blue-400/30 text-blue-700 dark:text-blue-300 text-xs font-bold uppercase tracking-wider">
-            <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-            <span>Ministry of Statistics &amp; Programme Implementation • MoSPI (SIH26102)</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-blue-50 border border-blue-200 text-blue-900 text-xs font-bold uppercase tracking-wide">
+            <ShieldCheck className="w-4 h-4 text-blue-700" />
+            <span>Ministry of Statistics &amp; Programme Implementation (MoSPI) • Government of India</span>
           </div>
 
           <div className="space-y-2 max-w-4xl">
-            <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-tight">
-              Explainable AI Risk &amp; Anomaly Intelligence for <span className="gradient-text">e-SAKSHI (MPLADS)</span>
+            <h1 className="text-2xl sm:text-4xl font-extrabold text-[#0B2545] tracking-tight leading-tight">
+              Explainable AI Risk &amp; Anomaly Intelligence for <span className="text-blue-700">e-SAKSHI (MPLADS)</span>
             </h1>
-            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-3xl leading-relaxed">
-              Empowering District Planning Officers to automatically detect peer cost outliers, chronic execution delays, duplicate proposals, and capture tamper-evident geo-verified completion evidence.
+            <p className="text-sm sm:text-base text-slate-600 max-w-3xl leading-relaxed">
+              Administrative Decision Support Layer for District Planning Officers to detect peer cost outliers, execution delays, duplicate proposals, and capture tamper-evident geo-verified completion evidence.
             </p>
           </div>
 
-          {/* Quick Universal Search & Action Bar */}
+          {/* Quick Universal Search Bar */}
           <form onSubmit={handleSearch} className="max-w-2xl pt-2">
             <div className="relative flex items-center">
-              <Search className="w-5 h-5 text-slate-400 dark:text-slate-500 absolute left-4" />
+              <Search className="w-4 h-4 text-slate-400 absolute left-4" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search Constituency, District, or Work (e.g. Varanasi, CC Road, Rampur)..."
-                className="w-full bg-slate-50 dark:bg-obsidian-950 text-slate-900 dark:text-white rounded-2xl pl-12 pr-28 py-3.5 text-xs sm:text-sm placeholder-slate-400 dark:placeholder-slate-500 border border-slate-200 dark:border-slate-700/80 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-xs"
+                className="w-full bg-slate-50 text-slate-900 rounded-xl pl-11 pr-28 py-3 text-xs sm:text-sm placeholder-slate-400 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition"
               />
               <button
                 type="submit"
-                className="absolute right-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition shadow-xs"
+                className="absolute right-1.5 px-4 py-2 bg-[#0B2545] hover:bg-[#133B5C] text-white text-xs font-bold rounded-lg transition shadow-xs"
               >
                 Search
               </button>
             </div>
           </form>
 
-          {/* Quick Filter Pills */}
-          <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-slate-500 dark:text-slate-400">
-            <span className="font-semibold text-slate-700 dark:text-slate-300">Popular:</span>
+          {/* Quick Filter Badges */}
+          <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-slate-500">
+            <span className="font-semibold text-slate-700">Quick Filters:</span>
             <button 
               type="button"
               onClick={() => setFilterAndSearch('Cost Outlier')}
-              className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition text-[11px] font-medium border border-slate-200 dark:border-slate-700"
+              className="px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 transition text-[11px] font-medium border border-slate-200"
             >
-              ⚡ +53.8% Cost Outliers
+              Cost Outlier (+53.8%)
             </button>
             <button 
               type="button"
               onClick={() => setFilterAndSearch('Execution Delay')}
-              className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition text-[11px] font-medium border border-slate-200 dark:border-slate-700"
+              className="px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 transition text-[11px] font-medium border border-slate-200"
             >
-              ⏱️ Delay &gt; 180 Days
+              Delay &gt; 180 Days
             </button>
             <button 
               type="button"
               onClick={() => setFilterAndSearch('Varanasi')}
-              className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition text-[11px] font-medium border border-slate-200 dark:border-slate-700"
+              className="px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 transition text-[11px] font-medium border border-slate-200"
             >
-              📍 Varanasi CC Road
+              Varanasi CC Road
             </button>
             <button 
               type="button"
               onClick={() => setFilterAndSearch('Duplicate')}
-              className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition text-[11px] font-medium border border-slate-200 dark:border-slate-700"
+              className="px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 transition text-[11px] font-medium border border-slate-200"
             >
-              🔄 Nearby Duplicates (&lt;500m)
+              Nearby Duplicates (&lt;500m)
             </button>
           </div>
 
@@ -245,161 +246,153 @@ export default function LandingHomePage() {
           <div className="flex flex-wrap items-center gap-3 pt-3">
             <Link
               to="/queue"
-              className="px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-xs hover:shadow-md transition flex items-center gap-2 transform active:scale-95"
+              className="px-5 py-2.5 rounded-lg bg-[#0B2545] hover:bg-[#133B5C] text-white font-bold text-xs sm:text-sm shadow-xs transition flex items-center gap-2"
             >
-              <AlertOctagon className="w-4 h-4" />
-              <span>Prioritised Scrutiny Queue ({highRisk} Flags)</span>
+              <AlertOctagon className="w-4 h-4 text-red-400" />
+              <span>Prioritised Scrutiny Queue (294 Flags)</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
 
             <Link
               to="/works/MPL-2024-UP-004821/capture-evidence"
-              className="px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm shadow-xs hover:shadow-md transition flex items-center gap-2 transform active:scale-95"
+              className="px-5 py-2.5 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs sm:text-sm shadow-xs transition flex items-center gap-2"
             >
               <Camera className="w-4 h-4" />
-              <span>Launch Geo-Camera Evidence</span>
+              <span>Launch Field Geo-Camera</span>
             </Link>
 
             <Link
               to="/dashboard"
-              className="px-5 py-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-bold text-xs sm:text-sm border border-slate-200 dark:border-slate-700 transition flex items-center gap-2"
+              className="px-5 py-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs sm:text-sm border border-slate-300 transition flex items-center gap-2"
             >
-              <TrendingUp className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              <TrendingUp className="w-4 h-4 text-blue-700" />
               <span>Executive Dashboard</span>
             </Link>
           </div>
 
         </div>
 
-        {/* 4 Live Platform Metric Cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 pt-6 border-t border-slate-100 dark:border-slate-800/80">
-          <div className="p-4 rounded-2xl bg-slate-50 dark:bg-obsidian-950 border border-slate-200 dark:border-slate-800/80 transition transform hover:-translate-y-0.5 hover:shadow-xs">
+        {/* 4 Official Metric Cards */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 pt-6 border-t border-slate-200">
+          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Sanctioned Value</span>
-              <Coins className="w-4 h-4 text-amber-500" />
+              <span className="text-[11px] font-bold text-slate-600 uppercase tracking-wider">Sanctioned Value</span>
+              <Coins className="w-4 h-4 text-slate-600" />
             </div>
-            <div className="text-xl sm:text-2xl font-black font-mono text-slate-900 dark:text-amber-300 mt-1">
+            <div className="text-xl sm:text-2xl font-black font-mono text-[#0B2545] mt-1">
               {formatINR(totalCost)}
             </div>
-            <span className="text-[10px] text-slate-500 dark:text-slate-400">Across 8 Districts</span>
+            <span className="text-[10px] text-slate-500">Across 8 Districts</span>
           </div>
 
-          <div className="p-4 rounded-2xl bg-slate-50 dark:bg-obsidian-950 border border-slate-200 dark:border-slate-800/80 transition transform hover:-translate-y-0.5 hover:shadow-xs">
+          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Works</span>
-              <Building2 className="w-4 h-4 text-blue-500" />
+              <span className="text-[11px] font-bold text-slate-600 uppercase tracking-wider">Total Works</span>
+              <Building2 className="w-4 h-4 text-blue-700" />
             </div>
-            <div className="text-xl sm:text-2xl font-black font-mono text-slate-900 dark:text-white mt-1">
+            <div className="text-xl sm:text-2xl font-black font-mono text-slate-900 mt-1">
               {totalWorks.toLocaleString('en-IN')}
             </div>
-            <span className="text-[10px] text-slate-500 dark:text-slate-400">eSAKSHI Sanctions</span>
+            <span className="text-[10px] text-slate-500">e-SAKSHI Records</span>
           </div>
 
-          <div className="p-4 rounded-2xl bg-red-50/60 dark:bg-red-950/20 border border-red-200 dark:border-red-900/40 transition transform hover:-translate-y-0.5 hover:shadow-xs">
+          <div className="p-4 rounded-xl bg-red-50 border border-red-200">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold text-red-700 dark:text-red-400 uppercase tracking-wider">High Risk Flags</span>
-              <AlertOctagon className="w-4 h-4 text-red-600 dark:text-red-400" />
+              <span className="text-[11px] font-bold text-red-800 uppercase tracking-wider">High Risk Flags</span>
+              <AlertOctagon className="w-4 h-4 text-red-700" />
             </div>
-            <div className="text-xl sm:text-2xl font-black font-mono text-red-600 dark:text-red-400 mt-1">
+            <div className="text-xl sm:text-2xl font-black font-mono text-red-700 mt-1">
               {highRisk}
             </div>
-            <span className="text-[10px] text-red-700/80 dark:text-red-400/80">Score &ge; 70 Triage</span>
+            <span className="text-[10px] text-red-800">Score &ge; 70 Triage</span>
           </div>
 
-          <div className="p-4 rounded-2xl bg-emerald-50/60 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900/40 transition transform hover:-translate-y-0.5 hover:shadow-xs">
+          <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider">Explainable AI</span>
-              <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+              <span className="text-[11px] font-bold text-emerald-800 uppercase tracking-wider">Explainable AI</span>
+              <CheckCircle2 className="w-4 h-4 text-emerald-700" />
             </div>
-            <div className="text-xl sm:text-2xl font-black font-mono text-emerald-600 dark:text-emerald-400 mt-1">
+            <div className="text-xl sm:text-2xl font-black font-mono text-emerald-800 mt-1">
               100%
             </div>
-            <span className="text-[10px] text-emerald-700/80 dark:text-emerald-400/80">Zero Black-Box</span>
+            <span className="text-[10px] text-emerald-800">Deterministic Rules</span>
           </div>
         </div>
 
       </section>
 
 
-      {/* 2. LIVE INFINITE MARQUEE TICKER */}
-      <section className="marquee-container overflow-hidden rounded-2xl bg-slate-900 text-slate-200 py-3 border border-slate-800 shadow-xs no-print">
+      {/* 2. OFFICIAL MARQUEE TICKER */}
+      <section className="marquee-container overflow-hidden rounded-xl bg-[#0B2545] text-slate-100 py-2.5 border border-[#133B5C] shadow-xs no-print">
         <div className="flex whitespace-nowrap marquee-content animate-marquee">
           <div className="flex items-center gap-8 text-xs font-semibold px-4">
-            <span className="flex items-center gap-2 text-emerald-400">
+            <span className="flex items-center gap-2 text-emerald-300">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              LIVE DATA STREAM: 3,013 e-SAKSHI Sanctions Synced
+              LIVE DATA: 3,013 e-SAKSHI Sanctions Synced
             </span>
-            <span className="text-slate-600">|</span>
-            <span className="flex items-center gap-1.5 text-amber-300">
-              ⚡ PEER COST ANOMALY: IQR Multi-District Baselines Active
+            <span className="text-slate-500">|</span>
+            <span className="flex items-center gap-1.5 text-amber-200">
+              PEER COST ANOMALY: IQR Multi-District Baselines Active
             </span>
-            <span className="text-slate-600">|</span>
-            <span className="flex items-center gap-1.5 text-purple-300">
-              📍 FIELD GEO-CAMERA: SHA-256 Tamper-Proof Geotag Lock Ready
+            <span className="text-slate-500">|</span>
+            <span className="flex items-center gap-1.5 text-blue-200">
+              FIELD EVIDENCE: SHA-256 Tamper-Proof Geotag Lock Ready
             </span>
-            <span className="text-slate-600">|</span>
-            <span className="flex items-center gap-1.5 text-blue-300">
-              🏛️ PARLIAMENTARY AUDIT: Lok Sabha (543) &amp; Rajya Sabha (245) Monitored
+            <span className="text-slate-500">|</span>
+            <span className="flex items-center gap-1.5 text-slate-200">
+              PARLIAMENTARY AUDIT: Lok Sabha (543) &amp; Rajya Sabha (245) Monitored
             </span>
-            <span className="text-slate-600">|</span>
-            <span className="flex items-center gap-1.5 text-rose-300">
-              🚨 TRIAGE QUEUE: 294 High-Risk Flags Prioritised for DPO Scrutiny
-            </span>
-            <span className="text-slate-600">|</span>
-            <span className="flex items-center gap-1.5 text-teal-300">
-              🛡️ STATUTORY EVIDENCE: Append-Only Immutable Audit Ledger
+            <span className="text-slate-500">|</span>
+            <span className="flex items-center gap-1.5 text-red-200">
+              TRIAGE QUEUE: 294 High-Risk Flags Prioritised for DPO Scrutiny
             </span>
           </div>
 
           <div className="flex items-center gap-8 text-xs font-semibold px-4">
-            <span className="flex items-center gap-2 text-emerald-400">
+            <span className="flex items-center gap-2 text-emerald-300">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              LIVE DATA STREAM: 3,013 e-SAKSHI Sanctions Synced
+              LIVE DATA: 3,013 e-SAKSHI Sanctions Synced
             </span>
-            <span className="text-slate-600">|</span>
-            <span className="flex items-center gap-1.5 text-amber-300">
-              ⚡ PEER COST ANOMALY: IQR Multi-District Baselines Active
+            <span className="text-slate-500">|</span>
+            <span className="flex items-center gap-1.5 text-amber-200">
+              PEER COST ANOMALY: IQR Multi-District Baselines Active
             </span>
-            <span className="text-slate-600">|</span>
-            <span className="flex items-center gap-1.5 text-purple-300">
-              📍 FIELD GEO-CAMERA: SHA-256 Tamper-Proof Geotag Lock Ready
+            <span className="text-slate-500">|</span>
+            <span className="flex items-center gap-1.5 text-blue-200">
+              FIELD EVIDENCE: SHA-256 Tamper-Proof Geotag Lock Ready
             </span>
-            <span className="text-slate-600">|</span>
-            <span className="flex items-center gap-1.5 text-blue-300">
-              🏛️ PARLIAMENTARY AUDIT: Lok Sabha (543) &amp; Rajya Sabha (245) Monitored
+            <span className="text-slate-500">|</span>
+            <span className="flex items-center gap-1.5 text-slate-200">
+              PARLIAMENTARY AUDIT: Lok Sabha (543) &amp; Rajya Sabha (245) Monitored
             </span>
-            <span className="text-slate-600">|</span>
-            <span className="flex items-center gap-1.5 text-rose-300">
-              🚨 TRIAGE QUEUE: 294 High-Risk Flags Prioritised for DPO Scrutiny
-            </span>
-            <span className="text-slate-600">|</span>
-            <span className="flex items-center gap-1.5 text-teal-300">
-              🛡️ STATUTORY EVIDENCE: Append-Only Immutable Audit Ledger
+            <span className="text-slate-500">|</span>
+            <span className="flex items-center gap-1.5 text-red-200">
+              TRIAGE QUEUE: 294 High-Risk Flags Prioritised for DPO Scrutiny
             </span>
           </div>
         </div>
       </section>
 
 
-      {/* 3. GUIDED STEP-BY-STEP INTERACTIVE WORKFLOW WIZARD */}
-      <section className="bg-white dark:bg-obsidian-850 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800/80 shadow-xs space-y-6">
+      {/* 3. 6-STEP INTERACTIVE WORKFLOW LIFECYCLE */}
+      <section className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
         
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-4">
           <div>
-            <div className="inline-flex items-center gap-2 text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
-              <Compass className="w-4 h-4" />
-              <span>Interactive Governance Wizard</span>
+            <div className="inline-flex items-center gap-2 text-xs font-bold text-blue-800 uppercase tracking-wider">
+              <Compass className="w-4 h-4 text-blue-700" />
+              <span>Operational Scrutiny Workflow</span>
             </div>
-            <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">
-              6-Step Operational Scrutiny Lifecycle
+            <h2 className="text-xl sm:text-2xl font-bold text-[#0B2545] tracking-tight">
+              6-Step Statutory Governance Lifecycle
             </h2>
           </div>
 
-          <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+          <div className="flex items-center gap-2 text-xs text-slate-600">
             <span>Step <strong>{activeStep}</strong> of 6</span>
-            <div className="w-32 h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+            <div className="w-32 h-2 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
               <div 
-                className="h-full bg-blue-600 dark:bg-blue-500 transition-all duration-300"
+                className="h-full bg-blue-700 transition-all duration-300"
                 style={{ width: ((activeStep / 6) * 100) + '%' }}
               />
             </div>
@@ -416,21 +409,21 @@ export default function LandingHomePage() {
                 key={step.num}
                 type="button"
                 onClick={() => setActiveStep(step.num)}
-                className={'p-3 rounded-2xl text-left border transition-all ' + (
+                className={'p-3 rounded-xl text-left border transition-all ' + (
                   isCurrent 
-                    ? 'bg-blue-50 dark:bg-blue-950/40 border-blue-500 dark:border-blue-400 shadow-xs ring-2 ring-blue-500/20' 
+                    ? 'bg-blue-50 border-blue-600 shadow-xs ring-1 ring-blue-600' 
                     : isPast
-                    ? 'bg-slate-50 dark:bg-obsidian-950 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300'
-                    : 'bg-white dark:bg-obsidian-900 border-slate-200 dark:border-slate-800/60 text-slate-400 hover:border-slate-300'
+                    ? 'bg-slate-50 border-slate-200 text-slate-700'
+                    : 'bg-white border-slate-200 text-slate-400 hover:border-slate-300'
                 )}
               >
                 <div className="flex items-center justify-between text-[10px] font-bold">
-                  <span className={isCurrent ? 'text-blue-600 dark:text-blue-400' : 'text-slate-400'}>
+                  <span className={isCurrent ? 'text-blue-800' : 'text-slate-500'}>
                     {step.tag}
                   </span>
-                  {isPast && <Check className="w-3.5 h-3.5 text-emerald-500" />}
+                  {isPast && <Check className="w-3.5 h-3.5 text-emerald-600" />}
                 </div>
-                <div className="text-xs font-bold text-slate-900 dark:text-slate-100 mt-1 line-clamp-1">
+                <div className="text-xs font-bold text-slate-900 mt-1 line-clamp-1">
                   {step.title.split(' ')[0]} {step.title.split(' ')[1]}
                 </div>
               </button>
@@ -439,24 +432,24 @@ export default function LandingHomePage() {
         </div>
 
         {/* Active Step Feature Box */}
-        <div className="p-6 sm:p-8 rounded-2xl bg-slate-50 dark:bg-obsidian-950 border border-slate-200 dark:border-slate-800 space-y-4">
+        <div className="p-6 sm:p-8 rounded-xl bg-slate-50 border border-slate-200 space-y-4">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             
             <div className="space-y-3 max-w-3xl">
               <div className="flex items-center gap-2">
-                <span className="px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 border border-blue-300 dark:border-blue-700/50">
+                <span className="px-2.5 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-blue-100 text-blue-900 border border-blue-300">
                   {currentStepData.tag} • {currentStepData.badge}
                 </span>
-                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
+                <span className="text-xs font-semibold text-slate-500">
                   {currentStepData.subtitle}
                 </span>
               </div>
 
-              <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
+              <h3 className="text-xl font-bold text-[#0B2545]">
                 {currentStepData.title}
               </h3>
 
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                 {currentStepData.desc}
               </p>
             </div>
@@ -464,7 +457,7 @@ export default function LandingHomePage() {
             <div className="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0">
               <Link
                 to={currentStepData.link}
-                className="px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-xs hover:shadow-md transition flex items-center justify-center gap-2 transform active:scale-95"
+                className="px-6 py-3 rounded-lg bg-[#0B2545] hover:bg-[#133B5C] text-white font-bold text-xs sm:text-sm shadow-xs transition flex items-center justify-center gap-2"
               >
                 <span>{currentStepData.btnText}</span>
                 <ArrowRight className="w-4 h-4" />
@@ -475,7 +468,7 @@ export default function LandingHomePage() {
                   type="button"
                   onClick={() => setActiveStep(prev => Math.max(1, prev - 1))}
                   disabled={activeStep === 1}
-                  className="px-3 py-2 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold disabled:opacity-30 transition"
+                  className="px-3 py-1.5 rounded bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-bold disabled:opacity-30 transition"
                 >
                   Previous
                 </button>
@@ -483,7 +476,7 @@ export default function LandingHomePage() {
                   type="button"
                   onClick={() => setActiveStep(prev => Math.min(6, prev + 1))}
                   disabled={activeStep === 6}
-                  className="px-3 py-2 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold disabled:opacity-30 transition"
+                  className="px-3 py-1.5 rounded bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-bold disabled:opacity-30 transition"
                 >
                   Next Step
                 </button>
@@ -496,41 +489,41 @@ export default function LandingHomePage() {
       </section>
 
 
-      {/* 4. CASE SPOTLIGHT CARD (Varanasi CC Road) */}
-      <section className="bg-white dark:bg-obsidian-850 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800/80 shadow-xs space-y-4">
+      {/* 4. CASE INQUEST SPOTLIGHT CARD (Varanasi CC Road) */}
+      <section className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           
           <div className="space-y-3 max-w-3xl">
             <div className="flex items-center gap-2">
-              <span className="px-3 py-1 rounded-full text-[10px] font-black bg-red-100 text-red-800 dark:bg-red-950/40 dark:text-red-300 border border-red-300 dark:border-red-800/60 font-mono">
+              <span className="px-2.5 py-0.5 rounded text-[10px] font-black bg-red-100 text-red-900 border border-red-300 font-mono">
                 CASE INQUEST SPOTLIGHT • #MPL-2024-UP-004821
               </span>
-              <span className="text-xs font-bold text-slate-500 dark:text-slate-400">
+              <span className="text-xs font-bold text-slate-600">
                 Varanasi, UP • Rural Roads &amp; Bridges
               </span>
             </div>
 
-            <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
+            <h3 className="text-base sm:text-lg font-bold text-[#0B2545]">
               Construction of CC Road and Paver Works from Main Chowk to Panchayat Bhawan, Village Rampur
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs pt-1">
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-obsidian-950 border border-red-200 dark:border-red-900/40">
-                <span className="text-red-600 dark:text-red-400 font-bold block text-[10px] uppercase">Cost Variance</span>
-                <span className="font-black text-slate-900 dark:text-white text-base">₹48.00 Lakh</span>
-                <span className="text-red-600 dark:text-red-400 text-[10px] block">+53.8% above peer median</span>
+              <div className="p-3 rounded-lg bg-slate-50 border border-red-200">
+                <span className="text-red-800 font-bold block text-[10px] uppercase">Cost Variance</span>
+                <span className="font-bold text-slate-900 text-base">₹48.00 Lakh</span>
+                <span className="text-red-700 text-[10px] block">+53.8% above peer median</span>
               </div>
 
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-obsidian-950 border border-amber-200 dark:border-amber-900/40">
-                <span className="text-amber-600 dark:text-amber-400 font-bold block text-[10px] uppercase">Duplicate Proximity</span>
-                <span className="font-black text-slate-900 dark:text-white text-base">420m Radius</span>
-                <span className="text-amber-600 dark:text-amber-400 text-[10px] block">Similar work (#004822)</span>
+              <div className="p-3 rounded-lg bg-slate-50 border border-amber-200">
+                <span className="text-amber-800 font-bold block text-[10px] uppercase">Duplicate Proximity</span>
+                <span className="font-bold text-slate-900 text-base">420m Radius</span>
+                <span className="text-amber-700 text-[10px] block">Similar work (#004822)</span>
               </div>
 
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-obsidian-950 border border-purple-200 dark:border-purple-900/40">
-                <span className="text-purple-600 dark:text-purple-400 font-bold block text-[10px] uppercase">Completion Proof</span>
-                <span className="font-black text-slate-900 dark:text-white text-base">Missing Doc</span>
-                <span className="text-purple-600 dark:text-purple-400 text-[10px] block">Geo-camera required</span>
+              <div className="p-3 rounded-lg bg-slate-50 border border-purple-200">
+                <span className="text-purple-800 font-bold block text-[10px] uppercase">Completion Proof</span>
+                <span className="font-bold text-slate-900 text-base">Missing Doc</span>
+                <span className="text-purple-700 text-[10px] block">Geo-camera required</span>
               </div>
             </div>
           </div>
@@ -538,7 +531,7 @@ export default function LandingHomePage() {
           <div className="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0">
             <Link
               to="/passport/MPL-2024-UP-004821"
-              className="px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs transition flex items-center justify-center gap-2 shadow-xs"
+              className="px-5 py-2.5 rounded-lg bg-[#0B2545] hover:bg-[#133B5C] text-white font-bold text-xs transition flex items-center justify-center gap-2 shadow-xs"
             >
               <FileText className="w-4 h-4 text-white" />
               <span>Inspect Risk Passport</span>
@@ -547,7 +540,7 @@ export default function LandingHomePage() {
 
             <Link
               to="/works/MPL-2024-UP-004821/capture-evidence"
-              className="px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs transition flex items-center justify-center gap-2 shadow-xs"
+              className="px-5 py-2.5 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs transition flex items-center justify-center gap-2 shadow-xs"
             >
               <Camera className="w-4 h-4" />
               <span>Capture Geo-Evidence</span>
@@ -559,22 +552,22 @@ export default function LandingHomePage() {
 
 
       {/* 5. LIVE SCRUTINY QUEUE PREVIEW TABLE */}
-      <section className="bg-white dark:bg-obsidian-850 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800/80 shadow-xs space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-3">
+      <section className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-3">
           <div>
-            <h3 className="text-lg font-black text-slate-900 dark:text-white">
+            <h3 className="text-base sm:text-lg font-bold text-[#0B2545]">
               High-Risk Priority Proposals (Triage Register)
             </h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
-              Proposals flagged with composite risk score ≥ 70 requiring immediate officer determination.
+            <p className="text-xs text-slate-500">
+              Proposals flagged with composite risk score ≥ 70 requiring immediate administrative determination.
             </p>
           </div>
 
           <Link
             to="/queue"
-            className="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-1"
+            className="text-xs font-bold text-blue-700 hover:underline inline-flex items-center gap-1"
           >
-            <span>View Full Scrutiny Queue ({highRisk})</span>
+            <span>View Full Scrutiny Queue (294)</span>
             <ChevronRight className="w-3.5 h-3.5" />
           </Link>
         </div>
@@ -582,7 +575,7 @@ export default function LandingHomePage() {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="border-b border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider text-[10px]">
+              <tr className="border-b border-slate-200 text-slate-600 font-bold uppercase tracking-wider text-[10px] bg-slate-50">
                 <th className="py-2.5 px-3">Work ID &amp; Description</th>
                 <th className="py-2.5 px-3">Constituency / District</th>
                 <th className="py-2.5 px-3">Cost (INR)</th>
@@ -591,38 +584,38 @@ export default function LandingHomePage() {
                 <th className="py-2.5 px-3 text-right">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+            <tbody className="divide-y divide-slate-200">
               {highRiskWorks.map((work) => (
-                <tr key={work.workId} className="hover:bg-slate-50 dark:hover:bg-obsidian-950 transition">
+                <tr key={work.workId} className="hover:bg-slate-50 transition">
                   <td className="py-3 px-3">
-                    <span className="font-mono font-bold text-blue-600 dark:text-blue-400 block text-[11px]">
+                    <span className="font-mono font-bold text-blue-800 block text-[11px]">
                       {work.workId}
                     </span>
-                    <span className="text-slate-800 dark:text-slate-200 font-medium line-clamp-1 max-w-xs">
+                    <span className="text-slate-900 font-medium line-clamp-1 max-w-xs">
                       {work.workTitle}
                     </span>
                   </td>
-                  <td className="py-3 px-3 text-slate-600 dark:text-slate-300">
+                  <td className="py-3 px-3 text-slate-700">
                     <span className="font-semibold block">{work.district}</span>
-                    <span className="text-[10px] text-slate-400">{work.state}</span>
+                    <span className="text-[10px] text-slate-500">{work.state}</span>
                   </td>
-                  <td className="py-3 px-3 font-mono font-bold text-slate-900 dark:text-slate-100">
+                  <td className="py-3 px-3 font-mono font-bold text-slate-900">
                     {formatINR(work.sanctionedAmount || work.estimatedCost)}
                   </td>
                   <td className="py-3 px-3">
-                    <span className="px-2 py-0.5 rounded-md font-mono font-bold text-[11px] bg-red-100 text-red-800 dark:bg-red-950/50 dark:text-red-400 border border-red-300 dark:border-red-800/60">
+                    <span className="px-2 py-0.5 rounded font-mono font-bold text-[11px] bg-red-100 text-red-900 border border-red-200">
                       {work.overallRiskScore} / 100
                     </span>
                   </td>
                   <td className="py-3 px-3">
-                    <span className="text-[11px] font-semibold text-red-600 dark:text-red-400">
+                    <span className="text-[11px] font-semibold text-red-700">
                       {work.riskSignals && work.riskSignals[0] ? work.riskSignals[0].split(':')[0] : 'Peer Cost Outlier'}
                     </span>
                   </td>
                   <td className="py-3 px-3 text-right">
                     <Link
                       to={'/passport/' + work.workId}
-                      className="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold text-[11px] transition inline-flex items-center gap-1 shadow-xs"
+                      className="px-3 py-1.5 rounded bg-blue-700 hover:bg-blue-800 text-white font-bold text-[11px] transition inline-flex items-center gap-1 shadow-xs"
                     >
                       <span>Inspect</span>
                       <ArrowRight className="w-3 h-3" />
@@ -638,12 +631,12 @@ export default function LandingHomePage() {
 
       {/* 6. ROLE-SPECIFIC GOVERNANCE GATEWAYS */}
       <section className="space-y-4">
-        <div className="border-b border-slate-200 dark:border-slate-800 pb-2">
-          <h3 className="text-lg font-black text-slate-900 dark:text-white">
-            Role-Specific Governance Portals
+        <div className="border-b border-slate-200 pb-2">
+          <h3 className="text-base sm:text-lg font-bold text-[#0B2545]">
+            Role-Specific Administrative Consoles
           </h3>
-          <p className="text-xs text-slate-500 dark:text-slate-400">
-            Tailored consoles for each stakeholder tier in the MPLADS administrative hierarchy.
+          <p className="text-xs text-slate-500">
+            Tailored interfaces for each stakeholder tier in the MPLADS administrative hierarchy.
           </p>
         </div>
 
@@ -651,28 +644,28 @@ export default function LandingHomePage() {
           {roles.map((item, idx) => (
             <div
               key={idx}
-              className="bg-white dark:bg-obsidian-850 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs flex flex-col justify-between space-y-4 transition transform hover:-translate-y-0.5 hover:shadow-xs"
+              className="bg-white p-5 rounded-xl border border-slate-200 shadow-xs flex flex-col justify-between space-y-4"
             >
               <div className="space-y-2">
-                <span className={'px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider ' + item.badgeColor}>
+                <span className={'px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider border ' + item.badgeColor}>
                   {item.badge}
                 </span>
-                <h4 className="text-sm font-extrabold text-slate-900 dark:text-white">
+                <h4 className="text-sm font-bold text-slate-900">
                   {item.role}
                 </h4>
-                <p className="text-[10px] font-bold text-slate-400 font-mono">
+                <p className="text-[10px] font-bold text-slate-500 font-mono">
                   {item.jurisdiction}
                 </p>
-                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                <p className="text-xs text-slate-600 leading-relaxed">
                   {item.desc}
                 </p>
               </div>
 
               <Link
                 to={item.link}
-                className="w-full py-2 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 text-slate-800 dark:text-slate-200 text-xs font-bold transition flex items-center justify-between"
+                className="w-full py-2 px-3 rounded-lg bg-slate-100 hover:bg-[#0B2545] hover:text-white text-slate-800 text-xs font-bold transition flex items-center justify-between"
               >
-                <span>Enter Portal</span>
+                <span>Enter Console</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
@@ -681,13 +674,13 @@ export default function LandingHomePage() {
       </section>
 
 
-      {/* 7. STATUTORY COMPLIANCE & FOOTER */}
-      <footer className="border-t border-slate-200 dark:border-slate-800 pt-6 pb-12 text-center text-xs text-slate-500 dark:text-slate-400 space-y-1.5">
-        <p className="font-bold text-slate-700 dark:text-slate-300">
+      {/* 7. STATUTORY COMPLIANCE & OFFICIAL FOOTER */}
+      <footer className="border-t border-slate-200 pt-6 text-center text-xs text-slate-500 space-y-1.5">
+        <p className="font-bold text-slate-700">
           MPLADS Rakshak • Ministry of Statistics &amp; Programme Implementation (MoSPI)
         </p>
         <p className="text-[11px] text-slate-500">
-          Smart India Hackathon SIH26102 Decision Support Intelligence Layer. All rights reserved.
+          National Informatics Centre &amp; MoSPI Decision Support Intelligence Layer • SIH26102
         </p>
       </footer>
 
