@@ -175,12 +175,13 @@ export default function LandingHomePage() {
 
         </div>
 
-        {/* Official Government of India Badge (Bottom-Right Corner) */}
-        <div className="absolute bottom-4 right-4 sm:bottom-5 sm:right-6 z-20 flex items-center gap-2.5 px-3.5 py-1.5 rounded-xl bg-slate-950/80 border border-white/15 text-white backdrop-blur-md shadow-2xl">
-          <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-          <div className="text-right leading-tight">
-            <span className="text-[11px] font-black block text-white tracking-wider font-sans">GOVERNMENT OF INDIA</span>
-            <span className="text-[9px] text-slate-300 font-medium">भारत सरकार • MoSPI</span>
+        {/* Official Government of India Pure Typography (Bottom-Right Corner on Image) */}
+        <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-8 z-20 text-right select-none pointer-events-none space-y-0.5">
+          <div className="text-xs sm:text-sm font-black text-white uppercase tracking-widest drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] font-sans">
+            Government of India
+          </div>
+          <div className="text-[10px] sm:text-xs font-semibold text-slate-200 tracking-wider drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
+            भारत सरकार • MoSPI
           </div>
         </div>
 
