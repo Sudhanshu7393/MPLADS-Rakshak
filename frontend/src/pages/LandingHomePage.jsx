@@ -145,108 +145,40 @@ export default function LandingHomePage() {
   return (
     <div className="min-h-screen bg-[#F8FAFC] font-sans text-slate-900 -m-4 md:-m-6 lg:-m-8 relative">
       
-      {/* 1. SEAMLESS UNCLUTTERED HERO SECTION (FULL PARLIAMENT ARCHITECTURE VISIBILITY) */}
-      <section className="relative bg-slate-950 text-white pt-14 pb-28 px-4 sm:px-6 lg:px-8 border-b border-slate-800 overflow-hidden">
+      {/* 1. CINEMATIC FULL-SCREEN PARLIAMENT HERO (ONLY PROJECT TITLE & EMBLEM ON THE IMAGE) */}
+      <section className="relative bg-slate-950 text-white min-h-[480px] lg:min-h-[540px] flex items-center justify-center text-center px-4 sm:px-6 lg:px-8 border-b border-slate-800 overflow-hidden">
         
-        {/* Full Unobstructed Parliament Architectural Background */}
+        {/* Unobstructed Parliament Architectural Background */}
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-95 scale-100 pointer-events-none transition-transform duration-700"
           style={{ backgroundImage: "url('/parliament_bg.jpg')" }}
         />
 
-        {/* Sophisticated Dark Gradient Vignette on Left Side for 100% Crisp Text Readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/65 to-transparent pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-slate-950/50 pointer-events-none" />
+        {/* Subtle Dark Vignette Mask so Title stands out with complete clarity */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/35 to-slate-950/60 pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto relative z-10">
+        {/* ONLY THE PROJECT TITLE ON THE IMAGE */}
+        <div className="relative z-10 max-w-4xl mx-auto space-y-4 py-12">
           
-          <div className="max-w-2xl space-y-5">
-            
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/15 border border-blue-400/30 text-blue-300 text-xs font-semibold backdrop-blur-md">
-              <ShieldCheck className="w-4 h-4 text-blue-400" />
-              <span>Ministry of Statistics &amp; Programme Implementation • e-SAKSHI</span>
-            </div>
-
-            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-[1.15] text-white">
-              AI-Powered Risk Intelligence for <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-200">MPLADS Governance</span>
-            </h1>
-
-            <p className="text-sm sm:text-base text-slate-200 leading-relaxed font-normal">
-              Automated decision-support platform enabling District Planning Officers to detect peer cost outliers, execution delays, duplicate proposals, and capture tamper-evident geo-verified completion evidence.
-            </p>
-
-            {/* Clean Professional Search Bar */}
-            <form onSubmit={handleSearch} className="max-w-lg pt-1">
-              <div className="relative flex items-center">
-                <Search className="w-4 h-4 text-slate-400 absolute left-4" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search Constituency, District, or Work (e.g. Varanasi, CC Road)..."
-                  className="w-full bg-slate-900/90 text-white rounded-xl pl-11 pr-28 py-3 text-xs sm:text-sm placeholder-slate-400 border border-slate-700/80 focus:outline-none focus:ring-2 focus:ring-blue-500 backdrop-blur-md shadow-xl"
-                />
-                <button
-                  type="submit"
-                  className="absolute right-1.5 px-4.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold rounded-lg transition shadow-sm"
-                >
-                  Search
-                </button>
-              </div>
-            </form>
-
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3 pt-2">
-              <Link
-                to="/queue"
-                className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs sm:text-sm shadow-lg transition flex items-center gap-2 transform active:scale-95"
-              >
-                <AlertOctagon className="w-4 h-4" />
-                <span>Scrutiny Queue ({highRisk} Flags)</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-
-              <Link
-                to="/dashboard"
-                className="px-4.5 py-2.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 font-semibold text-xs sm:text-sm border border-slate-700/80 backdrop-blur-md transition flex items-center gap-2"
-              >
-                <TrendingUp className="w-4 h-4 text-blue-400" />
-                <span>Executive Analytics</span>
-              </Link>
-
-              <Link
-                to="/works/MPL-2024-UP-004821/capture-evidence"
-                className="px-4.5 py-2.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 font-semibold text-xs sm:text-sm border border-slate-700/80 backdrop-blur-md transition flex items-center gap-2"
-              >
-                <Camera className="w-4 h-4 text-emerald-400" />
-                <span>Geo-Camera</span>
-              </Link>
-            </div>
-
-            {/* Live Inline Telemetry Bar */}
-            <div className="pt-3 flex flex-wrap items-center gap-4 text-xs font-mono text-slate-300">
-              <div className="flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>Monitored: <strong className="text-white">₹593.1 Cr</strong></span>
-              </div>
-              <span className="text-slate-600">•</span>
-              <div>
-                <span>Sanctions: <strong className="text-white">3,013 Works</strong></span>
-              </div>
-              <span className="text-slate-600">•</span>
-              <div>
-                <span>Active Flags: <strong className="text-red-400">{highRisk} Priority</strong></span>
-              </div>
-            </div>
-
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/80 border border-slate-700/80 text-blue-300 text-xs font-semibold backdrop-blur-md shadow-lg">
+            <ShieldCheck className="w-4 h-4 text-blue-400" />
+            <span>Ministry of Statistics &amp; Programme Implementation • e-SAKSHI (MoSPI)</span>
           </div>
+
+          <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white drop-shadow-lg">
+            MPLADS <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-200">RAKSHAK</span>
+          </h1>
+
+          <p className="text-sm sm:text-lg font-medium text-slate-200 tracking-wide max-w-2xl mx-auto drop-shadow-md leading-relaxed">
+            National AI-Powered Anomaly Intelligence &amp; Decision Support Layer for Public Funds Governance
+          </p>
 
         </div>
 
       </section>
 
 
-      {/* REST OF THE PAGE WITH SUBTLE OFFICIAL EMBLEM WATERMARK BACKGROUND */}
+      {/* 2. EVERYTHING ELSE STARTS CLEANLY BELOW THE PARLIAMENT IMAGE WITH OFFICIAL EMBLEM WATERMARK */}
       <div 
         className="relative bg-cover bg-fixed bg-center"
         style={{ backgroundImage: "url('/gov_watermark.jpg')" }}
@@ -257,7 +189,90 @@ export default function LandingHomePage() {
 
         <div className="relative z-10">
 
-          {/* 2. THREE CORE PILLAR HIGHLIGHTS (CLEAN ELEVATED WHITE CARDS) */}
+          {/* A. EXECUTIVE SEARCH & COMMAND BAR (DIRECTLY BELOW IMAGE) */}
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
+            <div className="bg-white/95 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-slate-200/80 space-y-5">
+              
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                
+                {/* Search Form */}
+                <form onSubmit={handleSearch} className="flex-1 max-w-2xl">
+                  <div className="relative flex items-center">
+                    <Search className="w-4 h-4 text-slate-400 absolute left-4" />
+                    <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder="Search Constituency, District, or Work Title (e.g. Varanasi, CC Road)..."
+                      className="w-full bg-slate-50 text-slate-900 rounded-xl pl-11 pr-28 py-3 text-xs sm:text-sm placeholder-slate-400 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white shadow-xs"
+                    />
+                    <button
+                      type="submit"
+                      className="absolute right-1.5 px-4.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition shadow-xs"
+                    >
+                      Search
+                    </button>
+                  </div>
+                </form>
+
+                {/* Quick Action Navigation Pills */}
+                <div className="flex flex-wrap items-center gap-2.5">
+                  <Link
+                    to="/queue"
+                    className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-sm transition flex items-center gap-1.5"
+                  >
+                    <AlertOctagon className="w-4 h-4" />
+                    <span>Scrutiny Queue ({highRisk} Flags)</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+
+                  <Link
+                    to="/dashboard"
+                    className="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs border border-slate-300 transition flex items-center gap-1.5"
+                  >
+                    <TrendingUp className="w-3.5 h-3.5 text-blue-600" />
+                    <span>Analytics</span>
+                  </Link>
+
+                  <Link
+                    to="/works/MPL-2024-UP-004821/capture-evidence"
+                    className="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs border border-slate-300 transition flex items-center gap-1.5"
+                  >
+                    <Camera className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Geo-Camera</span>
+                  </Link>
+
+                  <Link
+                    to="/works"
+                    className="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs border border-slate-300 transition flex items-center gap-1.5"
+                  >
+                    <Layers className="w-3.5 h-3.5 text-slate-600" />
+                    <span>Browse All Works</span>
+                  </Link>
+                </div>
+
+              </div>
+
+              {/* Live Telemetry Bar */}
+              <div className="pt-2 border-t border-slate-100 flex flex-wrap items-center justify-between text-xs text-slate-500 font-medium">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span>Continuous Surveillance Active: <strong>{totalWorks.toLocaleString('en-IN')} Sanctioned Works</strong></span>
+                </div>
+                <div className="flex items-center gap-4 font-mono text-[11px]">
+                  <span>Total Value: <strong className="text-slate-900">{formatINR(totalCost)}</strong></span>
+                  <span>•</span>
+                  <span>High Risk: <strong className="text-red-600">{highRisk} Flags</strong></span>
+                  <span>•</span>
+                  <span className="text-emerald-700 font-bold">100% Explainable AI</span>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+
+          {/* B. THREE CORE PILLAR HIGHLIGHTS */}
           <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               
@@ -301,7 +316,7 @@ export default function LandingHomePage() {
           </section>
 
 
-          {/* 3. FOUR BOLD METRIC STATS */}
+          {/* C. FOUR BOLD METRIC STATS */}
           <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <div className="bg-white/95 backdrop-blur-sm rounded-xl p-6 sm:p-8 border border-slate-200/80 shadow-sm grid grid-cols-2 lg:grid-cols-4 gap-6 text-center divide-y lg:divide-y-0 lg:divide-x divide-slate-100">
               
@@ -345,7 +360,7 @@ export default function LandingHomePage() {
           </section>
 
 
-          {/* 4. SIX ANALYTICAL ENGINES GRID */}
+          {/* D. SIX ANALYTICAL ENGINES GRID */}
           <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-6">
             
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200/80 pb-3">
@@ -409,7 +424,7 @@ export default function LandingHomePage() {
           </section>
 
 
-          {/* 5. RECENT HIGH-RISK PROPOSALS TABLE REGISTER */}
+          {/* E. RECENT HIGH-RISK PROPOSALS TABLE REGISTER */}
           <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-5">
             
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200/80 pb-3">
@@ -498,7 +513,7 @@ export default function LandingHomePage() {
           </section>
 
 
-          {/* 6. FAQ & STATUTORY GOVERNANCE SECTION */}
+          {/* F. FAQ & STATUTORY GOVERNANCE SECTION */}
           <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-5">
             
             <div className="border-b border-slate-200/80 pb-3">
@@ -538,7 +553,7 @@ export default function LandingHomePage() {
           </section>
 
 
-          {/* 7. FORMAL GOVERNMENT FOOTER */}
+          {/* G. FORMAL GOVERNMENT FOOTER */}
           <footer className="bg-[#0F172A] text-slate-400 pt-10 pb-8 border-t border-slate-800">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
               
