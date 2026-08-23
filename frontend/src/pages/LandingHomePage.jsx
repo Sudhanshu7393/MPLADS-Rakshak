@@ -145,11 +145,19 @@ export default function LandingHomePage() {
   return (
     <div className="min-h-screen bg-[#F8FAFC] font-sans text-slate-900 -m-4 md:-m-6 lg:-m-8">
       
-      {/* 1. ENTERPRISE PROFESSIONAL HERO SECTION (CLEAN DEEP SLATE #0F172A) */}
-      <section className="relative bg-[#0F172A] text-white pt-12 pb-24 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
+      {/* 1. ENTERPRISE HERO SECTION WITH OFFICIAL PARLIAMENT BACKGROUND */}
+      <section className="relative bg-[#0A192F] text-white pt-14 pb-28 px-4 sm:px-6 lg:px-8 border-b border-slate-800 overflow-hidden">
         
-        {/* Subtle grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-30 pointer-events-none" />
+        {/* Official Parliament Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-luminosity scale-105 pointer-events-none transition-transform duration-1000"
+          style={{ backgroundImage: "url('/parliament_bg.jpg')" }}
+        />
+
+        {/* Ambient Dark Navy Gradient Overlay to ensure 100% text readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A192F]/95 via-[#0A192F]/85 to-[#0A192F]/65 pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 right-10 w-[400px] h-[400px] bg-indigo-600/15 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
           
