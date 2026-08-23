@@ -145,8 +145,8 @@ export default function LandingHomePage() {
   return (
     <div className="min-h-screen bg-[#F8FAFC] font-sans text-slate-900 -m-4 md:-m-6 lg:-m-8 relative">
       
-      {/* 1. CINEMATIC FULL-SCREEN PARLIAMENT HERO (ONLY PROJECT TITLE & EMBLEM ON THE IMAGE) */}
-      <section className="relative bg-slate-950 text-white min-h-[480px] lg:min-h-[540px] flex items-center justify-center text-center px-4 sm:px-6 lg:px-8 border-b border-slate-800 overflow-hidden">
+      {/* 1. CINEMATIC 100% FULL-SCREEN PARLIAMENT HERO (PURE TITLE & EMBLEM ON THE IMAGE) */}
+      <section className="relative bg-slate-950 text-white min-h-[calc(100vh-3.75rem)] flex flex-col justify-between items-center text-center px-4 sm:px-6 lg:px-8 border-b border-slate-800 overflow-hidden">
         
         {/* Unobstructed Parliament Architectural Background */}
         <div 
@@ -155,34 +155,54 @@ export default function LandingHomePage() {
         />
 
         {/* Subtle Dark Vignette Mask so Title stands out with complete clarity */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/35 to-slate-950/60 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-slate-950/60 pointer-events-none" />
 
-        {/* ONLY THE PROJECT TITLE ON THE IMAGE */}
-        <div className="relative z-10 max-w-4xl mx-auto space-y-4 py-12">
+        {/* Top Spacer for perfect vertical centering */}
+        <div className="h-6 sm:h-10 shrink-0" />
+
+        {/* ONLY THE PROJECT TITLE ON THE IMAGE (VERTICALLY CENTERED) */}
+        <div className="relative z-10 max-w-4xl mx-auto space-y-5 my-auto py-6">
           
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/80 border border-slate-700/80 text-blue-300 text-xs font-semibold backdrop-blur-md shadow-lg">
             <ShieldCheck className="w-4 h-4 text-blue-400" />
             <span>Ministry of Statistics &amp; Programme Implementation • e-SAKSHI (MoSPI)</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white drop-shadow-lg">
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white drop-shadow-xl">
             MPLADS <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-200">RAKSHAK</span>
           </h1>
 
-          <p className="text-sm sm:text-lg font-medium text-slate-200 tracking-wide max-w-2xl mx-auto drop-shadow-md leading-relaxed">
+          <p className="text-base sm:text-xl font-medium text-slate-200 tracking-wide max-w-2xl mx-auto drop-shadow-md leading-relaxed">
             National AI-Powered Anomaly Intelligence &amp; Decision Support Layer for Public Funds Governance
           </p>
 
         </div>
 
-        {/* Official Government of India Pure Typography (Bottom-Right on Image) */}
-        <div className="absolute bottom-12 right-6 sm:bottom-14 sm:right-10 z-20 text-right select-none pointer-events-none space-y-0.5">
-          <div className="text-xs sm:text-sm font-black text-white uppercase tracking-widest drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] font-sans">
-            Government of India
+        {/* Full-Screen Viewport Bottom Bar (Telemetry + Scroll Down Hint + Government Badge) */}
+        <div className="w-full relative z-20 pb-6 px-4 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-300 border-t border-white/10 pt-4 bg-slate-950/40 backdrop-blur-xs">
+          
+          <div className="flex items-center gap-2 text-xs font-medium">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span>Live Surveillance: <strong className="text-white">{totalWorks.toLocaleString('en-IN')} Works</strong> • <strong className="text-white">{formatINR(totalCost)}</strong> • <strong className="text-red-400">{highRisk} Flags</strong></span>
           </div>
-          <div className="text-[10px] sm:text-xs font-semibold text-slate-200 tracking-wider drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
-            भारत सरकार • MoSPI
+
+          <a 
+            href="#command-center"
+            className="flex items-center gap-1.5 text-xs text-blue-300 hover:text-white transition font-bold animate-bounce"
+          >
+            <span>Explore Scrutiny Queue &amp; Analytics</span>
+            <ChevronDown className="w-4 h-4" />
+          </a>
+
+          <div className="text-right space-y-0.5 select-none hidden sm:block">
+            <div className="text-xs font-black text-white uppercase tracking-widest font-sans drop-shadow-md">
+              Government of India
+            </div>
+            <div className="text-[10px] text-slate-300 font-semibold drop-shadow-md">
+              भारत सरकार • MoSPI
+            </div>
           </div>
+
         </div>
 
       </section>
@@ -190,7 +210,8 @@ export default function LandingHomePage() {
 
       {/* 2. EVERYTHING ELSE STARTS CLEANLY BELOW THE PARLIAMENT IMAGE WITH OFFICIAL EMBLEM WATERMARK */}
       <div 
-        className="relative bg-cover bg-fixed bg-center"
+        id="command-center"
+        className="relative bg-cover bg-fixed bg-center scroll-mt-6"
         style={{ backgroundImage: "url('/gov_watermark.jpg')" }}
       >
         
@@ -200,7 +221,7 @@ export default function LandingHomePage() {
         <div className="relative z-10">
 
           {/* A. EXECUTIVE SEARCH & COMMAND BAR (DIRECTLY BELOW IMAGE) */}
-          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4 relative z-20">
             <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-xl border border-slate-200/90 space-y-4">
               
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3.5">
