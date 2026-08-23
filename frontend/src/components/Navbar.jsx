@@ -60,25 +60,25 @@ export default function Navbar({ activeDataMode = 'PUBLIC DATA', onAnalysisRun }
               to="/"
               className="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-200 hover:text-white hover:bg-slate-800 transition"
             >
-              Home &amp; Workflow
+              Gateway Portal
+            </Link>
+            <Link
+              to="/workflow"
+              className="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition"
+            >
+              Workflow Hub
             </Link>
             <Link
               to="/dashboard"
               className="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition"
             >
-              Executive Analytics
+              Dashboard
             </Link>
             <Link
               to="/queue"
               className="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition"
             >
               Scrutiny Queue
-            </Link>
-            <Link
-              to="/map"
-              className="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition"
-            >
-              Geospatial Map
             </Link>
             <Link
               to="/works/MPL-2024-UP-004821/capture-evidence"

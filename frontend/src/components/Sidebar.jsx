@@ -16,7 +16,8 @@ import {
 } from 'lucide-react';
 
 const NAV_ITEMS = [
-  { to: '/', label: 'Overview & Workflow Hub', icon: Compass, exact: true },
+  { to: '/', label: 'National Gateway Portal', icon: ShieldCheck, exact: true },
+  { to: '/workflow', label: 'Workflow Pipeline Hub', icon: Compass },
   { to: '/dashboard', label: 'Executive Analytics', icon: LayoutDashboard },
   { to: '/queue', label: 'Prioritised Scrutiny Queue', icon: AlertOctagon },
   { to: '/works', label: 'All Works (Browse)', icon: Layers },

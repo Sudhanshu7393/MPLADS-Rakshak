@@ -4,6 +4,7 @@ import GovHeader from './components/GovHeader';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import Login from './pages/Login';
+import GrandGatewayPage from './pages/GrandGatewayPage';
 import LandingHomePage from './pages/LandingHomePage';
 import Dashboard from './pages/Dashboard';
 import RiskQueue from './pages/RiskQueue';
@@ -27,7 +28,7 @@ function MainLayout() {
   const [refreshKey, setRefreshKey] = useState(0);
   const [isTourOpen, setIsTourOpen] = useState(false);
   const location = useLocation();
-  const isHomePage = location.pathname === '/';
+  const isGateway = location.pathname === '/';
 
   const loadDataMode = async () => {
     try {
@@ -52,10 +53,11 @@ function MainLayout() {
         onAnalysisRun={() => setRefreshKey(k => k + 1)}
       />
       <div className="flex-1 flex overflow-hidden">
-        <Sidebar />
-        <main className="flex-1 overflow-y-auto bg-slate-100 p-4 md:p-6 relative">
+        {!isGateway && <Sidebar />}
+        <main className={`flex-1 overflow-y-auto ${isGateway ? 'p-0 bg-slate-950' : 'p-4 md:p-6 bg-slate-100'} relative`}>
           <Routes>
-            <Route path="/" element={<LandingHomePage key={refreshKey} />} />
+            <Route path="/" element={<GrandGatewayPage key={refreshKey} />} />
+            <Route path="/workflow" element={<LandingHomePage key={refreshKey} />} />
             <Route path="/dashboard" element={<Dashboard key={refreshKey} />} />
             <Route path="/queue" element={<RiskQueue key={refreshKey} />} />
             <Route path="/passport/:workId" element={<RiskPassport key={refreshKey} />} />
