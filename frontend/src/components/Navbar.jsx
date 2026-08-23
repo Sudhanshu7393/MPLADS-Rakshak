@@ -72,49 +72,35 @@ export default function Navbar({ activeDataMode = 'PUBLIC DATA', onAnalysisRun }
             </div>
           </Link>
 
-          {/* Center Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1 text-xs font-semibold bg-white/5 p-1 rounded-lg border border-white/10">
-            {navLinks.map((item) => {
-              const isActive = location.pathname === item.to;
-              return (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  className={`px-3 py-1.5 rounded-md transition-all ${
-                    isActive 
-                      ? 'bg-white/20 text-white font-bold shadow-xs' 
-                      : 'text-slate-300 hover:text-white hover:bg-white/10'
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
-
-          {/* Right Action Items */}
-          <div className="flex items-center gap-2.5">
+          {/* Right Action Items & Surveillance Status */}
+          <div className="flex items-center gap-3">
             
+            {/* Live Data Stream Status Badge */}
+            <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-slate-200 text-xs font-medium">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>e-SAKSHI Active Feed</span>
+            </div>
+
             {/* Quick Run Analysis Trigger */}
             <button
               onClick={handleTriggerAnalysis}
               disabled={runningAnalysis}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-600 text-white border border-emerald-500/50 text-xs font-bold transition disabled:opacity-50 shadow-xs"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition disabled:opacity-50 shadow-xs"
               title="Run unsupervised anomaly engine"
             >
               <RefreshCw className={`w-3.5 h-3.5 text-white ${runningAnalysis ? 'animate-spin' : ''}`} />
-              <span className="hidden lg:inline">
-                {runningAnalysis ? 'Running...' : 'Run Analysis Cycle'}
+              <span className="hidden sm:inline">
+                {runningAnalysis ? 'Analyzing...' : 'Run Analysis'}
               </span>
             </button>
 
             {/* Officer Profile & Sign out */}
             <div className="flex items-center gap-2 pl-3 border-l border-slate-700">
               <div className="text-right hidden sm:block">
-                <div className="text-[11px] font-bold text-white leading-tight">
-                  {user?.fullName || 'District Officer'}
+                <div className="text-xs font-bold text-white leading-tight">
+                  {user?.fullName || 'District Planning Officer'}
                 </div>
-                <div className="text-[9px] text-slate-300 font-mono">
+                <div className="text-[10px] text-slate-300 font-mono">
                   Varanasi, Uttar Pradesh
                 </div>
               </div>
