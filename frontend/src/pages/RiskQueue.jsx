@@ -21,8 +21,8 @@ import Breadcrumbs from '../components/Breadcrumbs';
 
 const QUICK_FILTERS = [
   { id: 'ALL', label: 'All Scrutiny Items' },
-  { id: 'COST_OUTLIER', label: 'Peer Cost Outliers (&gt;50% Variance)' },
-  { id: 'CHRONIC_DELAY', label: 'Milestone Execution Delays (&gt;180 Days)' },
+  { id: 'COST_OUTLIER', label: 'Peer Cost Outliers (>50% Variance)' },
+  { id: 'CHRONIC_DELAY', label: 'Milestone Execution Delays (>180 Days)' },
   { id: 'MISSING_DOC', label: 'Mandatory Compliance Evidence Gaps' },
   { id: 'DUPLICATE', label: 'Geospatial & Semantic Overlaps' },
 ];
@@ -61,18 +61,13 @@ export default function RiskQueue() {
   const loadQueue = async () => {
     setLoading(true);
     try {
-      let searchQuery = search;
-      if (activeQuickFilter === 'COST_OUTLIER') searchQuery = 'Cost benchmark';
-      else if (activeQuickFilter === 'CHRONIC_DELAY') searchQuery = 'delayed';
-      else if (activeQuickFilter === 'MISSING_DOC') searchQuery = 'missing';
-      else if (activeQuickFilter === 'DUPLICATE') searchQuery = 'similar';
-
       const data = await api.getRiskQueue({
         riskLevel: riskLevel || undefined,
         district: district || undefined,
         category: category || undefined,
         status: status || undefined,
-        search: searchQuery || undefined,
+        signalType: activeQuickFilter !== 'ALL' ? activeQuickFilter : undefined,
+        search: search.trim() || undefined,
         sortBy,
         sortDir,
         page,

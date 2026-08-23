@@ -171,24 +171,40 @@ public class WorkService {
             String district,
             String category,
             String status,
+            String signalType,
             String search,
             String sortBy,
             String sortDir,
             Pageable pageable) {
 
-        Page<Work> worksPage = workRepository.findWithFilters(district, category, status, search, pageable);
+        org.springframework.data.domain.Sort.Direction direction = "asc".equalsIgnoreCase(sortDir)
+                ? org.springframework.data.domain.Sort.Direction.ASC
+                : org.springframework.data.domain.Sort.Direction.DESC;
+        org.springframework.data.domain.Sort sort;
+        if ("sanctionedAmount".equalsIgnoreCase(sortBy) || "cost".equalsIgnoreCase(sortBy)) {
+            sort = org.springframework.data.domain.Sort.by(direction, "sanctionedAmount");
+        } else if ("createdAt".equalsIgnoreCase(sortBy) || "date".equalsIgnoreCase(sortBy)) {
+            sort = org.springframework.data.domain.Sort.by(direction, "createdAt");
+        } else {
+            sort = org.springframework.data.domain.Sort.by(direction, "r.overallScore");
+        }
+
+        Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
+        Page<Object[]> pageResult = workRepository.findRiskQueueWithFilters(
+                district, category, status, riskLevel, signalType, search, sortedPageable);
+
         LocalDate now = LocalDate.of(2026, 8, 23);
-
         List<RiskQueueItemDto> items = new ArrayList<>();
-        for (Work w : worksPage.getContent()) {
-            RiskScore rs = riskScoreRepository.findByWorkId(w.getWorkId()).orElseGet(() -> {
-                RiskScore def = new RiskScore(w.getWorkId(), 10, "LOW", "PRIORITY_3", "HIGH");
-                def.setPrimaryReason("Normal range");
-                return def;
-            });
 
-            if (riskLevel != null && !riskLevel.trim().isEmpty() && !riskLevel.equalsIgnoreCase(rs.getRiskLevel())) {
-                continue; // filter by risk level
+        for (Object[] row : pageResult.getContent()) {
+            Work w = (Work) row[0];
+            RiskScore rs = row.length > 1 && row[1] != null ? (RiskScore) row[1] : null;
+            if (rs == null) {
+                rs = riskScoreRepository.findByWorkId(w.getWorkId()).orElseGet(() -> {
+                    RiskScore def = new RiskScore(w.getWorkId(), 10, "LOW", "PRIORITY_3", "HIGH");
+                    def.setPrimaryReason("Normal range");
+                    return def;
+                });
             }
 
             RiskQueueItemDto item = new RiskQueueItemDto();
@@ -211,7 +227,6 @@ public class WorkService {
             item.setPrimaryReason(rs.getPrimaryReason());
             item.setSanctionDate(w.getSanctionDate());
 
-            // Delay days calculation
             long delayDays = 0;
             if (w.getExpectedCompletionDate() != null) {
                 if ("Completed".equalsIgnoreCase(w.getStatus()) && w.getActualCompletionDate() != null) {
@@ -224,7 +239,6 @@ public class WorkService {
             }
             item.setDelayDays(delayDays);
 
-            // Existing Investigation check
             Optional<InvestigationCase> inv = investigationCaseRepository.findByWorkId(w.getWorkId());
             item.setHasOpenInvestigation(inv.isPresent());
             item.setInvestigationStatus(inv.map(InvestigationCase::getStatus).orElse(null));
@@ -232,19 +246,7 @@ public class WorkService {
             items.add(item);
         }
 
-        // Apply sorting
-        if ("score".equalsIgnoreCase(sortBy)) {
-            items.sort((a, b) -> "asc".equalsIgnoreCase(sortDir) ? Integer.compare(a.getRiskScore(), b.getRiskScore()) : Integer.compare(b.getRiskScore(), a.getRiskScore()));
-        } else if ("cost".equalsIgnoreCase(sortBy)) {
-            items.sort((a, b) -> "asc".equalsIgnoreCase(sortDir) ? Double.compare(a.getSanctionedAmount(), b.getSanctionedAmount()) : Double.compare(b.getSanctionedAmount(), a.getSanctionedAmount()));
-        } else if ("delay".equalsIgnoreCase(sortBy)) {
-            items.sort((a, b) -> "asc".equalsIgnoreCase(sortDir) ? Long.compare(a.getDelayDays(), b.getDelayDays()) : Long.compare(b.getDelayDays(), a.getDelayDays()));
-        } else {
-            // Default sort by risk score descending
-            items.sort((a, b) -> Integer.compare(b.getRiskScore(), a.getRiskScore()));
-        }
-
-        return new PageImpl<>(items, pageable, worksPage.getTotalElements());
+        return new PageImpl<>(items, sortedPageable, pageResult.getTotalElements());
     }
 
     public List<Map<String, Object>> getMapWorks() {

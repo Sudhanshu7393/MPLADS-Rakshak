@@ -42,7 +42,7 @@ function MainLayout() {
   }, [refreshKey]);
 
   return (
-    <div className="min-h-screen bg-slate-100 flex flex-col font-sans">
+    <div className="h-screen bg-slate-100 flex flex-col font-sans overflow-hidden">
       <GovHeader />
       <Navbar 
         activeDataMode={activeDataMode} 
@@ -50,7 +50,7 @@ function MainLayout() {
       />
       <div className="flex-1 flex overflow-hidden">
         <Sidebar />
-        <main className="flex-1 overflow-y-auto bg-slate-100 min-h-[calc(100vh-4rem)] relative">
+        <main className="flex-1 overflow-y-auto bg-slate-100 relative">
           <Routes>
             <Route path="/" element={<Dashboard key={refreshKey} />} />
             <Route path="/queue" element={<RiskQueue key={refreshKey} />} />

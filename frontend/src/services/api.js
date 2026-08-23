@@ -71,7 +71,10 @@ export const api = {
 
   // Works & Risk Queue
   getRiskQueue: (params = {}) => {
-    const query = new URLSearchParams(params).toString();
+    const cleanParams = Object.fromEntries(
+      Object.entries(params).filter(([_, v]) => v !== undefined && v !== null && String(v).trim() !== '')
+    );
+    const query = new URLSearchParams(cleanParams).toString();
     return request(`/risks/queue${query ? '?' + query : ''}`);
   },
   getRiskPassport: (workId) => request(`/risks/passport/${workId}`),

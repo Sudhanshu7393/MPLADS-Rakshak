@@ -37,6 +37,43 @@ public interface WorkRepository extends JpaRepository<Work, Long> {
             @Param("search") String search,
             Pageable pageable);
 
+    @Query(value = "SELECT w, r FROM Work w LEFT JOIN RiskScore r ON w.workId = r.workId WHERE " +
+           "(:district IS NULL OR :district = '' OR w.district = :district) AND " +
+           "(:category IS NULL OR :category = '' OR w.category = :category) AND " +
+           "(:status IS NULL OR :status = '' OR w.status = :status) AND " +
+           "(:riskLevel IS NULL OR :riskLevel = '' OR r.riskLevel = :riskLevel) AND " +
+           "(:signalType IS NULL OR :signalType = '' OR :signalType = 'ALL' " +
+           "  OR (:signalType = 'COST_OUTLIER' AND r.costScore > 10.0) " +
+           "  OR (:signalType = 'CHRONIC_DELAY' AND r.delayScore > 10.0) " +
+           "  OR (:signalType = 'MISSING_DOC' AND r.evidenceScore > 0.0) " +
+           "  OR (:signalType = 'DUPLICATE' AND r.similarityScore > 0.0)) AND " +
+           "(:search IS NULL OR :search = '' " +
+           "  OR LOWER(w.workName) LIKE LOWER(CONCAT('%', :search, '%')) " +
+           "  OR LOWER(w.workId) LIKE LOWER(CONCAT('%', :search, '%')) " +
+           "  OR LOWER(w.implementingAgencyName) LIKE LOWER(CONCAT('%', :search, '%')))",
+           countQuery = "SELECT COUNT(w) FROM Work w LEFT JOIN RiskScore r ON w.workId = r.workId WHERE " +
+           "(:district IS NULL OR :district = '' OR w.district = :district) AND " +
+           "(:category IS NULL OR :category = '' OR w.category = :category) AND " +
+           "(:status IS NULL OR :status = '' OR w.status = :status) AND " +
+           "(:riskLevel IS NULL OR :riskLevel = '' OR r.riskLevel = :riskLevel) AND " +
+           "(:signalType IS NULL OR :signalType = '' OR :signalType = 'ALL' " +
+           "  OR (:signalType = 'COST_OUTLIER' AND r.costScore > 10.0) " +
+           "  OR (:signalType = 'CHRONIC_DELAY' AND r.delayScore > 10.0) " +
+           "  OR (:signalType = 'MISSING_DOC' AND r.evidenceScore > 0.0) " +
+           "  OR (:signalType = 'DUPLICATE' AND r.similarityScore > 0.0)) AND " +
+           "(:search IS NULL OR :search = '' " +
+           "  OR LOWER(w.workName) LIKE LOWER(CONCAT('%', :search, '%')) " +
+           "  OR LOWER(w.workId) LIKE LOWER(CONCAT('%', :search, '%')) " +
+           "  OR LOWER(w.implementingAgencyName) LIKE LOWER(CONCAT('%', :search, '%')))")
+    Page<Object[]> findRiskQueueWithFilters(
+            @Param("district") String district,
+            @Param("category") String category,
+            @Param("status") String status,
+            @Param("riskLevel") String riskLevel,
+            @Param("signalType") String signalType,
+            @Param("search") String search,
+            Pageable pageable);
+
     @Query("SELECT w FROM Work w WHERE w.latitude IS NOT NULL AND w.longitude IS NOT NULL")
     List<Work> findWorksWithCoordinates();
 

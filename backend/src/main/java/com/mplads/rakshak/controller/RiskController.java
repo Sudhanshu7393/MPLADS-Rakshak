@@ -39,13 +39,14 @@ public class RiskController {
             @RequestParam(required = false) String district,
             @RequestParam(required = false) String category,
             @RequestParam(required = false) String status,
+            @RequestParam(required = false) String signalType,
             @RequestParam(required = false) String search,
             @RequestParam(defaultValue = "score") String sortBy,
             @RequestParam(defaultValue = "desc") String sortDir,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return ResponseEntity.ok(workService.getRiskQueue(riskLevel, district, category, status, search, sortBy, sortDir, pageable));
+        return ResponseEntity.ok(workService.getRiskQueue(riskLevel, district, category, status, signalType, search, sortBy, sortDir, pageable));
     }
 
     @GetMapping("/passport/{workId}")
