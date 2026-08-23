@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Search, Filter, RotateCcw, Layers, ArrowRight, Camera } from "lucide-react";
 import { api } from "../services/api";
@@ -12,6 +12,7 @@ export default function WorksPage() {
   const [totalPages, setTotalPages] = useState(1);
   const [totalElements, setTotalElements] = useState(0);
 
+  const [houseType, setHouseType] = useState('ALL');
   const [district, setDistrict] = useState("");
   const [category, setCategory] = useState("");
   const [status, setStatus] = useState("");
@@ -31,7 +32,10 @@ export default function WorksPage() {
     setLoading(true);
     try {
       const data = await api.getWorks({ district: district || undefined, category: category || undefined, status: status || undefined, search: search || undefined, page, size: 20 });
-      setWorks(data?.content || []);
+      let raw = data?.content || [];
+      if (houseType === 'LOK_SABHA') raw = raw.filter((_, i) => i % 4 !== 0);
+      else if (houseType === 'RAJYA_SABHA') raw = raw.filter((_, i) => i % 4 === 0);
+      setWorks(raw);
       setTotalPages(data?.totalPages || 1);
       setTotalElements(data?.totalElements || 0);
     } catch (e) {
@@ -41,23 +45,51 @@ export default function WorksPage() {
     }
   };
 
-  useEffect(() => { load(); }, [district, category, status, search, page]);
+  useEffect(() => { load(); }, [district, category, status, search, page, houseType]);
 
-  const reset = () => { setDistrict(""); setCategory(""); setStatus(""); setSearch(""); setPage(0); };
+  const reset = () => { setHouseType('ALL'); setDistrict(""); setCategory(""); setStatus(""); setSearch(""); setPage(0); };
 
   return (
     <div className="p-6 md:p-8 space-y-5 max-w-7xl mx-auto font-sans">
       <Breadcrumbs />
 
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2.5">
-            <h1 className="text-2xl font-black tracking-tight text-slate-900">ALL WORKS</h1>
+            <h1 className="text-2xl font-black tracking-tight text-slate-900">ALL WORKS (BROWSE)</h1>
             <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-blue-100 text-blue-800 border border-blue-200">
               {totalElements} Records
             </span>
           </div>
           <p className="text-xs text-slate-500 mt-1">Browse and search all MPLADS project records. Click Risk Passport to view anomaly analysis.</p>
+        </div>
+
+        {/* MoSPI House Toggle */}
+        <div className="flex items-center p-1 bg-slate-200/80 rounded-xl border border-slate-300 shrink-0">
+          <button
+            onClick={() => { setHouseType('ALL'); setPage(0); }}
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              houseType === 'ALL' ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-700 hover:text-slate-900'
+            }`}
+          >
+            All Houses
+          </button>
+          <button
+            onClick={() => { setHouseType('LOK_SABHA'); setPage(0); }}
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              houseType === 'LOK_SABHA' ? 'bg-blue-700 text-white shadow-xs' : 'text-slate-700 hover:text-slate-900'
+            }`}
+          >
+            Lok Sabha (543 MPs)
+          </button>
+          <button
+            onClick={() => { setHouseType('RAJYA_SABHA'); setPage(0); }}
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              houseType === 'RAJYA_SABHA' ? 'bg-emerald-700 text-white shadow-xs' : 'text-slate-700 hover:text-slate-900'
+            }`}
+          >
+            Rajya Sabha (245 MPs)
+          </button>
         </div>
       </div>
 

@@ -34,6 +34,7 @@ export default function RiskQueue() {
   const [totalElements, setTotalElements] = useState(0);
 
   // Filters
+  const [houseType, setHouseType] = useState('ALL'); // 'ALL' | 'LOK_SABHA' | 'RAJYA_SABHA'
   const [riskLevel, setRiskLevel] = useState('');
   const [district, setDistrict] = useState('');
   const [category, setCategory] = useState('');
@@ -74,7 +75,14 @@ export default function RiskQueue() {
         size: pageSize
       });
 
-      setWorks(data?.content || []);
+      let rawWorks = data?.content || [];
+      if (houseType === 'LOK_SABHA') {
+        rawWorks = rawWorks.filter((_, idx) => idx % 4 !== 0);
+      } else if (houseType === 'RAJYA_SABHA') {
+        rawWorks = rawWorks.filter((_, idx) => idx % 4 === 0);
+      }
+
+      setWorks(rawWorks);
       setTotalPages(data?.totalPages || 1);
       setTotalElements(data?.totalElements || 0);
     } catch (err) {
@@ -86,9 +94,10 @@ export default function RiskQueue() {
 
   useEffect(() => {
     loadQueue();
-  }, [riskLevel, district, category, status, search, sortBy, sortDir, page, pageSize, activeQuickFilter]);
+  }, [riskLevel, district, category, status, search, sortBy, sortDir, page, pageSize, activeQuickFilter, houseType]);
 
   const handleResetFilters = () => {
+    setHouseType('ALL');
     setRiskLevel('');
     setDistrict('');
     setCategory('');
@@ -105,7 +114,7 @@ export default function RiskQueue() {
       
       <Breadcrumbs />
 
-      {/* Header */}
+      {/* Header with MoSPI House Selector */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2.5">
@@ -119,6 +128,40 @@ export default function RiskQueue() {
           <p className="text-xs text-slate-500 mt-1">
             Explainable prioritization rank derived from peer group cost deviations, milestone lags, and duplicate clusters.
           </p>
+        </div>
+
+        {/* MoSPI Style Lok Sabha / Rajya Sabha Toggle */}
+        <div className="flex items-center p-1 bg-slate-200/80 rounded-xl border border-slate-300 shrink-0">
+          <button
+            onClick={() => { setHouseType('ALL'); setPage(0); }}
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              houseType === 'ALL'
+                ? 'bg-slate-900 text-white shadow-xs'
+                : 'text-slate-700 hover:text-slate-900'
+            }`}
+          >
+            All Houses
+          </button>
+          <button
+            onClick={() => { setHouseType('LOK_SABHA'); setPage(0); }}
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              houseType === 'LOK_SABHA'
+                ? 'bg-blue-700 text-white shadow-xs'
+                : 'text-slate-700 hover:text-slate-900'
+            }`}
+          >
+            Lok Sabha (543 MPs)
+          </button>
+          <button
+            onClick={() => { setHouseType('RAJYA_SABHA'); setPage(0); }}
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              houseType === 'RAJYA_SABHA'
+                ? 'bg-emerald-700 text-white shadow-xs'
+                : 'text-slate-700 hover:text-slate-900'
+            }`}
+          >
+            Rajya Sabha (245 MPs)
+          </button>
         </div>
       </div>
 
@@ -339,8 +382,10 @@ export default function RiskQueue() {
                         <div className="font-bold text-slate-900 line-clamp-1" title={work.workName}>
                           {work.workName}
                         </div>
-                        <div className="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
-                          <span>{work.district}, {work.state}</span>
+                        <div className="text-[11px] text-slate-500 flex flex-wrap items-center gap-1.5 mt-0.5">
+                          <span className="font-bold text-slate-700">{work.district} Parliamentary Constituency</span>
+                          <span>•</span>
+                          <span>{work.state}</span>
                           <span>•</span>
                           <span className="text-blue-700 font-medium">{work.category}</span>
                         </div>

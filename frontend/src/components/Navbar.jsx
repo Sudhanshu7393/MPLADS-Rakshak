@@ -54,6 +54,34 @@ export default function Navbar({ activeDataMode = 'PUBLIC DATA', onAnalysisRun }
             </div>
           </Link>
 
+          {/* Center Navigation Links (Official Gov Portal Style) */}
+          <nav className="hidden lg:flex items-center gap-1.5 bg-slate-950/40 p-1 rounded-xl border border-slate-800/80">
+            <Link
+              to="/"
+              className="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition"
+            >
+              Home
+            </Link>
+            <Link
+              to="/dashboard"
+              className="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition"
+            >
+              Dashboard
+            </Link>
+            <Link
+              to="/queue"
+              className="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition"
+            >
+              Scrutiny Queue
+            </Link>
+            <Link
+              to="/works"
+              className="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition"
+            >
+              All Works
+            </Link>
+          </nav>
+
           {/* Right Action Items */}
           <div className="flex items-center gap-3">
             
