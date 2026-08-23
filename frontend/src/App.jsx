@@ -68,10 +68,10 @@ function MainLayout() {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
 
-          {/* Floating Operational Guide Trigger */}
+          {/* Floating Operational Guide Trigger (Bottom-Right) */}
           <button
             onClick={() => setIsTourOpen(true)}
-            className="fixed bottom-6 left-68 z-30 hidden lg:flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 text-slate-200 font-semibold text-xs shadow-md transition border border-slate-700 no-print"
+            className="fixed bottom-6 right-6 z-40 hidden lg:flex items-center gap-2 px-4 py-2.5 rounded-full bg-slate-900/90 hover:bg-slate-900 text-slate-100 font-semibold text-xs shadow-xl transition-all hover:scale-105 border border-slate-700 backdrop-blur-md no-print"
           >
             <Compass className="w-4 h-4 text-blue-400" />
             <span>Workflow Walkthrough</span>

@@ -73,7 +73,7 @@ export default function Navbar({ activeDataMode = 'PUBLIC DATA', onAnalysisRun }
           </Link>
 
           {/* Center Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1 text-xs font-semibold bg-[#071B30] p-1 rounded-lg border border-[#173E66]">
+          <nav className="hidden md:flex items-center gap-1 text-xs font-semibold bg-white/5 p-1 rounded-lg border border-white/10">
             {navLinks.map((item) => {
               const isActive = location.pathname === item.to;
               return (
@@ -82,8 +82,8 @@ export default function Navbar({ activeDataMode = 'PUBLIC DATA', onAnalysisRun }
                   to={item.to}
                   className={`px-3 py-1.5 rounded-md transition-all ${
                     isActive 
-                      ? 'bg-blue-600 text-white font-bold shadow-xs' 
-                      : 'text-slate-200 hover:text-white hover:bg-white/10'
+                      ? 'bg-white/20 text-white font-bold shadow-xs' 
+                      : 'text-slate-300 hover:text-white hover:bg-white/10'
                   }`}
                 >
                   {item.label}

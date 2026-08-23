@@ -146,7 +146,7 @@ export default function LandingHomePage() {
     <div className="min-h-screen bg-[#F8FAFC] font-sans text-slate-900 -m-4 md:-m-6 lg:-m-8">
       
       {/* 1. SEAMLESS CINEMATIC HERO SECTION WITH ILLUMINATED PARLIAMENT ARCHITECTURE */}
-      <section className="relative bg-slate-950 text-white pt-12 pb-32 px-4 sm:px-6 lg:px-8 border-b border-slate-800 overflow-hidden">
+      <section className="relative bg-slate-950 text-white pt-10 pb-24 px-4 sm:px-6 lg:px-8 border-b border-slate-800 overflow-hidden">
         
         {/* Full Parliament Architectural Background */}
         <div 
@@ -155,28 +155,28 @@ export default function LandingHomePage() {
         />
 
         {/* Sophisticated Dark Gradient Vignette for Razor-Sharp Text Contrast */}
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/92 via-slate-950/70 to-slate-950/45 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/70 to-slate-950/40 pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/60 pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
           
           {/* Left Column: Headline & Controls */}
-          <div className="lg:col-span-7 space-y-5">
+          <div className="lg:col-span-7 space-y-4">
             
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/15 border border-blue-400/30 text-blue-300 text-xs font-semibold backdrop-blur-md">
               <ShieldCheck className="w-3.5 h-3.5 text-blue-400" />
-              <span>Ministry of Statistics &amp; Programme Implementation (MoSPI) • e-SAKSHI</span>
+              <span>Ministry of Statistics &amp; Programme Implementation • e-SAKSHI</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.18] text-white">
-              AI-Powered Risk &amp; Anomaly Intelligence for <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-300">MPLADS Governance</span>
+            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight text-white">
+              AI-Powered Risk Intelligence for <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-sky-300">MPLADS Governance</span>
             </h1>
 
             <p className="text-xs sm:text-sm text-slate-300 max-w-xl leading-relaxed">
-              Automated decision-support platform enabling District Planning Officers to proactively detect peer cost outliers, execution delays, duplicate proposals, and capture tamper-evident geo-verified completion evidence.
+              Automated decision-support platform enabling District Planning Officers to detect peer cost outliers, execution delays, duplicate proposals, and capture tamper-evident geo-verified completion evidence.
             </p>
 
-            {/* Search Input */}
+            {/* Clean Professional Search Bar */}
             <form onSubmit={handleSearch} className="max-w-lg pt-1">
               <div className="relative flex items-center">
                 <Search className="w-4 h-4 text-slate-400 absolute left-4" />
@@ -197,84 +197,84 @@ export default function LandingHomePage() {
             </form>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3 pt-1">
+            <div className="flex flex-wrap items-center gap-2.5 pt-1">
               <Link
                 to="/queue"
-                className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs sm:text-sm shadow-md transition flex items-center gap-2 transform active:scale-95"
+                className="px-4.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-md transition flex items-center gap-1.5 transform active:scale-95"
               >
-                <AlertOctagon className="w-4 h-4" />
+                <AlertOctagon className="w-3.5 h-3.5" />
                 <span>Scrutiny Queue ({highRisk} Flags)</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
 
               <Link
                 to="/dashboard"
-                className="px-4 py-2.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 font-semibold text-xs sm:text-sm border border-slate-700/80 backdrop-blur-md transition flex items-center gap-2"
+                className="px-3.5 py-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 font-semibold text-xs border border-slate-700/80 backdrop-blur-md transition flex items-center gap-1.5"
               >
-                <TrendingUp className="w-4 h-4 text-blue-400" />
-                <span>Analytics</span>
+                <TrendingUp className="w-3.5 h-3.5 text-blue-400" />
+                <span>Executive Analytics</span>
               </Link>
 
               <Link
                 to="/works/MPL-2024-UP-004821/capture-evidence"
-                className="px-4 py-2.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 font-semibold text-xs sm:text-sm border border-slate-700/80 backdrop-blur-md transition flex items-center gap-2"
+                className="px-3.5 py-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 font-semibold text-xs border border-slate-700/80 backdrop-blur-md transition flex items-center gap-1.5"
               >
-                <Camera className="w-4 h-4 text-emerald-400" />
+                <Camera className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Geo-Camera</span>
               </Link>
             </div>
 
           </div>
 
-          {/* Right Column: Frosted Glassmorphic Case Inquest Card */}
+          {/* Right Column: Sleek Frosted Glass Spotlight Card */}
           <div className="lg:col-span-5 flex justify-center">
             
-            <div className="w-full max-w-md bg-slate-900/80 backdrop-blur-xl rounded-2xl p-5 text-white shadow-2xl border border-white/10 space-y-4">
+            <div className="w-full max-w-sm bg-slate-900/80 backdrop-blur-xl rounded-2xl p-4.5 text-white shadow-2xl border border-white/10 space-y-3.5">
               
-              <div className="flex items-center justify-between border-b border-white/10 pb-3">
+              <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
                 <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-xs">
-                    <ShieldCheck className="w-4 h-4" />
+                  <div className="w-6 h-6 rounded-md bg-blue-600 flex items-center justify-center text-white font-bold text-xs">
+                    <ShieldCheck className="w-3.5 h-3.5" />
                   </div>
                   <div>
-                    <span className="text-xs font-bold block text-slate-200 leading-none">CASE INQUEST SPOTLIGHT</span>
-                    <span className="text-[10px] text-slate-400 font-mono">#MPL-2024-UP-004821</span>
+                    <span className="text-[11px] font-bold block text-slate-200 leading-none">CASE INQUEST SPOTLIGHT</span>
+                    <span className="text-[9px] text-slate-400 font-mono">#MPL-2024-UP-004821</span>
                   </div>
                 </div>
-                <span className="px-2.5 py-0.5 rounded text-[10px] font-black bg-red-500/20 text-red-300 border border-red-400/30">
+                <span className="px-2 py-0.5 rounded text-[10px] font-black bg-red-500/20 text-red-300 border border-red-400/30">
                   87 / 100 HIGH RISK
                 </span>
               </div>
 
               <div className="space-y-1">
-                <h4 className="text-xs sm:text-sm font-bold text-white leading-snug">
+                <h4 className="text-xs font-bold text-white leading-snug">
                   Construction of CC Road &amp; Paver Works, Rampur, Varanasi
                 </h4>
                 <p className="text-[11px] text-slate-300 leading-relaxed">
-                  Sanctioned cost is <strong className="text-red-400">+53.8% above peer median</strong> with a near-identical proposal detected 420m away.
+                  Sanctioned cost is <strong className="text-red-400">+53.8% above peer median</strong> with near-duplicate detected 420m away.
                 </p>
               </div>
 
               <div className="grid grid-cols-2 gap-2 text-xs">
-                <div className="p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/80 space-y-0.5">
+                <div className="p-2 rounded-xl bg-slate-800/80 border border-slate-700/80 space-y-0.5">
                   <span className="text-[9px] text-slate-400 block font-bold uppercase">Cost Variance</span>
-                  <span className="font-mono font-bold text-white text-sm">₹48.00 Lakh</span>
-                  <span className="text-[10px] text-red-400 block font-bold">+53.8% Outlier</span>
+                  <span className="font-mono font-bold text-white text-xs">₹48.00 Lakh</span>
+                  <span className="text-[9px] text-red-400 block font-bold">+53.8% Outlier</span>
                 </div>
 
-                <div className="p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/80 space-y-0.5">
-                  <span className="text-[9px] text-slate-400 block font-bold uppercase">Duplicate Range</span>
-                  <span className="font-mono font-bold text-white text-sm">420 Meters</span>
-                  <span className="text-[10px] text-amber-400 block font-bold">Similar Proposal</span>
+                <div className="p-2 rounded-xl bg-slate-800/80 border border-slate-700/80 space-y-0.5">
+                  <span className="text-[9px] text-slate-400 block font-bold uppercase">Proximity</span>
+                  <span className="font-mono font-bold text-white text-xs">420 Meters</span>
+                  <span className="text-[9px] text-amber-400 block font-bold">Duplicate Cluster</span>
                 </div>
               </div>
 
               <Link
                 to="/passport/MPL-2024-UP-004821"
-                className="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center justify-center gap-2 transition shadow-md"
+                className="w-full py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition shadow-sm"
               >
                 <span>Inspect Forensic Risk Passport</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-3 h-3" />
               </Link>
 
             </div>
@@ -286,11 +286,11 @@ export default function LandingHomePage() {
       </section>
 
 
-      {/* 2. THREE CORE PILLAR HIGHLIGHTS (CLEAN WHITE CARDS) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-20">
+      {/* 2. THREE CORE PILLAR HIGHLIGHTS (CLEAN ELEVATED WHITE CARDS) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           
-          <div className="bg-white rounded-xl p-5 shadow-lg border border-slate-200 flex items-start gap-4">
+          <div className="bg-white rounded-xl p-5 shadow-sm border border-slate-200 flex items-start gap-4">
             <div className="w-10 h-10 rounded-lg bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-700 shrink-0 shadow-xs">
               <Cpu className="w-5 h-5" />
             </div>
@@ -302,7 +302,7 @@ export default function LandingHomePage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl p-5 shadow-lg border border-slate-200 flex items-start gap-4">
+          <div className="bg-white rounded-xl p-5 shadow-sm border border-slate-200 flex items-start gap-4">
             <div className="w-10 h-10 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 shrink-0 shadow-xs">
               <Camera className="w-5 h-5" />
             </div>
@@ -314,7 +314,7 @@ export default function LandingHomePage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl p-5 shadow-lg border border-slate-200 flex items-start gap-4">
+          <div className="bg-white rounded-xl p-5 shadow-sm border border-slate-200 flex items-start gap-4">
             <div className="w-10 h-10 rounded-lg bg-slate-100 border border-slate-300 flex items-center justify-center text-slate-800 shrink-0 shadow-xs">
               <FileCheck2 className="w-5 h-5" />
             </div>
@@ -331,11 +331,11 @@ export default function LandingHomePage() {
 
 
       {/* 3. FOUR BOLD METRIC STATS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
-        <div className="bg-white rounded-xl p-8 border border-slate-200 shadow-sm grid grid-cols-2 lg:grid-cols-4 gap-8 text-center divide-y lg:divide-y-0 lg:divide-x divide-slate-100">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="bg-white rounded-xl p-6 sm:p-8 border border-slate-200 shadow-sm grid grid-cols-2 lg:grid-cols-4 gap-6 text-center divide-y lg:divide-y-0 lg:divide-x divide-slate-100">
           
           <div className="space-y-1">
-            <div className="text-2xl sm:text-4xl font-extrabold font-mono text-slate-900">
+            <div className="text-2xl sm:text-3xl font-extrabold font-mono text-slate-900">
               {formatINR(totalCost)}
             </div>
             <div className="text-xs font-semibold uppercase tracking-wider text-slate-500">
@@ -344,7 +344,7 @@ export default function LandingHomePage() {
           </div>
 
           <div className="space-y-1 pt-4 lg:pt-0">
-            <div className="text-2xl sm:text-4xl font-extrabold font-mono text-slate-900">
+            <div className="text-2xl sm:text-3xl font-extrabold font-mono text-slate-900">
               {totalWorks.toLocaleString('en-IN')}
             </div>
             <div className="text-xs font-semibold uppercase tracking-wider text-slate-500">
@@ -353,7 +353,7 @@ export default function LandingHomePage() {
           </div>
 
           <div className="space-y-1 pt-4 lg:pt-0">
-            <div className="text-2xl sm:text-4xl font-extrabold font-mono text-red-600">
+            <div className="text-2xl sm:text-3xl font-extrabold font-mono text-red-600">
               {highRisk}
             </div>
             <div className="text-xs font-semibold uppercase tracking-wider text-slate-500">
@@ -362,7 +362,7 @@ export default function LandingHomePage() {
           </div>
 
           <div className="space-y-1 pt-4 lg:pt-0">
-            <div className="text-2xl sm:text-4xl font-extrabold font-mono text-emerald-600">
+            <div className="text-2xl sm:text-3xl font-extrabold font-mono text-emerald-600">
               100%
             </div>
             <div className="text-xs font-semibold uppercase tracking-wider text-slate-500">
@@ -375,14 +375,14 @@ export default function LandingHomePage() {
 
 
       {/* 4. SIX ANALYTICAL ENGINES GRID */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-6">
         
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200 pb-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200 pb-3">
           <div>
             <span className="text-xs font-bold uppercase tracking-wider text-blue-700 block">
               SYSTEM ARCHITECTURE
             </span>
-            <h2 className="text-xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
               6 Calibrated Anomaly &amp; Risk Engines
             </h2>
           </div>
@@ -402,18 +402,18 @@ export default function LandingHomePage() {
             return (
               <div
                 key={idx}
-                className="bg-white rounded-xl p-6 border border-slate-200 hover:border-slate-300 shadow-xs flex flex-col justify-between space-y-5 transition"
+                className="bg-white rounded-xl p-5 border border-slate-200 hover:border-slate-300 shadow-xs flex flex-col justify-between space-y-4 transition"
               >
-                <div className="space-y-3">
-                  <div className={'w-10 h-10 rounded-lg ' + item.color + ' flex items-center justify-center'}>
-                    <Icon className="w-5 h-5" />
+                <div className="space-y-2.5">
+                  <div className={'w-9 h-9 rounded-lg ' + item.color + ' flex items-center justify-center'}>
+                    <Icon className="w-4.5 h-4.5" />
                   </div>
 
                   <div>
                     <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider">
                       {item.tag}
                     </span>
-                    <h3 className="text-base font-bold text-slate-900 mt-0.5">
+                    <h3 className="text-sm font-bold text-slate-900 mt-0.5">
                       {item.title}
                     </h3>
                   </div>
@@ -425,7 +425,7 @@ export default function LandingHomePage() {
 
                 <Link
                   to={item.link}
-                  className="inline-flex items-center gap-1 text-xs font-semibold text-blue-700 hover:text-blue-900 pt-3 border-t border-slate-100"
+                  className="inline-flex items-center gap-1 text-xs font-semibold text-blue-700 hover:text-blue-900 pt-2.5 border-t border-slate-100"
                 >
                   <span>Explore Module</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -439,14 +439,14 @@ export default function LandingHomePage() {
 
 
       {/* 5. RECENT HIGH-RISK PROPOSALS TABLE REGISTER */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-6">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-5">
         
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200 pb-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200 pb-3">
           <div>
             <span className="text-xs font-bold uppercase tracking-wider text-red-700 block">
               TRIAGE REGISTER
             </span>
-            <h2 className="text-xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
               High-Risk Priority Proposals
             </h2>
             <p className="text-xs text-slate-500 mt-0.5">
@@ -528,13 +528,13 @@ export default function LandingHomePage() {
 
 
       {/* 6. FAQ & STATUTORY GOVERNANCE SECTION */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-6">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-5">
         
-        <div className="border-b border-slate-200 pb-4">
+        <div className="border-b border-slate-200 pb-3">
           <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block">
             STATUTORY COMPLIANCE
           </span>
-          <h2 className="text-xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
             Frequently Asked Questions
           </h2>
         </div>
@@ -568,15 +568,15 @@ export default function LandingHomePage() {
 
 
       {/* 7. FORMAL GOVERNMENT FOOTER */}
-      <footer className="bg-[#0F172A] text-slate-400 pt-12 pb-10 border-t border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <footer className="bg-[#0F172A] text-slate-400 pt-10 pb-8 border-t border-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             
             <div className="space-y-2 md:col-span-2">
               <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded bg-blue-600 flex items-center justify-center text-white font-bold text-xs">
-                  <ShieldCheck className="w-4 h-4" />
+                <div className="w-6 h-6 rounded bg-blue-600 flex items-center justify-center text-white font-bold text-xs">
+                  <ShieldCheck className="w-3.5 h-3.5" />
                 </div>
                 <span className="font-bold text-sm tracking-wider text-white">MPLADS RAKSHAK</span>
                 <span className="text-[10px] font-bold uppercase bg-blue-900/80 text-blue-200 border border-blue-400/30 px-1.5 py-0.2 rounded">MoSPI</span>
@@ -586,7 +586,7 @@ export default function LandingHomePage() {
               </p>
             </div>
 
-            <div className="space-y-1.5 text-xs">
+            <div className="space-y-1 text-xs">
               <span className="font-bold text-white uppercase tracking-wider block">Operational Modules</span>
               <ul className="space-y-1 text-slate-400">
                 <li><Link to="/dashboard" className="hover:text-white transition">Executive Analytics</Link></li>
@@ -596,7 +596,7 @@ export default function LandingHomePage() {
               </ul>
             </div>
 
-            <div className="space-y-1.5 text-xs">
+            <div className="space-y-1 text-xs">
               <span className="font-bold text-white uppercase tracking-wider block">Audit &amp; Governance</span>
               <ul className="space-y-1 text-slate-400">
                 <li><Link to="/audit" className="hover:text-white transition">Officer Audit Trail</Link></li>
@@ -608,7 +608,7 @@ export default function LandingHomePage() {
 
           </div>
 
-          <div className="border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+          <div className="border-t border-slate-800 pt-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
             <p>© 2026 MPLADS Rakshak • Ministry of Statistics &amp; Programme Implementation (MoSPI). All rights reserved.</p>
             <p className="font-mono text-[11px]">Smart India Hackathon SIH26102</p>
           </div>
