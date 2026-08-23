@@ -43,14 +43,14 @@ function MainLayout() {
   }, [refreshKey]);
 
   return (
-    <div className="h-screen bg-[#F1F5F9] text-slate-900 flex flex-col font-sans overflow-hidden">
+    <div className="h-screen bg-[#F1F5F9] dark:bg-[#0B0F19] text-slate-900 dark:text-slate-100 flex flex-col font-sans overflow-hidden transition-colors duration-200">
       <Navbar 
         activeDataMode={activeDataMode} 
         onAnalysisRun={() => setRefreshKey(k => k + 1)}
       />
       <div className="flex-1 flex overflow-hidden">
         <Sidebar />
-        <main className="flex-1 overflow-y-auto bg-[#F1F5F9] p-4 md:p-6 lg:p-8 relative">
+        <main className="flex-1 overflow-y-auto bg-[#F1F5F9] dark:bg-[#0B0F19] p-4 md:p-6 lg:p-8 relative transition-colors duration-200">
           <Routes>
             <Route path="/" element={<LandingHomePage key={refreshKey} />} />
             <Route path="/dashboard" element={<Dashboard key={refreshKey} />} />

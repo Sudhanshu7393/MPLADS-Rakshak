@@ -1,18 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-export default function RevealOnScroll({ children, className = '', delay = 0, threshold = 0.1 }) {
+export default function RevealOnScroll({ children, className = '', delay = 0, threshold = 0.08 }) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          if (ref.current) observer.unobserve(ref.current);
-        }
+        setIsVisible(entry.isIntersecting);
       },
-      { threshold, rootMargin: '0px 0px -40px 0px' }
+      { threshold, rootMargin: '0px 0px -20px 0px' }
     );
 
     if (ref.current) {

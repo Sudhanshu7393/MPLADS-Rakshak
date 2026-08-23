@@ -94,6 +94,19 @@ export default function Navbar({ activeDataMode = 'PUBLIC DATA', onAnalysisRun }
               </span>
             </button>
 
+            {/* Light / Dark Mode Toggle Switcher */}
+            <button
+              onClick={toggleTheme}
+              className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-slate-200 hover:text-white border border-white/10 transition flex items-center justify-center shadow-xs"
+              title={isDark ? "Switch to Light Theme" : "Switch to Dark Theme"}
+            >
+              {isDark ? (
+                <Sun className="w-4 h-4 text-amber-300 transition-transform rotate-0 hover:rotate-90" />
+              ) : (
+                <Moon className="w-4 h-4 text-sky-200 transition-transform rotate-0 hover:-rotate-12" />
+              )}
+            </button>
+
             {/* Officer Profile & Sign out */}
             <div className="flex items-center gap-2 pl-3 border-l border-slate-700">
               <div className="text-right hidden sm:block">
