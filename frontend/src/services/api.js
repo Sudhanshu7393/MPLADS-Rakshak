@@ -32,7 +32,7 @@ export function clearAuthSession() {
   localStorage.removeItem('rakshak_user');
 }
 
-// 1. Comprehensive Works Dataset
+// 1. Comprehensive Pan-India Geo-Referenced Works Dataset
 const MOCK_WORKS = [
   {
     workId: 'MPL-2024-UP-004821',
@@ -43,6 +43,7 @@ const MOCK_WORKS = [
     state: 'Uttar Pradesh',
     mpName: 'Hon. Prime Minister (Varanasi)',
     sanctionedAmount: 4800000,
+    cost: 4800000,
     estimatedCost: 4800000,
     sanctionDate: '2024-03-12',
     targetDate: '2024-09-15',
@@ -50,6 +51,8 @@ const MOCK_WORKS = [
     riskScore: 87,
     overallRiskScore: 87,
     riskLevel: 'HIGH',
+    lat: 25.3176,
+    lon: 82.9739,
     latitude: 25.3176,
     longitude: 82.9739,
     agencyName: 'Purvanchal Infrastructure Ltd',
@@ -70,6 +73,7 @@ const MOCK_WORKS = [
     state: 'Uttar Pradesh',
     mpName: 'Hon. Prime Minister (Varanasi)',
     sanctionedAmount: 3200000,
+    cost: 3200000,
     estimatedCost: 3200000,
     sanctionDate: '2024-01-20',
     targetDate: '2024-06-30',
@@ -77,6 +81,8 @@ const MOCK_WORKS = [
     riskScore: 82,
     overallRiskScore: 82,
     riskLevel: 'HIGH',
+    lat: 25.3211,
+    lon: 82.9845,
     latitude: 25.3211,
     longitude: 82.9845,
     agencyName: 'Surya Solar Tech Solutions',
@@ -96,6 +102,7 @@ const MOCK_WORKS = [
     state: 'Uttar Pradesh',
     mpName: 'Hon. Prime Minister (Varanasi)',
     sanctionedAmount: 2500000,
+    cost: 2500000,
     estimatedCost: 2500000,
     sanctionDate: '2024-02-05',
     targetDate: '2024-08-10',
@@ -103,6 +110,8 @@ const MOCK_WORKS = [
     riskScore: 78,
     overallRiskScore: 78,
     riskLevel: 'HIGH',
+    lat: 25.2985,
+    lon: 82.9654,
     latitude: 25.2985,
     longitude: 82.9654,
     agencyName: 'Jal Shakti Engineering Corp',
@@ -116,11 +125,12 @@ const MOCK_WORKS = [
     workId: 'MPL-2024-UP-005120',
     workName: 'Upgradation and Boundary Wall Construction for Rural Primary Health Sub-Center, Badagaon',
     workTitle: 'Upgradation and Boundary Wall Construction for Rural Primary Health Sub-Center, Badagaon',
-    category: 'Health & Family Welfare',
+    category: 'Health & Sanitation',
     district: 'Varanasi',
     state: 'Uttar Pradesh',
     mpName: 'Hon. Prime Minister (Varanasi)',
     sanctionedAmount: 5200000,
+    cost: 5200000,
     estimatedCost: 5200000,
     sanctionDate: '2024-04-18',
     targetDate: '2024-11-20',
@@ -128,6 +138,8 @@ const MOCK_WORKS = [
     riskScore: 75,
     overallRiskScore: 75,
     riskLevel: 'HIGH',
+    lat: 25.3340,
+    lon: 83.0012,
     latitude: 25.3340,
     longitude: 83.0012,
     agencyName: 'Purvanchal Infrastructure Ltd',
@@ -146,6 +158,7 @@ const MOCK_WORKS = [
     state: 'Uttar Pradesh',
     mpName: 'Hon. Prime Minister (Varanasi)',
     sanctionedAmount: 6500000,
+    cost: 6500000,
     estimatedCost: 6500000,
     sanctionDate: '2024-01-10',
     targetDate: '2024-07-15',
@@ -153,6 +166,8 @@ const MOCK_WORKS = [
     riskScore: 73,
     overallRiskScore: 73,
     riskLevel: 'HIGH',
+    lat: 25.2750,
+    lon: 82.9120,
     latitude: 25.2750,
     longitude: 82.9120,
     agencyName: 'Kashi Vikas Nirman Sanstha',
@@ -161,6 +176,156 @@ const MOCK_WORKS = [
       'Timeline Lag: Project is 185 days past targeted handover date.',
       'Fund Velocity Anomaly: 80% funds disbursed against 40% physical progress.'
     ]
+  },
+  {
+    workId: 'MPL-2024-UP-006240',
+    workName: 'Smart Classroom Digital Laboratory Setup at Gomti Nagar Inter College',
+    workTitle: 'Smart Classroom Digital Laboratory Setup at Gomti Nagar Inter College',
+    category: 'Education',
+    district: 'Lucknow',
+    state: 'Uttar Pradesh',
+    mpName: 'Hon. MP (Lucknow)',
+    sanctionedAmount: 3800000,
+    cost: 3800000,
+    estimatedCost: 3800000,
+    sanctionDate: '2024-02-14',
+    targetDate: '2024-06-30',
+    status: 'SANCTIONED',
+    riskScore: 54,
+    overallRiskScore: 54,
+    riskLevel: 'MEDIUM',
+    lat: 26.8467,
+    lon: 80.9462,
+    latitude: 26.8467,
+    longitude: 80.9462,
+    agencyName: 'Awadh Digital Solutions',
+    primaryReason: 'Advisory Review: Cost variance +18% vs state norms',
+    riskSignals: ['Cost Deviation: +18% vs state ed-tech schedule.']
+  },
+  {
+    workId: 'MPL-2024-UP-007119',
+    workName: 'Solar Street Lights Network across 12 Gram Panchayats',
+    workTitle: 'Solar Street Lights Network across 12 Gram Panchayats',
+    category: 'Energy & Power',
+    district: 'Gorakhpur',
+    state: 'Uttar Pradesh',
+    mpName: 'Hon. MP (Gorakhpur)',
+    sanctionedAmount: 4200000,
+    cost: 4200000,
+    estimatedCost: 4200000,
+    sanctionDate: '2024-03-01',
+    targetDate: '2024-08-30',
+    status: 'IN_PROGRESS',
+    riskScore: 61,
+    overallRiskScore: 61,
+    riskLevel: 'MEDIUM',
+    lat: 26.7606,
+    lon: 83.3732,
+    latitude: 26.7606,
+    longitude: 83.3732,
+    agencyName: 'Purvanchal Urja Vikas',
+    primaryReason: 'Delay Advisory: 45 days execution lag',
+    riskSignals: ['Milestone Lag: 45 days past installation schedule.']
+  },
+  {
+    workId: 'MPL-2024-UP-008923',
+    workName: 'Drinking Water Pipeline Extension to Rural Harijan Basti',
+    workTitle: 'Drinking Water Pipeline Extension to Rural Harijan Basti',
+    category: 'Drinking Water',
+    district: 'Kanpur Nagar',
+    state: 'Uttar Pradesh',
+    mpName: 'Hon. MP (Kanpur)',
+    sanctionedAmount: 2800000,
+    cost: 2800000,
+    estimatedCost: 2800000,
+    sanctionDate: '2024-01-15',
+    targetDate: '2024-05-30',
+    status: 'COMPLETED',
+    riskScore: 22,
+    overallRiskScore: 22,
+    riskLevel: 'LOW',
+    lat: 26.4499,
+    lon: 80.3319,
+    latitude: 26.4499,
+    longitude: 80.3319,
+    agencyName: 'Ganga Jal Nigam',
+    primaryReason: 'Routine Sanction: All parameters within standard bounds',
+    riskSignals: ['Compliant with standard schedule of rates. Geotagged evidence verified.']
+  },
+  {
+    workId: 'MPL-2024-UP-009450',
+    workName: 'Construction of Overbridge Approach Pathway and Pedestrian Guardrails',
+    workTitle: 'Construction of Overbridge Approach Pathway and Pedestrian Guardrails',
+    category: 'Roads & Bridges',
+    district: 'Prayagraj',
+    state: 'Uttar Pradesh',
+    mpName: 'Hon. MP (Prayagraj)',
+    sanctionedAmount: 3100000,
+    cost: 3100000,
+    estimatedCost: 3100000,
+    sanctionDate: '2024-02-28',
+    targetDate: '2024-07-30',
+    status: 'COMPLETED',
+    riskScore: 18,
+    overallRiskScore: 18,
+    riskLevel: 'LOW',
+    lat: 25.4358,
+    lon: 81.8463,
+    latitude: 25.4358,
+    longitude: 81.8463,
+    agencyName: 'Triveni Setu Nirman',
+    primaryReason: 'Routine Sanction: Verified on-site completion',
+    riskSignals: ['100% compliant with PWD SOR baselines.']
+  },
+  {
+    workId: 'MPL-2024-MH-001045',
+    workName: 'Community E-Library & Skill Training Center at Andheri West',
+    workTitle: 'Community E-Library & Skill Training Center at Andheri West',
+    category: 'Education',
+    district: 'Mumbai Suburban',
+    state: 'Maharashtra',
+    mpName: 'Hon. MP (Mumbai North West)',
+    sanctionedAmount: 5500000,
+    cost: 5500000,
+    estimatedCost: 5500000,
+    sanctionDate: '2024-03-05',
+    targetDate: '2024-09-20',
+    status: 'SANCTIONED',
+    riskScore: 28,
+    overallRiskScore: 28,
+    riskLevel: 'LOW',
+    lat: 19.1136,
+    lon: 72.8697,
+    latitude: 19.1136,
+    longitude: 72.8697,
+    agencyName: 'Maharashtra Skill Tech',
+    primaryReason: 'Routine Sanction',
+    riskSignals: ['Standard ed-tech rates.']
+  },
+  {
+    workId: 'MPL-2024-KA-003321',
+    workName: 'Solar Water Filtration and ATM Kiosk at Electronic City',
+    workTitle: 'Solar Water Filtration and ATM Kiosk at Electronic City',
+    category: 'Drinking Water',
+    district: 'Bengaluru Urban',
+    state: 'Karnataka',
+    mpName: 'Hon. MP (Bangalore South)',
+    sanctionedAmount: 2900000,
+    cost: 2900000,
+    estimatedCost: 2900000,
+    sanctionDate: '2024-01-25',
+    targetDate: '2024-06-15',
+    status: 'IN_PROGRESS',
+    riskScore: 32,
+    overallRiskScore: 32,
+    riskLevel: 'LOW',
+    lat: 12.9716,
+    lon: 77.5946,
+    latitude: 12.9716,
+    longitude: 77.5946,
+    agencyName: 'Karnataka Jal Mission',
+    primaryReason: 'Routine Sanction',
+    riskSignals: ['All verified on-site.']
   }
 ];
 
@@ -193,7 +358,56 @@ const MOCK_SUMMARY = {
   recentHighRiskWorks: MOCK_WORKS
 };
 
-// 3. Comprehensive Cases / Investigations
+// 3. Similar / Duplicate Proposals Pairs
+const MOCK_SIMILAR_PAIRS = [
+  {
+    sourceWorkId: 'MPL-2024-UP-004821',
+    sourceWorkName: 'Construction of CC Road and Interlocking Pavement from Main Chowk to Primary Health Center, Village Rampur',
+    sourceDistrict: 'Varanasi',
+    sourceCategory: 'Roads & Bridges',
+    sourceSanctionedAmount: 4800000,
+    targetWorkId: 'MPL-2023-UP-001209',
+    targetWorkName: 'Paved CC Pathway & Brick Interlocking near Shiv Mandir, Rampur Village',
+    targetDistrict: 'Varanasi',
+    targetCategory: 'Roads & Bridges',
+    targetSanctionedAmount: 3400000,
+    targetAgency: 'Purvanchal Infrastructure Ltd',
+    similarityScore: 92,
+    distanceMeters: 240
+  },
+  {
+    sourceWorkId: 'MPL-2024-UP-002104',
+    sourceWorkName: 'Deep Borewell and RO Drinking Water Filtration Plant at Government Girls Inter College, Pindra',
+    sourceDistrict: 'Varanasi',
+    sourceCategory: 'Drinking Water',
+    sourceSanctionedAmount: 2500000,
+    targetWorkId: 'MPL-2023-UP-000845',
+    targetWorkName: 'Installation of Solar RO Water Purifier System at Girls School Campus, Pindra',
+    targetDistrict: 'Varanasi',
+    targetCategory: 'Drinking Water',
+    targetSanctionedAmount: 2200000,
+    targetAgency: 'Jal Shakti Engineering Corp',
+    similarityScore: 88,
+    distanceMeters: 180
+  },
+  {
+    sourceWorkId: 'MPL-2024-UP-003912',
+    sourceWorkName: 'Installation of Solar High-Mast Lighting System at Community Gathering Center, Cholapur',
+    sourceDistrict: 'Varanasi',
+    sourceCategory: 'Energy & Power',
+    sourceSanctionedAmount: 3200000,
+    targetWorkId: 'MPL-2022-UP-004510',
+    targetWorkName: 'Erection of High-Mast Solar Light Tower in Front of Community Hall, Cholapur',
+    targetDistrict: 'Varanasi',
+    targetCategory: 'Energy & Power',
+    targetSanctionedAmount: 2800000,
+    targetAgency: 'Surya Solar Tech Solutions',
+    similarityScore: 85,
+    distanceMeters: 95
+  }
+];
+
+// 4. Comprehensive Cases / Investigations
 const MOCK_CASES = [
   {
     caseNumber: 'CASE-2024-001',
@@ -226,11 +440,22 @@ const MOCK_CASES = [
     priority: 'HIGH',
     dateOpened: '2024-03-01',
     updatedAt: '2024-03-12',
-    summary: 'Proximity matching detected identical deep borewell sanctioned 240m away in 2023 under state education budget.'
+    summary: 'Proximity matching detected identical deep borewell sanctioned 180m away under state education budget.'
+  },
+  {
+    caseNumber: 'CASE-2024-004',
+    workId: 'MPL-2024-UP-005120',
+    title: 'Agency Monopoly Concentration Review in Rural Sub-Centers',
+    status: 'UNDER_REVIEW',
+    assignedOfficer: 'Chief Development Officer (CDO)',
+    priority: 'HIGH',
+    dateOpened: '2024-04-20',
+    updatedAt: '2024-05-02',
+    summary: 'Purvanchal Infrastructure holds >64% sector market share (HHI = 4210). Notice issued for open competitive bidding.'
   }
 ];
 
-// 4. Audit Log Entries
+// 5. Audit Log Entries
 const MOCK_AUDIT_LOGS = [
   {
     id: 1,
@@ -299,6 +524,18 @@ async function request(endpoint, options = {}) {
   if (endpoint.includes('/dashboard/summary')) {
     return MOCK_SUMMARY;
   }
+  if (endpoint.includes('/works/map')) {
+    return MOCK_WORKS;
+  }
+  if (endpoint.includes('/works/filters/districts')) {
+    return ['Varanasi', 'Lucknow', 'Kanpur Nagar', 'Gorakhpur', 'Prayagraj', 'Agra', 'Mumbai Suburban', 'Bengaluru Urban'];
+  }
+  if (endpoint.includes('/works/filters/categories')) {
+    return ['Roads & Bridges', 'Drinking Water', 'Education', 'Community Assets', 'Health & Sanitation', 'Energy & Power'];
+  }
+  if (endpoint.includes('/similar')) {
+    return MOCK_SIMILAR_PAIRS;
+  }
   if (endpoint.includes('/risks/queue') || (endpoint.startsWith('/works') && !endpoint.includes('/filters') && !endpoint.includes('/map') && !endpoint.includes('/evidence'))) {
     return {
       content: MOCK_WORKS,
@@ -322,7 +559,7 @@ async function request(endpoint, options = {}) {
         peerCount: 312
       },
       similarWorks: [
-        { workId: 'MPL-2023-UP-001209', workName: 'Paved Pathway at Shiv Mandir', similarityScore: 92, distanceMeters: 240 }
+        { workId: 'MPL-2023-UP-001209', workName: 'Paved CC Pathway & Brick Interlocking near Shiv Mandir, Rampur Village', similarityScore: 92, distanceMeters: 240 }
       ],
       agencyAnalysis: {
         agencyName: found.agencyName,
@@ -373,26 +610,6 @@ async function request(endpoint, options = {}) {
         ]
       }
     };
-  }
-  if (endpoint.includes('/works/map')) {
-    return MOCK_WORKS;
-  }
-  if (endpoint.includes('/works/filters/districts')) {
-    return ['Varanasi', 'Lucknow', 'Kanpur Nagar', 'Gorakhpur', 'Prayagraj', 'Agra', 'Ghaziabad', 'Meerut'];
-  }
-  if (endpoint.includes('/works/filters/categories')) {
-    return ['Roads & Bridges', 'Drinking Water', 'Education', 'Community Assets', 'Health & Sanitation', 'Energy & Power'];
-  }
-  if (endpoint.includes('/similar')) {
-    return [
-      {
-        sourceWork: MOCK_WORKS[0],
-        matchedWork: { workId: 'MPL-2023-UP-001209', workName: 'Paved Pathway at Shiv Mandir', sanctionedAmount: 3400000 },
-        similarityScore: 92,
-        distanceMeters: 240,
-        clusterId: 'CLUSTER-VAR-001'
-      }
-    ];
   }
   if (endpoint.includes('/investigations') && !endpoint.includes('/notes')) {
     return {
