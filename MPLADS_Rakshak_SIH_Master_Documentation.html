@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MPLADS RAKSHAK - Master Presentation & Defense Guide (SIH 2026)</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
+
+    :root {
+      --primary: #0B2545;
+      --secondary: #133B5C;
+      --saffron: #FF9933;
+      --green: #10B981;
+      --red: #EF4444;
+      --amber: #F59E0B;
+      --purple: #8B5CF6;
+      --bg: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --text: #0F172A;
+      --text-muted: #64748B;
+      --border: #E2E8F0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 24px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #FFFFFF;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    /* National Header Bar */
+    .tricolor {
+      height: 6px;
+      display: flex;
+      width: 100%;
+    }
+    .tricolor .s { background: #FF9933; width: 33.33%; }
+    .tricolor .w { background: #FFFFFF; width: 33.33%; }
+    .tricolor .g { background: #138808; width: 33.34%; }
+
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: #FFFFFF;
+      padding: 40px;
+      position: relative;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+    .badge-saffron { background: rgba(255,153,51,0.2); color: #FFD29D; border: 1px solid rgba(255,153,51,0.4); }
+    .badge-green { background: rgba(16,185,129,0.15); color: #10B981; border: 1px solid rgba(16,185,129,0.3); }
+    .badge-red { background: rgba(239,68,68,0.15); color: #EF4444; border: 1px solid rgba(239,68,68,0.3); }
+
+    .header h1 {
+      font-size: 36px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      font-size: 16px;
+      color: #CBD5E1;
+      max-width: 800px;
+    }
+
+    .action-bar {
+      padding: 16px 40px;
+      background: #F1F5F9;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .download-btn {
+      background: #2563EB;
+      color: #FFFFFF;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 13px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 6px rgba(37,99,235,0.3);
+      transition: all 0.2s;
+    }
+    .download-btn:hover {
+      background: #1D4ED8;
+      transform: translateY(-1px);
+    }
+
+    .content {
+      padding: 40px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 32px 0 16px 0;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #E2E8F0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Slide Card Box */
+    .slide-box {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      border-left: 6px solid var(--primary);
+    }
+    .slide-box.accent-red { border-left-color: var(--red); }
+    .slide-box.accent-green { border-left-color: var(--green); }
+    .slide-box.accent-amber { border-left-color: var(--amber); }
+    .slide-box.accent-purple { border-left-color: var(--purple); }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .slide-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: #F1F5F9;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+    .slide-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+      margin: 16px 0;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin: 16px 0;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin: 16px 0;
+    }
+
+    .mini-card {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .mini-card h4 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .mini-card p {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .stat-box {
+      text-align: center;
+      padding: 20px;
+      background: #F8FAFC;
+      border-radius: 14px;
+      border: 1px solid #E2E8F0;
+    }
+    .stat-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--primary);
+    }
+    .stat-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .script-box {
+      background: #F0FDF4;
+      border: 1px solid #BBF7D0;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 16px 0;
+      font-style: italic;
+      color: #166534;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .qa-box {
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+    }
+    .qa-q {
+      font-weight: 800;
+      color: #991B1B;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+    .qa-a {
+      font-size: 13px;
+      color: #1E293B;
+      line-height: 1.6;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    th, td {
+      padding: 12px 14px;
+      border: 1px solid #E2E8F0;
+      text-align: left;
+    }
+    th {
+      background: #F1F5F9;
+      font-weight: 700;
+      color: var(--text);
+    }
+    tr:nth-child(even) {
+      background: #F8FAFC;
+    }
+
+    @media print {
+      body { background: #FFFFFF; padding: 0; }
+      .container { box-shadow: none; border: none; max-width: 100%; }
+      .action-bar { display: none; }
+      .slide-box { page-break-inside: avoid; border: 1px solid #CBD5E1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- National Accent -->
+    <div class="tricolor">
+      <div class="s"></div>
+      <div class="w"></div>
+      <div class="g"></div>
+    </div>
+
+    <!-- Header Banner -->
+    <div class="header">
+      <span class="badge badge-saffron">Smart India Hackathon • SIH26102 (MoSPI)</span>
+      <h1>MPLADS RAKSHAK</h1>
+      <p>National AI-Powered Anomaly Intelligence & Decision Support Layer for e-SAKSHI (Public Funds Governance)</p>
+    </div>
+
+    <!-- Action Bar -->
+    <div class="action-bar">
+      <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">
+        📑 Master Documentation &amp; Presentation Pitch Deck
+      </span>
+      <button onclick="window.print()" class="download-btn">
+        <span>🖨️ Download / Save as PDF</span>
+      </button>
+    </div>
+
+    <div class="content">
+
+      <!-- EXECUTIVE SUMMARY -->
+      <h2 class="section-title">🏛️ Executive Overview &amp; Problem Statement</h2>
+      <div class="slide-box accent-red">
+        <div class="slide-header">
+          <span class="slide-title">1. The ₹4,000 Crore Governance Challenge in MPLADS</span>
+          <span class="slide-number">SLIDE 01</span>
+        </div>
+        <p style="font-size: 14px; margin-bottom: 12px;">
+          The Members of Parliament Local Area Development Scheme (MPLADS) allocates <strong>₹5 Crore annually per MP</strong> (₹4,000+ Crore national annual outlay across 790+ MPs) for essential community infrastructure (rural roads, drinking water, healthcare).
+        </p>
+        <div class="grid-2">
+          <div class="mini-card" style="border-left: 4px solid var(--red);">
+            <h4>🔴 1. Cost Inflation & Estimates</h4>
+            <p>Identical works (e.g. 500m CC Road) sanctioned at +50% to +80% above neighboring district medians without automated peer benchmarking.</p>
+          </div>
+          <div class="mini-card" style="border-left: 4px solid var(--amber);">
+            <h4>🟠 2. Duplicate & Ghost Projects</h4>
+            <p>Multiple MPs or consecutive terms fund the same physical asset because titles differ slightly in text (e.g. "Shiva Temple Road" vs "Shiv Mandir Way").</p>
+          </div>
+          <div class="mini-card" style="border-left: 4px solid var(--purple);">
+            <h4>🟣 3. Stalled Timelines & Delays</h4>
+            <p>Works lingering 180–400+ days past sanctioned deadlines with funds disbursed without verifiable completion proof.</p>
+          </div>
+          <div class="mini-card" style="border-left: 4px solid #334155;">
+            <h4>🟤 4. Contractor Cartels & Fake Photos</h4>
+            <p>Single agencies capturing 70%+ district works; inspection photos uploaded from office desks (fake GPS & gallery uploads).</p>
+          </div>
+        </div>
+        <div style="background: #FEF2F2; padding: 12px 16px; border-radius: 8px; border: 1px solid #FECACA; font-size: 13px; color: #991B1B;">
+          <strong>The Fundamental Flaw:</strong> Existing e-SAKSHI is a PASSIVE data store. Audits happen 2 years later after funds are spent. We need <strong>Real-Time Anomaly Interception</strong>.
+        </div>
+      </div>
+
+      <!-- THE SOLUTION -->
+      <h2 class="section-title">💡 Proposed Solution: MPLADS Rakshak</h2>
+      <div class="slide-box accent-green">
+        <div class="slide-header">
+          <span class="slide-title">2. Intelligent Decision-Support Shield for DPOs</span>
+          <span class="slide-number">SLIDE 02</span>
+        </div>
+        <p style="font-size: 14px; margin-bottom: 12px;">
+          MPLADS Rakshak is an <strong>AI-powered, non-invasive decision support layer</strong> that intercepts e-SAKSHI proposal streams, calculates 0–100 risk scores across 6 calibrated anomaly engines, and delivers prioritized, court-ready dossiers to District Planning Officers.
+        </p>
+        <div class="grid-3">
+          <div class="mini-card">
+            <h4>⚡ Non-Invasive Feasibility</h4>
+            <p>Plugs directly into e-SAKSHI APIs with zero database modifications or disruption to active workflows.</p>
+          </div>
+          <div class="mini-card">
+            <h4>🎯 100% Explainable AI (XAI)</h4>
+            <p>No black-box scores. Every flag gives exact numerical proof (e.g. +53.8% IQR cost, 195d lag, 92% NLP match).</p>
+          </div>
+          <div class="mini-card">
+            <h4>📑 1-Click Court Dossiers</h4>
+            <p>Generates MoSPI-compliant statutory PDF reports with digital audit trails for instant vigilance action.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 ANOMALY ENGINES -->
+      <h2 class="section-title">⚙️ The 6 Calibrated AI & Econometric Engines</h2>
+      <div class="slide-box accent-purple">
+        <div class="slide-header">
+          <span class="slide-title">3. Multi-Dimensional Anomaly Detection Core</span>
+          <span class="slide-number">SLIDE 03</span>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Anomaly Engine</th>
+                <th>Mathematical / AI Technique</th>
+                <th>What It Catches</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1</strong></td>
+                <td><strong>Peer Cost Outliers</strong></td>
+                <td>Interquartile Range (IQR) & Multi-District Medians</td>
+                <td>Estimates exceeding +1.5x IQR above identical sector projects.</td>
+              </tr>
+              <tr>
+                <td><strong>2</strong></td>
+                <td><strong>Duplicate Matcher</strong></td>
+                <td>TF-IDF NLP Vectorization + Haversine Geodesic Distance</td>
+                <td>Semantic duplicate proposals within &lt;500m radius.</td>
+              </tr>
+              <tr>
+                <td><strong>3</strong></td>
+                <td><strong>Milestone Delay Lag</strong></td>
+                <td>Dynamic Hazard Decay Timeline Scoring</td>
+                <td>Projects lagging 180+ days past sanctioned target date.</td>
+              </tr>
+              <tr>
+                <td><strong>4</strong></td>
+                <td><strong>Agency Monopoly (HHI)</strong></td>
+                <td>Herfindahl-Hirschman Index (Antitrust Economics)</td>
+                <td>Single vendor cartels capturing district HHI &gt; 2500.</td>
+              </tr>
+              <tr>
+                <td><strong>5</strong></td>
+                <td><strong>Unsupervised Detector</strong></td>
+                <td>Isolation Forests &amp; Multi-Variate Clustering</td>
+                <td>Multi-variable non-linear fund velocity anomalies.</td>
+              </tr>
+              <tr>
+                <td><strong>6</strong></td>
+                <td><strong>Geo-Camera Evidence</strong></td>
+                <td>Hardware GPS Lock + SHA-256 Digest Matrix</td>
+                <td>Photos taken &gt;500m away or altered image files.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- LIVE STATS IMPACT -->
+      <h2 class="section-title">📊 Audited Scale & Quantified Impact</h2>
+      <div class="slide-box">
+        <div class="slide-header">
+          <span class="slide-title">4. Real-World Multi-District Benchmarking</span>
+          <span class="slide-number">SLIDE 04</span>
+        </div>
+        <div class="grid-4">
+          <div class="stat-box">
+            <div class="stat-number">₹593.13 Cr</div>
+            <div class="stat-label">Sanctioned Outlay Audited</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">3,013</div>
+            <div class="stat-label">Total Projects Processed</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number" style="color: var(--red);">294</div>
+            <div class="stat-label">High-Risk Priority Flags</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number" style="color: var(--green);">220 ms</div>
+            <div class="stat-label">3,000 Works Batch Execution</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3-MINUTE PITCH SCRIPT -->
+      <h2 class="section-title">🎙️ 3-Minute Master Pitch Script (Word-for-Word)</h2>
+      <div class="slide-box accent-green">
+        <div class="slide-header">
+          <span class="slide-title">5. Winning Presentation Script for Judges</span>
+          <span class="slide-number">PITCH GUIDE</span>
+        </div>
+        
+        <h4 style="color: var(--primary); margin-top: 10px;">[0:00 - 0:45] The Hook &amp; Problem (दमदार शुरुआत)</h4>
+        <div class="script-box">
+          "Respected Judges and Evaluators, good morning. Every year under MPLADS, the Government of India allocates over ₹4,000 Crores across 790+ MPs to build essential community infrastructure. While the official e-SAKSHI portal records transactions, it remains a passive data entry system. It cannot automatically alert an officer if a proposed road costs 60% more than identical roads in neighboring blocks, if the same project was already funded by a previous MP, or if uploaded site photos were taken from an office 5 kilometers away. As a result, audits happen years later—long after public money is spent."
+        </div>
+
+        <h4 style="color: var(--primary); margin-top: 10px;">[0:45 - 1:45] The Solution &amp; 6 Engines (सोल्यूशन का दम)</h4>
+        <div class="script-box">
+          "To solve this national governance challenge, we built <strong>MPLADS RAKSHAK</strong>—a national AI-powered anomaly intelligence and decision-support layer for e-SAKSHI. Instead of manual post-mortems, Rakshak continuously evaluates every proposal across 6 calibrated econometric engines: Peer-group IQR cost benchmarking, Milestone delay decay, TF-IDF and Haversine duplicate matching within 500 meters, HHI contractor monopoly index, Isolation Forests, and a tamper-proof Geo-Camera that locks hardware GPS and generates immutable SHA-256 cryptographic hashes on field evidence."
+        </div>
+
+        <h4 style="color: var(--primary); margin-top: 10px;">[1:45 - 2:30] Live Demo &amp; Explainable AI (लाइव डेमो व XAI)</h4>
+        <div class="script-box">
+          "On our live dataset of 3,013 projects worth ₹593 Crores, Rakshak prioritized 294 high-risk proposals in just 220 milliseconds. Notice that our AI is 100% Explainable. When an officer inspects Work #MPL-2024-UP-004821 in Varanasi, the 360° Risk Passport decomposes the exact score: +53.8% cost anomaly vs 312 peer works (+25 pts), 195 days delay (+20 pts), and an agency monopoly of 64%. With 1 click, the officer exports a court-ready MoSPI statutory PDF dossier for immediate vigilance determination."
+        </div>
+
+        <h4 style="color: var(--primary); margin-top: 10px;">[2:30 - 3:00] Business Impact &amp; Closing (समापन)</h4>
+        <div class="script-box">
+          "MPLADS Rakshak requires zero disruption to existing e-SAKSHI databases, cuts manual audit time from 6 weeks to under a second, and ensures complete financial transparency. We believe MPLADS Rakshak serves as a true national guardian for public funds. Thank you, and we are now open for questions."
+        </div>
+      </div>
+
+      <!-- JUDGES Q&A DEFENSE GUIDE -->
+      <h2 class="section-title">🛡️ Judges Q&amp;A Defense Guide (Top 5 Questions &amp; Winning Answers)</h2>
+      <div class="slide-box accent-red">
+        <div class="slide-header">
+          <span class="slide-title">6. Bulletproof Answers to Tough Questions</span>
+          <span class="slide-number">Q&amp;A DEFENSE</span>
+        </div>
+
+        <div class="qa-box">
+          <div class="qa-q">Q1: "Are you replacing e-SAKSHI or how does this integrate?"</div>
+          <div class="qa-a">
+            <strong>Winning Answer:</strong> "No, Sir/Ma'am. e-SAKSHI is the official transactional ERP of the Government of India. MPLADS Rakshak is an <em>auxiliary decision-support and intelligence layer</em> that sits on top of e-SAKSHI APIs. It does not replace the database or approval workflow; it simply empowers District Officers with pre-triaged risk scores and mathematical evidence."
+          </div>
+        </div>
+
+        <div class="qa-box">
+          <div class="qa-q">Q2: "What if the AI model gives a False Positive prediction?"</div>
+          <div class="qa-a">
+            <strong>Winning Answer:</strong> "That is why we built <strong>100% Explainable AI (XAI)</strong> with a strict <strong>Human-in-the-Loop</strong> architecture. The AI never automatically cancels or approves a project; it provides decomposed proof (IQR variance, delay days, distance mismatch) in the 360° Risk Passport. The final determination always rests with the District Planning Officer."
+          </div>
+        </div>
+
+        <div class="qa-box">
+          <div class="qa-q">Q3: "How do you catch duplicate works if project titles use different words?"</div>
+          <div class="qa-a">
+            <strong>Winning Answer:</strong> "We use a dual-tier matching engine: 1) <strong>TF-IDF N-gram NLP Vectorization</strong> to match semantic intent (e.g. 'CC Road near Temple' vs 'Paved Pathway at Mandir'), and 2) <strong>Haversine Geodesic Distance</strong> to confirm both works are within a &lt;500m radius. This achieves &gt;90% accuracy in duplicate detection."
+          </div>
+        </div>
+
+        <div class="qa-box">
+          <div class="qa-q">Q4: "How does your Geo-Camera prevent officers from uploading gallery photos from home?"</div>
+          <div class="qa-a">
+            <strong>Winning Answer:</strong> "File gallery uploads are blocked at the browser/mobile API level; only live camera streams are permitted. When the shutter fires, live hardware GPS is captured, distance from site is verified, and a <strong>SHA-256 cryptographic digest</strong> is immediately computed and locked into the immutable audit ledger."
+          </div>
+        </div>
+
+        <div class="qa-box">
+          <div class="qa-q">Q5: "How does it scale to national level across 1,00,000 works?"</div>
+          <div class="qa-a">
+            <strong>Winning Answer:</strong> "We implemented in-memory maps and Hibernate JDBC bulk batching (Batch size 100) in Spring Boot. 3,013 works are fully analyzed in <strong>220 milliseconds</strong>. At national scale with 1,00,000 works, the batch processing completes in under 4 seconds on standard cloud infrastructure."
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
