@@ -10,12 +10,12 @@ import {
   Database, 
   History, 
   Sliders, 
-  FileText,
-  ShieldCheck,
-  Layers,
-  PanelLeftClose,
-  PanelLeftOpen,
-  X
+  FileText, 
+  ShieldCheck, 
+  Layers, 
+  ChevronLeft, 
+  ChevronRight, 
+  X 
 } from 'lucide-react';
 
 const NAV_ITEMS = [
@@ -58,20 +58,26 @@ export default function Sidebar({ isCollapsed, onToggle, mobileOpen = false, onC
       <aside 
         className={`hidden md:flex ${
           collapsed ? 'w-16' : 'w-64'
-        } bg-white dark:bg-[#0F172A] text-slate-700 dark:text-slate-200 border-r border-slate-200 dark:border-slate-800 flex-col justify-between shrink-0 font-sans transition-all duration-300 ease-in-out no-print sidebar relative overflow-hidden z-20`}
+        } bg-white dark:bg-[#0F172A] text-slate-700 dark:text-slate-200 border-r border-slate-200 dark:border-slate-800 flex-col justify-between shrink-0 font-sans transition-all duration-300 ease-in-out no-print sidebar relative overflow-visible z-20`}
       >
         
-        {/* Header with Title & Collapse Button */}
-        <div className="p-3 space-y-1 overflow-y-auto overflow-x-hidden">
+        {/* Floating Circular Sidebar Toggle Button (Modern Linear / Notion Style on the Right Border Edge) */}
+        <button
+          onClick={handleToggle}
+          className="absolute -right-3.5 top-1/3 -translate-y-1/2 z-30 w-7 h-7 rounded-full bg-white dark:bg-[#0F172A] border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-400 dark:hover:border-blue-500 shadow-md hover:shadow-lg transition-all flex items-center justify-center group focus:outline-none hover:scale-110 cursor-pointer"
+          title={collapsed ? "Expand Sidebar (Operational Modules)" : "Collapse Sidebar"}
+        >
+          {collapsed ? (
+            <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+          ) : (
+            <ChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-0.5" />
+          )}
+        </button>
+
+        {/* Content Container */}
+        <div className="p-3 space-y-1 overflow-y-auto overflow-x-hidden flex-1">
           <div className={`flex items-center ${collapsed ? 'justify-center' : 'justify-between'} px-1 py-1.5 mb-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500`}>
             {!collapsed && <span>Operational Modules</span>}
-            <button
-              onClick={handleToggle}
-              className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition"
-              title={collapsed ? "Expand Sidebar" : "Collapse Sidebar"}
-            >
-              {collapsed ? <PanelLeftOpen className="w-4 h-4 text-slate-600 dark:text-slate-300" /> : <PanelLeftClose className="w-4 h-4 text-slate-600 dark:text-slate-300" />}
-            </button>
           </div>
 
           {NAV_ITEMS.map((item) => {
