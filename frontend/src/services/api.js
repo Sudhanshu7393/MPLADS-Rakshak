@@ -36,8 +36,8 @@ export function clearAuthSession() {
 const MOCK_WORKS = [
   {
     workId: 'MPL-2024-UP-004821',
-    workName: 'Construction of CC Road and Interlocking Pavement from Main Gate to Primary Health Center',
-    workTitle: 'Construction of CC Road and Interlocking Pavement from Main Gate to Primary Health Center',
+    workName: 'Construction of CC Road and Interlocking Pavement from Main Chowk to Primary Health Center, Village Rampur',
+    workTitle: 'Construction of CC Road and Interlocking Pavement from Main Chowk to Primary Health Center, Village Rampur',
     category: 'Roads & Bridges',
     district: 'Varanasi',
     state: 'Uttar Pradesh',
@@ -63,8 +63,8 @@ const MOCK_WORKS = [
   },
   {
     workId: 'MPL-2024-UP-003912',
-    workName: 'Installation of Solar High-Mast Lighting System at Community Gathering Center',
-    workTitle: 'Installation of Solar High-Mast Lighting System at Community Gathering Center',
+    workName: 'Installation of Solar High-Mast Lighting System at Community Gathering Center, Cholapur',
+    workTitle: 'Installation of Solar High-Mast Lighting System at Community Gathering Center, Cholapur',
     category: 'Energy & Power',
     district: 'Varanasi',
     state: 'Uttar Pradesh',
@@ -89,8 +89,8 @@ const MOCK_WORKS = [
   },
   {
     workId: 'MPL-2024-UP-002104',
-    workName: 'Deep Borewell and RO Drinking Water Filtration Plant at Government Girls Inter College',
-    workTitle: 'Deep Borewell and RO Drinking Water Filtration Plant at Government Girls Inter College',
+    workName: 'Deep Borewell and RO Drinking Water Filtration Plant at Government Girls Inter College, Pindra',
+    workTitle: 'Deep Borewell and RO Drinking Water Filtration Plant at Government Girls Inter College, Pindra',
     category: 'Drinking Water',
     district: 'Varanasi',
     state: 'Uttar Pradesh',
@@ -114,8 +114,8 @@ const MOCK_WORKS = [
   },
   {
     workId: 'MPL-2024-UP-005120',
-    workName: 'Upgradation and Boundary Wall Construction for Rural Primary Health Sub-Center',
-    workTitle: 'Upgradation and Boundary Wall Construction for Rural Primary Health Sub-Center',
+    workName: 'Upgradation and Boundary Wall Construction for Rural Primary Health Sub-Center, Badagaon',
+    workTitle: 'Upgradation and Boundary Wall Construction for Rural Primary Health Sub-Center, Badagaon',
     category: 'Health & Family Welfare',
     district: 'Varanasi',
     state: 'Uttar Pradesh',
@@ -188,7 +188,8 @@ const MOCK_SUMMARY = {
     "High": 294,
     "Medium": 842,
     "Low": 1877
-  }
+  },
+  recentHighRiskWorks: MOCK_WORKS
 };
 
 async function request(endpoint, options = {}) {
@@ -210,11 +211,10 @@ async function request(endpoint, options = {}) {
       if (contentType && contentType.includes('application/json')) {
         return await response.json();
       }
-      return null;
+      // If it returned HTML (e.g. Vercel SPA rewrite fallback index.html), fall through to mock router!
     }
   } catch (err) {
-    // Network / backend unavailable (e.g. on Standalone Vercel frontend deployment)
-    console.warn(`[MPLADS Rakshak] Backend unreachable for ${endpoint}. Using verified fallback dataset.`);
+    console.warn(`[MPLADS Rakshak] Backend offline for ${endpoint}. Using live mock data.`);
   }
 
   // Graceful Fallback Router for Standalone Vercel Hosting
@@ -439,7 +439,6 @@ export const api = {
       if (!response.ok) throw new Error(await response.text() || 'Upload failed');
       return await response.json();
     } catch (e) {
-      // Offline fallback for demo on Vercel
       return {
         evidenceId: 'EV-2026-004821',
         gpsDistanceMeters: 85,
