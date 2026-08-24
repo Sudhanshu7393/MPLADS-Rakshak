@@ -17,6 +17,7 @@ import ReportsPage from './pages/ReportsPage';
 import WorksPage from './pages/WorksPage';
 import CameraCapturePage from './pages/CameraCapturePage';
 import DemoTourModal from './components/DemoTourModal';
+import CommandPalette from './components/CommandPalette';
 import { ToastProvider } from './context/ToastContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { api } from './services/api';
@@ -27,6 +28,7 @@ function MainLayout() {
   const [refreshKey, setRefreshKey] = useState(0);
   const [isTourOpen, setIsTourOpen] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const location = useLocation();
 
   const loadDataMode = async () => {
@@ -49,6 +51,18 @@ function MainLayout() {
     setMobileNavOpen(false);
   }, [location.pathname]);
 
+  // Global Ctrl+K / Cmd+K Spotlight shortcut
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        setCommandPaletteOpen(prev => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
     <div className="h-screen bg-[#F1F5F9] dark:bg-[#0B0F19] text-slate-900 dark:text-slate-100 flex flex-col font-sans overflow-hidden transition-colors duration-200">
       <Navbar 
@@ -56,6 +70,7 @@ function MainLayout() {
         onAnalysisRun={() => setRefreshKey(k => k + 1)}
         mobileNavOpen={mobileNavOpen}
         onToggleMobileNav={() => setMobileNavOpen(prev => !prev)}
+        onOpenCommandPalette={() => setCommandPaletteOpen(true)}
       />
       <div className="flex-1 flex overflow-hidden relative">
         <Sidebar 
@@ -92,6 +107,12 @@ function MainLayout() {
           <DemoTourModal
             isOpen={isTourOpen}
             onClose={() => setIsTourOpen(false)}
+          />
+
+          <CommandPalette
+            isOpen={commandPaletteOpen}
+            onClose={() => setCommandPaletteOpen(false)}
+            onAnalysisRun={() => setRefreshKey(k => k + 1)}
           />
         </main>
       </div>

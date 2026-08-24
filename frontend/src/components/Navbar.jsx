@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { RefreshCw, LogOut, ShieldCheck, Sun, Moon, Sparkles, ChevronRight, Menu, X } from 'lucide-react';
+import { RefreshCw, LogOut, ShieldCheck, Sun, Moon, Search, Command, Menu, X } from 'lucide-react';
 import { getCurrentUser, clearAuthSession, api } from '../services/api';
 import { useToast } from '../context/ToastContext';
 import { useTheme } from '../context/ThemeContext';
 
-export default function Navbar({ activeDataMode = 'PUBLIC DATA', onAnalysisRun, onToggleMobileNav, mobileNavOpen }) {
+export default function Navbar({ 
+  activeDataMode = 'PUBLIC DATA', 
+  onAnalysisRun, 
+  onToggleMobileNav, 
+  mobileNavOpen,
+  onOpenCommandPalette 
+}) {
   const user = getCurrentUser();
   const navigate = useNavigate();
   const location = useLocation();
@@ -78,13 +84,29 @@ export default function Navbar({ activeDataMode = 'PUBLIC DATA', onAnalysisRun, 
           </div>
 
           {/* Right Action Items & Surveillance Status */}
-          <div className="flex items-center gap-1.5 sm:gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-2.5">
             
-            {/* Live Data Stream Status Badge (Desktop Only) */}
-            <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-slate-200 text-xs font-medium">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            {/* Live Data Stream Status Badge with National Sonar Radar Wave */}
+            <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-slate-200 text-xs font-medium relative group">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+              </span>
               <span>e-SAKSHI Active Feed</span>
             </div>
+
+            {/* Spotlight Command Palette (⌘K) Trigger */}
+            <button
+              onClick={onOpenCommandPalette}
+              className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-slate-200 hover:text-white border border-white/15 text-xs font-medium transition shadow-xs"
+              title="Open Spotlight Command Palette (Ctrl+K)"
+            >
+              <Search className="w-3.5 h-3.5 text-blue-300" />
+              <span className="hidden sm:inline">Search...</span>
+              <kbd className="hidden md:inline-flex items-center text-[10px] font-mono bg-black/20 text-slate-300 px-1.5 py-0.5 rounded border border-white/10">
+                ⌘K
+              </kbd>
+            </button>
 
             {/* Quick Run Analysis Trigger */}
             <button

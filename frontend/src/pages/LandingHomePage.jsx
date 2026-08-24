@@ -38,6 +38,9 @@ import {
 import { api } from '../services/api';
 import { formatINR } from '../utils/formatters';
 import RevealOnScroll from '../components/RevealOnScroll';
+import CountUpNumber from '../components/CountUpNumber';
+import SpotlightCard from '../components/SpotlightCard';
+import LiveRiskSimulator from '../components/LiveRiskSimulator';
 
 export default function LandingHomePage() {
   const [summary, setSummary] = useState(null);
@@ -111,7 +114,8 @@ export default function LandingHomePage() {
       accent: "from-blue-600 to-indigo-600",
       link: "/queue?search=Cost%20Outlier",
       tag: "IQR Statistical Engine",
-      stat: "+53.8% Avg Outlier"
+      stat: "+53.8% Avg Outlier",
+      spotlight: "rgba(37, 99, 235, 0.16)"
     },
     {
       title: "Timeline & Delay Tracking",
@@ -120,7 +124,8 @@ export default function LandingHomePage() {
       accent: "from-amber-600 to-orange-600",
       link: "/queue?search=Execution%20Delay",
       tag: "Milestone Engine",
-      stat: "180+ Days Threshold"
+      stat: "180+ Days Threshold",
+      spotlight: "rgba(245, 158, 11, 0.16)"
     },
     {
       title: "Duplicate Proposal Matcher",
@@ -129,7 +134,8 @@ export default function LandingHomePage() {
       accent: "from-indigo-600 to-purple-600",
       link: "/similar",
       tag: "Geospatial Clustering",
-      stat: "<500m Proximity Lock"
+      stat: "<500m Proximity Lock",
+      spotlight: "rgba(147, 51, 234, 0.16)"
     },
     {
       title: "Geo-Camera Evidence Lock",
@@ -138,7 +144,8 @@ export default function LandingHomePage() {
       accent: "from-emerald-600 to-teal-600",
       link: "/works/MPL-2024-UP-004821/capture-evidence",
       tag: "Tamper-Proof Lock",
-      stat: "SHA-256 Verified"
+      stat: "SHA-256 Verified",
+      spotlight: "rgba(16, 185, 129, 0.16)"
     },
     {
       title: "Agency Monopoly Index",
@@ -147,7 +154,8 @@ export default function LandingHomePage() {
       accent: "from-slate-700 to-slate-900",
       link: "/queue",
       tag: "HHI Market Power",
-      stat: "HHI > 2500 Monitored"
+      stat: "HHI > 2500 Monitored",
+      spotlight: "rgba(79, 70, 229, 0.16)"
     },
     {
       title: "Statutory Audit Ledger",
@@ -156,7 +164,8 @@ export default function LandingHomePage() {
       accent: "from-blue-800 to-slate-900",
       link: "/audit",
       tag: "Append-Only Ledger",
-      stat: "100% Audit Trail"
+      stat: "100% Audit Trail",
+      spotlight: "rgba(30, 58, 138, 0.16)"
     }
   ];
 
@@ -201,9 +210,12 @@ export default function LandingHomePage() {
         {/* Full-Screen Viewport Bottom Bar (Telemetry + Smooth Scroll Trigger + Government Badge) */}
         <div className="w-full relative z-20 pb-4 sm:pb-6 px-3 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-slate-300 border-t border-white/10 pt-3 sm:pt-4 bg-slate-950/50 backdrop-blur-sm">
           
-          <div className="flex items-center gap-2 text-[11px] sm:text-xs font-medium text-center sm:text-left">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-            <span>Live Surveillance: <strong className="text-white font-mono">{totalWorks.toLocaleString('en-IN')} Works</strong> • <strong className="text-white font-mono">{formatINR(totalCost)}</strong> • <strong className="text-red-400 font-mono">{highRisk} Flags</strong></span>
+          <div className="flex items-center gap-2.5 text-[11px] sm:text-xs font-medium text-center sm:text-left">
+            <span className="relative flex h-2.5 w-2.5 shrink-0">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+            </span>
+            <span>Live Surveillance: <strong className="text-white font-mono"><CountUpNumber end={totalWorks} duration={1200} /> Works</strong> • <strong className="text-white font-mono"><CountUpNumber end={totalCost} formatter={formatINR} duration={1400} /></strong> • <strong className="text-red-400 font-mono"><CountUpNumber end={highRisk} duration={1200} /> Flags</strong></span>
           </div>
 
           <a 
@@ -327,13 +339,16 @@ export default function LandingHomePage() {
                 {/* Live Telemetry Bar */}
                 <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400 font-medium">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-                    <span>Surveillance: <strong className="text-slate-800 dark:text-slate-200 font-mono">{totalWorks.toLocaleString('en-IN')} Works</strong></span>
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                    </span>
+                    <span>Continuous Surveillance Active: <strong className="text-slate-800 dark:text-slate-200 font-mono"><CountUpNumber end={totalWorks} duration={1400} /> Sanctioned Works</strong></span>
                   </div>
                   <div className="flex flex-wrap items-center gap-2 sm:gap-4 font-mono text-[10px] sm:text-[11px]">
-                    <span>Value: <strong className="text-slate-900 dark:text-slate-100">{formatINR(totalCost)}</strong></span>
+                    <span>Value: <strong className="text-slate-900 dark:text-slate-100"><CountUpNumber end={totalCost} formatter={formatINR} duration={1600} /></strong></span>
                     <span>•</span>
-                    <span>High Risk: <strong className="text-red-600 dark:text-red-400">{highRisk}</strong></span>
+                    <span>High Risk: <strong className="text-red-600 dark:text-red-400"><CountUpNumber end={highRisk} duration={1400} /> Flags</strong></span>
                     <span>•</span>
                     <span className="text-emerald-700 dark:text-emerald-400 font-bold">100% Explainable AI</span>
                   </div>
@@ -394,14 +409,14 @@ export default function LandingHomePage() {
           </section>
 
 
-          {/* C. FOUR BOLD METRIC STATS BANNER (REVEALS UPWARD) */}
+          {/* C. FOUR BOLD METRIC STATS BANNER WITH DYNAMIC COUNT-UP (APPLE KEYNOTE STYLE) */}
           <section className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3 sm:py-4">
             <RevealOnScroll delay={150}>
               <div className="bg-white/95 dark:bg-slate-900/90 backdrop-blur-sm rounded-xl p-4 sm:p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 text-center divide-y sm:divide-y-0 divide-slate-100 dark:divide-slate-800 hover:shadow-md transition">
                 
                 <div className="space-y-1">
                   <div className="text-xl sm:text-3xl font-extrabold font-mono text-slate-900 dark:text-slate-100">
-                    {formatINR(totalCost)}
+                    <CountUpNumber end={totalCost} formatter={formatINR} duration={1600} />
                   </div>
                   <div className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                     Sanctioned Value Audited
@@ -410,7 +425,7 @@ export default function LandingHomePage() {
 
                 <div className="space-y-1 pt-2 sm:pt-0">
                   <div className="text-xl sm:text-3xl font-extrabold font-mono text-slate-900 dark:text-slate-100">
-                    {totalWorks.toLocaleString('en-IN')}
+                    <CountUpNumber end={totalWorks} duration={1400} />
                   </div>
                   <div className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                     Sanctioned Projects
@@ -419,7 +434,7 @@ export default function LandingHomePage() {
 
                 <div className="space-y-1 pt-2 sm:pt-0">
                   <div className="text-xl sm:text-3xl font-extrabold font-mono text-red-600 dark:text-red-400">
-                    {highRisk}
+                    <CountUpNumber end={highRisk} duration={1400} />
                   </div>
                   <div className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                     High-Risk Flags
@@ -428,7 +443,7 @@ export default function LandingHomePage() {
 
                 <div className="space-y-1 pt-2 sm:pt-0">
                   <div className="text-xl sm:text-3xl font-extrabold font-mono text-emerald-600 dark:text-emerald-400">
-                    100%
+                    <CountUpNumber end={100} suffix="%" duration={1200} />
                   </div>
                   <div className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                     Explainable AI
@@ -440,7 +455,7 @@ export default function LandingHomePage() {
           </section>
 
 
-          {/* D. SIX ANALYTICAL ENGINES GRID (UPWARD REVEAL WITH STAGGER) */}
+          {/* D. SIX ANALYTICAL ENGINES GRID WITH 3D TILT & SPOTLIGHT GLOW (BENTO GRID STYLE) */}
           <section className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-4 sm:space-y-6">
             
             <RevealOnScroll delay={50}>
@@ -469,10 +484,11 @@ export default function LandingHomePage() {
                 const Icon = item.icon;
                 return (
                   <RevealOnScroll key={idx} delay={idx * 70}>
-                    <div
-                      className="bg-white/95 dark:bg-slate-900/90 backdrop-blur-sm rounded-xl p-4 sm:p-5 border border-slate-200/80 dark:border-slate-800 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between space-y-3 sm:space-y-4 group relative overflow-hidden h-full"
+                    <SpotlightCard
+                      spotlightColor={item.spotlight}
+                      className="bg-white/95 dark:bg-slate-900/90 backdrop-blur-sm rounded-xl p-4 sm:p-5 border border-slate-200/80 dark:border-slate-800 hover:border-blue-400 dark:hover:border-blue-500 shadow-sm hover:shadow-xl transition-all duration-300 h-full"
                     >
-                      <div className="space-y-2 sm:space-y-2.5">
+                      <div className="space-y-3 sm:space-y-3.5">
                         
                         <div className="flex items-center justify-between">
                           <div className={'w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br ' + item.accent + ' flex items-center justify-center text-white shadow-xs group-hover:scale-110 transition-transform'}>
@@ -499,12 +515,12 @@ export default function LandingHomePage() {
 
                       <Link
                         to={item.link}
-                        className="inline-flex items-center gap-1 text-xs font-semibold text-blue-700 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300 pt-2.5 border-t border-slate-100 dark:border-slate-800 group-hover:translate-x-1 transition-transform"
+                        className="inline-flex items-center gap-1 text-xs font-semibold text-blue-700 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300 pt-3 border-t border-slate-100 dark:border-slate-800 group-hover:translate-x-1 transition-transform mt-4"
                       >
                         <span>Explore Engine</span>
                         <ArrowRight className="w-3.5 h-3.5" />
                       </Link>
-                    </div>
+                    </SpotlightCard>
                   </RevealOnScroll>
                 );
               })}
@@ -513,7 +529,15 @@ export default function LandingHomePage() {
           </section>
 
 
-          {/* E. RECENT HIGH-RISK PROPOSALS TABLE REGISTER (SMOOTH UPWARD FLOAT) */}
+          {/* E. INTERACTIVE LIVE RISK ENGINE & EXPLAINABILITY SIMULATOR WIDGET */}
+          <section className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
+            <RevealOnScroll delay={100}>
+              <LiveRiskSimulator />
+            </RevealOnScroll>
+          </section>
+
+
+          {/* F. RECENT HIGH-RISK PROPOSALS TABLE REGISTER (SMOOTH UPWARD FLOAT) */}
           <section className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-4 sm:space-y-5">
             
             <RevealOnScroll delay={50}>
@@ -606,7 +630,7 @@ export default function LandingHomePage() {
           </section>
 
 
-          {/* F. FAQ & STATUTORY GOVERNANCE SECTION (REVEALS UPWARD) */}
+          {/* G. FAQ & STATUTORY GOVERNANCE SECTION (REVEALS UPWARD) */}
           <section className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-4 sm:space-y-5">
             
             <RevealOnScroll delay={50}>
@@ -649,7 +673,7 @@ export default function LandingHomePage() {
           </section>
 
 
-          {/* G. FORMAL GOVERNMENT FOOTER */}
+          {/* H. FORMAL GOVERNMENT FOOTER */}
           <footer className="bg-[#0F172A] dark:bg-[#060A12] text-slate-400 pt-8 sm:pt-10 pb-6 sm:pb-8 border-t border-slate-800 dark:border-slate-900">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
               
