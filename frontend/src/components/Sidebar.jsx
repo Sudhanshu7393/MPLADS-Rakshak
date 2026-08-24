@@ -33,10 +33,8 @@ const NAV_ITEMS = [
 ];
 
 export default function Sidebar({ isCollapsed, onToggle, mobileOpen = false, onCloseMobile }) {
-  const [internalCollapsed, setInternalCollapsed] = useState(() => {
-    const saved = localStorage.getItem('sidebar_collapsed');
-    return saved !== null ? saved === 'true' : true; // Default: Compact Icon Mode
-  });
+  // BY DEFAULT: Always permanently compact (collapsed = true) as requested by user
+  const [internalCollapsed, setInternalCollapsed] = useState(true);
 
   const collapsed = isCollapsed !== undefined ? isCollapsed : internalCollapsed;
 
@@ -44,11 +42,7 @@ export default function Sidebar({ isCollapsed, onToggle, mobileOpen = false, onC
     if (onToggle) {
       onToggle();
     } else {
-      setInternalCollapsed(prev => {
-        const next = !prev;
-        localStorage.setItem('sidebar_collapsed', String(next));
-        return next;
-      });
+      setInternalCollapsed(prev => !prev);
     }
   };
 
@@ -61,10 +55,10 @@ export default function Sidebar({ isCollapsed, onToggle, mobileOpen = false, onC
         } bg-white dark:bg-[#0F172A] text-slate-700 dark:text-slate-200 border-r border-slate-200 dark:border-slate-800 flex-col justify-between shrink-0 font-sans transition-all duration-300 ease-in-out no-print sidebar relative overflow-visible z-20`}
       >
         
-        {/* Floating Circular Sidebar Toggle Button (Modern Linear / Notion Style on the Right Border Edge) */}
+        {/* Floating Circular Sidebar Toggle Button (Vertically Centered at 48% on the Right Border Edge) */}
         <button
           onClick={handleToggle}
-          className="absolute -right-3.5 top-1/3 -translate-y-1/2 z-30 w-7 h-7 rounded-full bg-white dark:bg-[#0F172A] border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-400 dark:hover:border-blue-500 shadow-md hover:shadow-lg transition-all flex items-center justify-center group focus:outline-none hover:scale-110 cursor-pointer"
+          className="absolute -right-3.5 top-[48%] -translate-y-1/2 z-30 w-7 h-7 rounded-full bg-white dark:bg-[#0F172A] border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-400 dark:hover:border-blue-500 shadow-md hover:shadow-lg transition-all flex items-center justify-center group focus:outline-none hover:scale-110 cursor-pointer"
           title={collapsed ? "Expand Sidebar (Operational Modules)" : "Collapse Sidebar"}
         >
           {collapsed ? (
@@ -75,10 +69,12 @@ export default function Sidebar({ isCollapsed, onToggle, mobileOpen = false, onC
         </button>
 
         {/* Content Container */}
-        <div className="p-3 space-y-1 overflow-y-auto overflow-x-hidden flex-1">
-          <div className={`flex items-center ${collapsed ? 'justify-center' : 'justify-between'} px-1 py-1.5 mb-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500`}>
-            {!collapsed && <span>Operational Modules</span>}
-          </div>
+        <div className={`p-3 space-y-1 overflow-y-auto overflow-x-hidden flex-1 ${collapsed ? 'pt-3' : ''}`}>
+          {!collapsed && (
+            <div className="flex items-center justify-between px-1 py-1.5 mb-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+              <span>Operational Modules</span>
+            </div>
+          )}
 
           {NAV_ITEMS.map((item) => {
             const Icon = item.icon;
@@ -89,11 +85,11 @@ export default function Sidebar({ isCollapsed, onToggle, mobileOpen = false, onC
                 end={item.exact}
                 title={collapsed ? item.label : undefined}
                 className={({ isActive }) =>
-                  `flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all ${
+                  `flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
                     isActive
                       ? 'bg-[#0B2545] dark:bg-blue-600 text-white font-bold shadow-xs'
                       : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
-                  } ${collapsed ? 'justify-center px-2' : ''}`
+                  } ${collapsed ? 'justify-center px-2 py-2.5' : ''}`
                 }
               >
                 <Icon className="w-4 h-4 shrink-0" />
