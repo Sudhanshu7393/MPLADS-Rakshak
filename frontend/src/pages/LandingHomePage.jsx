@@ -112,55 +112,61 @@ export default function LandingHomePage() {
       title: "Cost Outlier Detection",
       desc: "Multi-district peer median benchmarking with IQR variance analysis to detect inflated estimates.",
       icon: TrendingUp,
-      iconBg: "bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800",
+      accent: "from-blue-600 to-indigo-600",
       link: "/queue?search=Cost%20Outlier",
       tag: "IQR Statistical Engine",
-      stat: "+53.8% Avg Outlier"
+      stat: "+53.8% Avg Outlier",
+      spotlight: "rgba(37, 99, 235, 0.16)"
     },
     {
       title: "Timeline & Delay Tracking",
       desc: "Tracks execution lags exceeding 180+ days past sanctioned milestone dates with automated risk inflation.",
       icon: Clock,
-      iconBg: "bg-amber-100 text-amber-800 border-amber-200 dark:bg-amber-950 dark:text-amber-300 dark:border-amber-800",
+      accent: "from-amber-600 to-orange-600",
       link: "/queue?search=Execution%20Delay",
       tag: "Milestone Engine",
-      stat: "180+ Days Threshold"
+      stat: "180+ Days Threshold",
+      spotlight: "rgba(245, 158, 11, 0.16)"
     },
     {
       title: "Duplicate Proposal Matcher",
       desc: "TF-IDF NLP text proximity and Haversine geospatial clustering (<500m) to catch double-dipping proposals.",
       icon: Layers,
-      iconBg: "bg-purple-100 text-purple-800 border-purple-200 dark:bg-purple-950 dark:text-purple-300 dark:border-purple-800",
+      accent: "from-indigo-600 to-purple-600",
       link: "/similar",
       tag: "Geospatial Clustering",
-      stat: "<500m Proximity Lock"
+      stat: "<500m Proximity Lock",
+      spotlight: "rgba(147, 51, 234, 0.16)"
     },
     {
       title: "Geo-Camera Evidence Lock",
       desc: "Mobile photo progress capture with hardware GPS locking, distance mismatch alerts, and SHA-256 hashes.",
       icon: Camera,
-      iconBg: "bg-emerald-100 text-emerald-800 border-emerald-200 dark:bg-emerald-950 dark:text-emerald-300 dark:border-emerald-800",
+      accent: "from-emerald-600 to-teal-600",
       link: "/works/MPL-2024-UP-004821/capture-evidence",
       tag: "Tamper-Proof Lock",
-      stat: "SHA-256 Verified"
+      stat: "SHA-256 Verified",
+      spotlight: "rgba(16, 185, 129, 0.16)"
     },
     {
       title: "Agency Monopoly Index",
       desc: "Herfindahl-Hirschman Index (HHI) analysis to detect contractor concentration and single-bidder monopolies.",
       icon: Building2,
-      iconBg: "bg-indigo-100 text-indigo-800 border-indigo-200 dark:bg-indigo-950 dark:text-indigo-300 dark:border-indigo-800",
+      accent: "from-slate-700 to-slate-900",
       link: "/queue",
       tag: "HHI Market Power",
-      stat: "HHI > 2500 Monitored"
+      stat: "HHI > 2500 Monitored",
+      spotlight: "rgba(79, 70, 229, 0.16)"
     },
     {
       title: "Statutory Audit Ledger",
       desc: "Immutable cryptographic event log recording every officer determination, memo issue, and verification.",
       icon: ShieldCheck,
-      iconBg: "bg-slate-100 text-slate-800 border-slate-300 dark:bg-slate-800 dark:text-slate-200 dark:border-slate-700",
+      accent: "from-blue-800 to-slate-900",
       link: "/audit",
       tag: "Append-Only Ledger",
-      stat: "100% Audit Trail"
+      stat: "100% Audit Trail",
+      spotlight: "rgba(30, 58, 138, 0.16)"
     }
   ];
 
