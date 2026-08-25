@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import OfficialEmblem from './OfficialEmblem';
 import { NavLink } from 'react-router-dom';
 import { 
   Compass,
@@ -130,9 +131,7 @@ export default function Sidebar({ isCollapsed, onToggle, mobileOpen = false, onC
             {/* Drawer Header */}
             <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-900/80">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold shadow-xs">
-                  <ShieldCheck className="w-4 h-4" />
-                </div>
+                <OfficialEmblem size={30} />
                 <div>
                   <span className="font-black text-sm text-slate-900 dark:text-white tracking-wide block">
                     MPLADS RAKSHAK

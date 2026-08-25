@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { RefreshCw, LogOut, ShieldCheck, Sun, Moon, Search, Command, Menu, X } from 'lucide-react';
+import OfficialEmblem from './OfficialEmblem';
 import { getCurrentUser, clearAuthSession, api } from '../services/api';
 import { useToast } from '../context/ToastContext';
 import { useTheme } from '../context/ThemeContext';
@@ -63,9 +64,7 @@ export default function Navbar({
             </button>
 
             <Link to="/" className="flex items-center gap-2 sm:gap-3 group shrink-0">
-              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-blue-600 border border-blue-400/40 flex items-center justify-center shadow-xs text-white shrink-0">
-                <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-              </div>
+              <OfficialEmblem size={34} className="hover:scale-105 transition-transform" />
               <div>
                 <div className="flex items-center gap-1.5 sm:gap-2 leading-tight">
                   <span className="font-black text-xs sm:text-sm tracking-wider text-white truncate max-w-[130px] sm:max-w-none">

@@ -27,6 +27,7 @@ import {
 import { api } from '../services/api';
 import { formatINR, formatDate } from '../utils/formatters';
 import Breadcrumbs from '../components/Breadcrumbs';
+import OfficialEmblem from '../components/OfficialEmblem';
 import { useToast } from '../context/ToastContext';
 
 export default function ReportsPage() {
@@ -230,9 +231,7 @@ export default function ReportsPage() {
               {/* National Emblem & Formal MoSPI Document Header */}
               <div className="border-b-2 border-slate-900 pb-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div className="flex items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-xl bg-slate-900 flex items-center justify-center text-white font-bold shadow-xs">
-                    <ShieldCheck className="w-7 h-7" />
-                  </div>
+                  <OfficialEmblem size={46} className="shrink-0" />
                   <div>
                     <h1 className="text-base sm:text-lg font-black tracking-wider text-slate-950 uppercase font-sans">
                       {dossier.reportTitle || 'STATUTORY RISK INVESTIGATION DOSSIER'}

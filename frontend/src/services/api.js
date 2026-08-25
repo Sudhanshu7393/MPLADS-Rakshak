@@ -355,6 +355,14 @@ const MOCK_SUMMARY = {
     "Medium": 842,
     "Low": 1877
   },
+    topRiskDistricts: [
+    { district: 'Varanasi', averageScore: 78.4, highRiskCount: 84 },
+    { district: 'Gorakhpur', averageScore: 68.2, highRiskCount: 52 },
+    { district: 'Lucknow', averageScore: 62.5, highRiskCount: 44 },
+    { district: 'Prayagraj', averageScore: 59.8, highRiskCount: 38 },
+    { district: 'Kanpur Nagar', averageScore: 54.1, highRiskCount: 32 },
+    { district: 'Agra', averageScore: 48.6, highRiskCount: 26 }
+  ],
   recentHighRiskWorks: MOCK_WORKS
 };
 

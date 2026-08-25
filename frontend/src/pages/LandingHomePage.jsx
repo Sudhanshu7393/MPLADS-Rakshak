@@ -41,6 +41,7 @@ import RevealOnScroll from '../components/RevealOnScroll';
 import CountUpNumber from '../components/CountUpNumber';
 import SpotlightCard from '../components/SpotlightCard';
 import LiveRiskSimulator from '../components/LiveRiskSimulator';
+import OfficialEmblem from '../components/OfficialEmblem';
 
 export default function LandingHomePage() {
   const [summary, setSummary] = useState(null);
@@ -191,7 +192,7 @@ export default function LandingHomePage() {
         <div className="relative z-10 max-w-4xl mx-auto space-y-4 sm:space-y-5 my-auto py-4 sm:py-6">
           
           <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-slate-900/85 border border-slate-700/80 text-blue-300 text-[11px] sm:text-xs font-semibold backdrop-blur-md shadow-2xl hover:border-blue-400/50 transition">
-            <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-400 shrink-0" />
+            <OfficialEmblem size={20} className="shrink-0" />
             <span className="truncate max-w-[260px] sm:max-w-none">
               Ministry of Statistics &amp; Programme Implementation • e-SAKSHI (MoSPI)
             </span>
