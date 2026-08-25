@@ -355,7 +355,7 @@ const MOCK_SUMMARY = {
     "Medium": 842,
     "Low": 1877
   },
-    topRiskDistricts: [
+  topRiskDistricts: [
     { district: 'Varanasi', averageScore: 78.4, highRiskCount: 84 },
     { district: 'Gorakhpur', averageScore: 68.2, highRiskCount: 52 },
     { district: 'Lucknow', averageScore: 62.5, highRiskCount: 44 },
@@ -636,6 +636,12 @@ async function request(endpoint, options = {}) {
   }
   if (endpoint.includes('/data/status')) {
     return {
+      totalRecords: 3013,
+      validRecords: 2985,
+      warningRecords: 24,
+      invalidRecords: 4,
+      missingCoordinates: 14,
+      activeSourceType: "PUBLIC DATA (e-SAKSHI LIVE)",
       totalWorks: 3013,
       activeDataMode: "PUBLIC DATA (e-SAKSHI LIVE)",
       lastIngestionDate: "2024-08-24 18:30:00",
@@ -643,21 +649,26 @@ async function request(endpoint, options = {}) {
       highRiskCount: 294
     };
   }
-  if (endpoint.includes('/data/history')) {
-    return [
-      { id: 1, fileName: 'eSakshi_Varanasi_Public_2024.csv', rowCount: 3013, status: 'SUCCESS', importedAt: '2024-08-24 18:30:00', importedBy: 'DPO Varanasi' },
-      { id: 2, fileName: 'MoSPI_Peer_Benchmark_Rates.csv', rowCount: 1540, status: 'SUCCESS', importedAt: '2024-08-20 12:00:00', importedBy: 'System Admin' }
-    ];
-  }
   if (endpoint.includes('/data/quality')) {
     return {
+      overallCompleteness: 98.6,
       totalRecords: 3013,
-      validRecords: 2999,
+      validRecords: 2985,
       dataQualityScore: 99.5,
-      missingGpsCount: 14,
+      missingCoordinates: 14,
+      coordinateCompleteness: 99.5,
+      sanctionDateCompleteness: 100.0,
+      agencyCompleteness: 97.8,
+      categoryCompleteness: 100.0,
       missingSanctionDates: 0,
       duplicateIds: 0
     };
+  }
+  if (endpoint.includes('/data/history')) {
+    return [
+      { id: 1, fileName: 'eSakshi_National_MPLADS_Public_2024.csv', sourceType: 'PUBLIC DATA', totalRecords: 3013, validRecords: 2985, warningRecords: 24, status: 'SUCCESS', importedAt: '2024-08-24T18:30:00Z', importedBy: 'DPO Varanasi' },
+      { id: 2, fileName: 'MoSPI_Standard_Peer_Rates_Benchmark.csv', sourceType: 'AUTHORIZED DATA', totalRecords: 1540, validRecords: 1540, warningRecords: 0, status: 'SUCCESS', importedAt: '2024-08-20T12:00:00Z', importedBy: 'System Admin' }
+    ];
   }
   if (endpoint.includes('/audit')) {
     return {
